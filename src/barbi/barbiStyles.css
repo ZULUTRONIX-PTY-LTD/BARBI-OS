@@ -1,0 +1,536 @@
+    /* Dimmish Burnt-Orange / Warm Amber Visual Grading — Zero White Ambience */
+    :root {
+      --bg-void: #020100;
+      --gold-core: #D96800;
+      --gold-bright: #F0820A;
+      --gold-pale: #F5B860;
+      --accent-rgb: 217, 107, 8;
+      --accent-hex: #D96B08;
+      --accent-soft: #F0A858;
+      --accent-muted: #A65206;
+    }
+    #sphere-viewport {
+      background-color: #020100 !important;
+    }
+    #pcb-edge-overlay {
+      opacity: 0.14;
+      color: rgba(196, 84, 4, 0.42);
+    }
+    .hud-frame-svg-overlay {
+      color: #D96B08 !important;
+      filter: drop-shadow(0 0 5px rgba(204, 88, 4, 0.28)) !important;
+    }
+    .node-label {
+      top: 0px !important;
+      left: 0px !important;
+      background: rgba(14, 6, 1, 0.72) !important;
+      border: 1px solid rgba(204, 92, 6, 0.34) !important;
+      color: #E89538 !important;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.65) !important;
+      transition: opacity 0.12s ease, border-color 0.15s ease, background-color 0.15s ease !important;
+      will-change: transform, opacity !important;
+      contain: layout style;
+    }
+    .node-label:hover {
+      z-index: 60 !important;
+      border-color: rgba(245, 148, 20, 0.88) !important;
+      background: rgba(28, 12, 2, 0.92) !important;
+      color: #FFD27D !important;
+      box-shadow: 0 0 14px rgba(217, 104, 8, 0.35) !important;
+    }
+    .app-node-badge {
+      background: linear-gradient(135deg, rgba(24, 10, 2, 0.85) 0%, rgba(10, 4, 1, 0.92) 100%) !important;
+      border: 1px solid rgba(217, 107, 8, 0.46) !important;
+      box-shadow: 0 0 12px rgba(204, 88, 4, 0.18) !important;
+    }
+    #barbi-custom-cursor {
+      pointer-events: none !important;
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 24px;
+      height: 24px;
+      margin-left: -12px;
+      margin-top: -12px;
+      border-radius: 9999px;
+      border: 1.4px solid rgba(224, 112, 10, 0.72);
+      box-shadow: 0 0 10px rgba(196, 82, 0, 0.36);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      will-change: transform !important;
+      transition: border-color 0.1s ease !important;
+      backface-visibility: hidden;
+      contain: layout style size;
+    }
+    #barbi-custom-cursor-dot {
+      width: 4.5px;
+      height: 4.5px;
+      border-radius: 9999px;
+      background: #FF9D1A;
+      box-shadow: 0 0 8px #F0820A;
+      will-change: transform;
+    }
+    :root {
+      --bg-void: #000000;
+      --dribbble-dark: #3A3A43;
+      --dribbble-plum: #423D43;
+      --dribbble-muted: #858085;
+      /* Central 3D Sphere Core remains permanently Golden */
+      --gold-core: #F59E0B;
+      --gold-bright: #FBBF24;
+      --gold-pale: #FDE68A;
+      /* Dynamic UI & Non-Core Sphere Accent: Crisp White by default, Tactical Red in Focus Mode */
+      --accent-rgb: 255, 255, 255;
+      --accent-hex: #FFFFFF;
+      --accent-soft: #E2E8F0;
+      --accent-muted: #94A3B8;
+    }
+    body.focus-mode-active {
+      --accent-rgb: 239, 68, 68;
+      --accent-hex: #EF4444;
+      --accent-soft: #FCA5A5;
+      --accent-muted: #F87171;
+    }
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #000000;
+      color: #F8FAFC;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .font-mono-tech {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(var(--accent-rgb), 0.35);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(var(--accent-rgb), 0.65);
+    }
+    .glass-panel {
+      background: linear-gradient(145deg, rgba(16, 16, 20, 0.78) 0%, rgba(6, 6, 9, 0.9) 100%);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(var(--accent-rgb), 0.16);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.78), inset 0 1px 0 rgba(var(--accent-rgb), 0.1);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .glass-composer {
+      background: linear-gradient(160deg, rgba(16, 16, 22, 0.22) 0%, rgba(6, 6, 10, 0.34) 100%);
+      backdrop-filter: blur(10px) saturate(140%);
+      -webkit-backdrop-filter: blur(10px) saturate(140%);
+      border: 1px solid rgba(var(--accent-rgb), 0.26);
+      box-shadow:
+        0 0 30px rgba(var(--accent-rgb), 0.08),
+        0 12px 32px rgba(0, 0, 0, 0.45),
+        inset 0 1px 1px rgba(var(--accent-rgb), 0.14);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+    .glass-composer:focus-within {
+      background: linear-gradient(160deg, rgba(18, 18, 25, 0.32) 0%, rgba(6, 6, 10, 0.44) 100%);
+      border-color: rgba(var(--accent-rgb), 0.58);
+      box-shadow:
+        0 0 42px rgba(var(--accent-rgb), 0.16),
+        0 14px 38px rgba(0, 0, 0, 0.55),
+        inset 0 1px 1px rgba(var(--accent-rgb), 0.22);
+    }
+    .glass-chat-bubble {
+      background: linear-gradient(145deg, rgba(14, 14, 20, 0.26) 0%, rgba(5, 5, 9, 0.38) 100%);
+      backdrop-filter: blur(8px) saturate(135%);
+      -webkit-backdrop-filter: blur(8px) saturate(135%);
+      border: 1px solid rgba(var(--accent-rgb), 0.18);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+    .glass-pill {
+      background: rgba(20, 20, 26, 0.68);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(var(--accent-rgb), 0.15);
+      transition: border-color 0.25s ease, color 0.25s ease, background-color 0.25s ease;
+    }
+    .accent-text {
+      color: var(--accent-hex);
+    }
+    .accent-soft-text {
+      color: var(--accent-soft);
+    }
+    .accent-border {
+      border-color: rgba(var(--accent-rgb), 0.42) !important;
+    }
+    .accent-btn {
+      background: rgba(var(--accent-rgb), 0.14);
+      border: 1px solid rgba(var(--accent-rgb), 0.38);
+      color: var(--accent-soft);
+      transition: all 0.2s ease;
+    }
+    .accent-btn:hover {
+      background: rgba(var(--accent-rgb), 0.26);
+      border-color: rgba(var(--accent-rgb), 0.72);
+      color: #FFFFFF;
+    }
+    .accent-solid-btn {
+      background: var(--accent-hex);
+      color: #000000;
+      box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.45);
+      transition: all 0.2s ease;
+    }
+    body.focus-mode-active .accent-solid-btn {
+      color: #FFFFFF;
+    }
+    .white-circle-orb {
+      background: var(--accent-hex);
+      box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.85);
+      transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+    }
+    .node-label {
+      position: absolute;
+      transform: translate(-50%, -135%);
+      pointer-events: auto;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.15s ease, border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+      will-change: transform, left, top, opacity;
+    }
+    .node-label:hover {
+      z-index: 50 !important;
+      border-color: rgba(var(--accent-rgb), 0.95) !important;
+      background: rgba(15, 15, 22, 0.96) !important;
+    }
+    .app-node-badge {
+      background: linear-gradient(135deg, rgba(28, 28, 36, 0.92) 0%, rgba(10, 10, 15, 0.96) 100%);
+      border: 1px solid rgba(var(--accent-rgb), 0.55);
+      box-shadow: 0 0 18px rgba(var(--accent-rgb), 0.22);
+    }
+    input[type="range"].time-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      background: rgba(255, 255, 255, 0.14);
+      height: 5px;
+      border-radius: 999px;
+    }
+    input[type="range"].time-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent-hex);
+      box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.9);
+      cursor: pointer;
+      border: 2px solid #000;
+    }
+    /* Edge-Only Dense PCB Traces Fading Smoothly into the Starfield Background */
+    .pcb-edge-svg {
+      color: var(--accent-hex);
+      opacity: 0.32;
+      transition: color 0.35s ease, opacity 0.35s ease;
+      mask-image: radial-gradient(ellipse 68% 66% at 50% 50%, transparent 52%, rgba(0, 0, 0, 0.45) 74%, black 95%);
+      -webkit-mask-image: radial-gradient(ellipse 68% 66% at 50% 50%, transparent 52%, rgba(0, 0, 0, 0.45) 74%, black 95%);
+    }
+    body.focus-mode-active .pcb-edge-svg {
+      opacity: 0.48;
+      filter: drop-shadow(0 0 6px rgba(239, 68, 68, 0.6));
+    }
+    @keyframes pcbPulse {
+      0% { stroke-dashoffset: 360; }
+      100% { stroke-dashoffset: 0; }
+    }
+    .pcb-trace-animated {
+      stroke-dasharray: 24 336;
+      animation: pcbPulse 4.5s linear infinite;
+    }
+    /* Borderless, Almost Completely See-Through Glassmorphism GTA Radar Overlay */
+    .gta-borderless-glass {
+      background: radial-gradient(ellipse at 50% 50%, rgba(10, 12, 16, 0.24) 0%, rgba(0, 0, 0, 0.04) 85%, transparent 100%);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: none !important;
+      box-shadow: none !important;
+    }
+    .gta-canvas-feather {
+      mask-image: radial-gradient(ellipse 88% 86% at 50% 50%, black 62%, rgba(0, 0, 0, 0.5) 82%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 88% 86% at 50% 50%, black 62%, rgba(0, 0, 0, 0.5) 82%, transparent 100%);
+    }
+    /* Futuristic Hexagonal App Dock Pods */
+    .hex-dock-pod {
+      background: linear-gradient(155deg, rgba(255, 255, 255, 0.08) 0%, rgba(10, 10, 14, 0.45) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(var(--accent-rgb), 0.24);
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hex-dock-pod:hover {
+      transform: translateY(-3px) scale(1.03);
+      background: linear-gradient(155deg, rgba(var(--accent-rgb), 0.22) 0%, rgba(16, 16, 22, 0.72) 100%);
+      border-color: rgba(var(--accent-rgb), 0.85);
+      box-shadow: 0 0 22px rgba(var(--accent-rgb), 0.32);
+    }
+    /* Ultra-Transparent Theme-Matched Weather API Window (Weatherito-Inspired) */
+    .weather-api-glass {
+      background: linear-gradient(135deg, rgba(12, 14, 18, 0.24) 0%, rgba(4, 5, 8, 0.34) 100%);
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      border: 1px solid rgba(var(--accent-rgb), 0.22);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(var(--accent-rgb), 0.12);
+    }
+    .weather-api-sidebar {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 0px !important;
+      border-right: 1px solid rgba(var(--accent-rgb), 0.16);
+    }
+    /* Smart Timer & PolyGhost Interactive Hourglass Widget */
+    .smart-timer-glass {
+      background: linear-gradient(140deg, rgba(10, 10, 15, 0.72) 0%, rgba(3, 3, 6, 0.88) 100%);
+      backdrop-filter: blur(22px) saturate(160%);
+      -webkit-backdrop-filter: blur(22px) saturate(160%);
+      border: 1px solid rgba(var(--accent-rgb), 0.22);
+      box-shadow:
+        0 28px 75px rgba(0, 0, 0, 0.88),
+        0 0 48px rgba(239, 68, 68, 0.14),
+        inset 0 1px 0 rgba(var(--accent-rgb), 0.16);
+    }
+    .pomodoro-squircle {
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 0px !important;
+      border: 1px solid rgba(var(--accent-rgb), 0.16);
+      box-shadow: none;
+    }
+    .polyghost-chamber-card {
+      background: radial-gradient(circle at 42% 45%, rgba(239, 68, 68, 0.12) 0%, rgba(0, 0, 0, 0.04) 68%, transparent 100%);
+      border-radius: 0px !important;
+      border: 1px solid rgba(var(--accent-rgb), 0.16);
+      box-shadow: none;
+    }
+    .timer-circle-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      transition: all 0.2s ease;
+    }
+    .timer-circle-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.45);
+      transform: scale(1.05);
+    }
+    .timer-start-pill {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      letter-spacing: 0.16em;
+      transition: all 0.22s ease;
+    }
+    .timer-start-pill:hover {
+      background: rgba(239, 68, 68, 0.28);
+      border-color: rgba(239, 68, 68, 0.75);
+      box-shadow: 0 0 22px rgba(239, 68, 68, 0.35);
+    }
+    /* Futuristic Sci-Fi HUD Window Templates (Completely Transparent Glassmorphism, Zero Rounded Panels) */
+    .hud-popup-surface {
+      background: rgba(4, 8, 14, 0.14) !important;
+      backdrop-filter: blur(12px) saturate(140%) !important;
+      -webkit-backdrop-filter: blur(12px) saturate(140%) !important;
+      border: none !important;
+      border-radius: 0px !important;
+      box-shadow: none !important;
+      cursor: grab;
+    }
+    .hud-popup-surface[data-hud-fixed="true"] {
+      cursor: pointer !important;
+    }
+    .hud-popup-surface .rounded-3xl,
+    .hud-popup-surface .rounded-2xl {
+      border-radius: 0px !important;
+    }
+    .hud-popup-surface.is-dragging {
+      cursor: grabbing !important;
+      user-select: none !important;
+    }
+    /* Clip 100% of everything outside the exact chamfered sci-fi boundary of each template from image_2d1760.png */
+    .hud-popup-surface[data-hud-template="1"] {
+      clip-path: polygon(2.4% 1.8%, 74.0% 1.8%, 78.0% 1.8%, 98.8% 15.0%, 98.8% 88.0%, 95.5% 98.2%, 3.0% 98.2%, 1.2% 91.0%, 1.2% 7.0%);
+    }
+    .hud-popup-surface[data-hud-template="2"] {
+      clip-path: polygon(2.8% 2.0%, 33.0% 2.0%, 35.5% 4.8%, 62.0% 4.8%, 64.5% 2.0%, 95.5% 2.0%, 98.8% 10.0%, 98.8% 90.0%, 95.5% 98.2%, 3.5% 98.2%, 1.2% 91.0%, 1.2% 10.0%);
+    }
+    .hud-popup-surface[data-hud-template="3"] {
+      clip-path: polygon(3.2% 2.0%, 96.5% 2.0%, 98.8% 9.0%, 98.8% 86.0%, 93.5% 98.2%, 2.8% 98.2%, 1.2% 89.0%, 1.2% 10.0%);
+    }
+    .hud-popup-surface[data-hud-template="4"] {
+      clip-path: polygon(3.2% 1.8%, 96.8% 1.8%, 99.0% 6.0%, 99.0% 93.4%, 96.6% 98.0%, 3.4% 98.0%, 1.0% 93.4%, 1.0% 6.0%);
+    }
+    .hud-popup-surface[data-hud-template="5"] {
+      clip-path: polygon(4.5% 2.0%, 96.5% 2.0%, 98.8% 8.0%, 98.8% 91.0%, 95.8% 98.2%, 3.0% 98.2%, 1.2% 91.0%, 1.2% 12.0%);
+    }
+    .hud-popup-surface[data-hud-template="6"] {
+      clip-path: polygon(3.8% 2.0%, 96.5% 2.0%, 98.8% 9.0%, 98.8% 91.0%, 95.5% 98.2%, 4.2% 98.2%, 1.2% 89.0%, 1.2% 11.0%);
+    }
+    .hud-popup-surface[data-hud-template="8"] {
+      clip-path: polygon(3.0% 2.0%, 97.0% 2.0%, 98.8% 8.0%, 98.8% 92.0%, 97.0% 98.0%, 3.0% 98.0%, 1.2% 92.0%, 1.2% 8.0%);
+    }
+    .hud-popup-surface[data-hud-template="9"] {
+      clip-path: polygon(5.0% 2.0%, 96.5% 2.0%, 98.8% 8.5%, 98.8% 91.5%, 96.2% 98.0%, 2.5% 98.0%, 1.2% 91.5%, 1.2% 16.0%);
+    }
+    .hud-popup-surface[data-hud-template="10"] {
+      clip-path: polygon(2.8% 2.0%, 97.2% 2.0%, 98.8% 10.0%, 98.8% 90.0%, 97.2% 98.0%, 2.8% 98.0%, 1.2% 90.0%, 1.2% 10.0%);
+    }
+
+    /* Borderless Sci-Fi Chat Panel Controls (Zero Borders, Clean Floating Icons/Labels) */
+    .scifi-hud-btn,
+    .scifi-hud-icon-btn,
+    #composer-tools-tray button {
+      position: relative;
+      background: transparent !important;
+      background-image: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      outline: none !important;
+      clip-path: none !important;
+      transition: transform 0.15s ease, color 0.15s ease, filter 0.15s ease;
+    }
+    .scifi-hud-btn:hover,
+    .scifi-hud-icon-btn:hover,
+    #composer-tools-tray button:hover {
+      background: transparent !important;
+      color: #ffffff !important;
+      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.75));
+      transform: translateY(-1px);
+    }
+    .scifi-hud-icon-btn {
+      height: 30px !important;
+      padding: 0 6px !important;
+    }
+
+    .hud-popup-surface[data-hud-template="7"] {
+      clip-path: polygon(3.5% 2.5%, 96.5% 2.5%, 99.0% 10.0%, 99.0% 88.0%, 96.5% 97.5%, 3.5% 97.5%, 1.0% 88.0%, 1.0% 10.0%);
+    }
+    /* Ensure modals have generous safe-zone inner padding so close (✕), fullscreen (⛶) & minimize (—) buttons sit strictly inside all sci-fi borders */
+    aside.hud-popup-surface,
+    section.hud-popup-surface {
+      padding: 36px 48px 34px 44px !important;
+    }
+    /* High-Visibility Glassmorphic Chess.com Board & Thin Professional Sci-Fi Hairlines */
+    #chess-app-modal,
+    #youtube-app-modal {
+      cursor: default !important;
+      padding: 16px 26px 16px 26px !important;
+    }
+    #chess-app-modal .hud-frame-svg-overlay path,
+    #chess-app-modal .hud-frame-svg-overlay polygon,
+    #chess-app-modal .hud-frame-svg-overlay polyline,
+    #chess-app-modal .hud-frame-svg-overlay line {
+      vector-effect: non-scaling-stroke;
+    }
+    #chess-app-modal .hud-frame-svg-overlay {
+      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.22)) !important;
+    }
+    .chess-glass-board-outer {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.62), rgba(30, 41, 59, 0.46));
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.6), inset 0 0 12px rgba(255, 255, 255, 0.06);
+    }
+    .chess-sq-light {
+      background: linear-gradient(135deg, rgba(242, 245, 228, 0.48), rgba(218, 226, 196, 0.38));
+      backdrop-filter: blur(8px);
+      border: 0.5px solid rgba(255, 255, 255, 0.24);
+    }
+    .chess-sq-dark {
+      background: linear-gradient(135deg, rgba(118, 150, 86, 0.72), rgba(86, 118, 56, 0.62));
+      backdrop-filter: blur(8px);
+      border: 0.5px solid rgba(163, 230, 53, 0.28);
+    }
+    .chess-sq-selected {
+      background: linear-gradient(135deg, rgba(247, 247, 105, 0.72), rgba(186, 202, 68, 0.65)) !important;
+      box-shadow: inset 0 0 0 2px rgba(254, 240, 138, 0.95);
+    }
+    .chess-sq-lastmove {
+      background: linear-gradient(135deg, rgba(245, 246, 130, 0.48), rgba(186, 202, 68, 0.42)) !important;
+    }
+    .chess-sq-hint {
+      box-shadow: inset 0 0 0 2.5px #38bdf8, inset 0 0 14px rgba(56, 189, 248, 0.55) !important;
+    }
+    .chess-sq-check {
+      background: radial-gradient(circle, rgba(239, 68, 68, 0.92) 0%, rgba(220, 38, 38, 0.62) 58%, rgba(153, 27, 27, 0.35) 100%) !important;
+      box-shadow: inset 0 0 0 2px #fca5a5, 0 0 16px rgba(239, 68, 68, 0.8) !important;
+      animation: chessCheckPulse 1.1s infinite alternate;
+    }
+    @keyframes chessCheckPulse {
+      0% { filter: brightness(1); }
+      100% { filter: brightness(1.28); }
+    }
+    .chess-piece-svg {
+      width: 82%;
+      height: 82%;
+      pointer-events: none;
+      transition: transform 0.12s ease;
+    }
+    .chess-sq-btn:hover .chess-piece-svg {
+      transform: scale(1.07);
+    }
+
+    .hud-fullscreen-active {
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
+      width: 96vw !important;
+      max-width: 96vw !important;
+      height: 92vh !important;
+      max-height: 92vh !important;
+      z-index: 60 !important;
+    }
+    .hud-scroll-inner {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(var(--accent-rgb), 0.35) transparent;
+    }
+    .hud-frame-svg-overlay {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 30;
+      color: var(--accent-hex);
+      filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.38));
+      transition: color 0.3s ease, filter 0.3s ease;
+    }
+
+/* Additive Mobile & Small-Viewport Guard (Preserves Desktop HUD Identically) */
+@media (max-width: 640px) {
+  #barbi-brand-hud {
+    padding: 0.45rem 0.75rem !important;
+  }
+  #top-left-controls-hud {
+    max-width: 92vw !important;
+    overflow-x: auto !important;
+  }
+  #top-center-clock-hud {
+    display: none !important;
+  }
+  #device-battery-hud {
+    padding: 0.35rem 0.6rem !important;
+  }
+  #btn-status-hud {
+    padding: 0.35rem 0.65rem !important;
+  }
+  #memory-search-modal {
+    width: calc(100vw - 1.5rem) !important;
+    max-width: 340px !important;
+  }
+}

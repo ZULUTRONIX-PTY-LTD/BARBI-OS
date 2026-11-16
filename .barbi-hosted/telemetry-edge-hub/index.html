@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telemetry Edge Hub</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="badge">FORGED BY B.A.R.B.I 2.0 • R.E.A SYSTEM BUILDER</div>
+      <h1>Telemetry Edge Hub</h1>
+      <p class="tagline">Lightweight Dark-UI Solar Sensor &amp; Edge Diagnostics Console</p>
+    </div>
+    <div class="actions">
+      <button id="btn-export-json" class="btn">Export Local Data (.json)</button>
+      <button id="btn-add-item" class="btn btn-primary">+ New Operation</button>
+    </div>
+  </header>
+  <main class="grid">
+    
+    <section class="card" data-idx="0">
+      <div class="card-head">
+        <span>PV Array Yield</span>
+        <span class="pill">Active DC Power</span>
+      </div>
+      <div class="metric-val" id="metric-val-0">4.820 kW</div>
+      <button class="btn card-btn" onclick="triggerModuleAction(0, 'PV Array Yield')">Inspect MPPT</button>
+    </section>
+
+    <section class="card" data-idx="1">
+      <div class="card-head">
+        <span>Pyranometer Node</span>
+        <span class="pill">Solar Irradiance</span>
+      </div>
+      <div class="metric-val" id="metric-val-1">912.400 W/m²</div>
+      <button class="btn card-btn" onclick="triggerModuleAction(1, 'Pyranometer Node')">Calibrate Sensor</button>
+    </section>
+
+    <section class="card" data-idx="2">
+      <div class="card-head">
+        <span>LiFePO4 Storage Bank</span>
+        <span class="pill">State of Charge</span>
+      </div>
+      <div class="metric-val" id="metric-val-2">86.500 %</div>
+      <button class="btn card-btn" onclick="triggerModuleAction(2, 'LiFePO4 Storage Bank')">Check Cell Balance</button>
+    </section>
+
+    <section class="card" data-idx="3">
+      <div class="card-head">
+        <span>Inverter Thermal Core</span>
+        <span class="pill">Heatsink Temperature</span>
+      </div>
+      <div class="metric-val" id="metric-val-3">42.300 °C</div>
+      <button class="btn card-btn" onclick="triggerModuleAction(3, 'Inverter Thermal Core')">View Thermal Log</button>
+    </section>
+
+    <section class="card" data-idx="4">
+      <div class="card-head">
+        <span>Edge Gateway Link</span>
+        <span class="pill">MQTT Telemetry Latency</span>
+      </div>
+      <div class="metric-val" id="metric-val-4">14.200 ms</div>
+      <button class="btn card-btn" onclick="triggerModuleAction(4, 'Edge Gateway Link')">Test Connection</button>
+    </section>
+  </main>
+  <section class="panel">
+    <h2>Interactive Command &amp; Log Console</h2>
+    <div class="input-row">
+      <input id="op-input" type="text" placeholder="Enter task, telemetry note, or operational rule..." />
+      <button class="btn btn-primary" onclick="appendUserOperation()">Persist to Local &amp; Sync</button>
+    </div>
+    <ul id="op-log" class="log-list"></ul>
+  </section>
+  <script src="./app.js"></script>
+</body>
+</html>

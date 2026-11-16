@@ -1,0 +1,6 @@
+{
+  "name": "B.A.R.B.I",
+  "description": "Brilliant Adaptive Reasoning Brain Interface — Cross-platform personal AI system with 3D cognitive sphere, ARCHIVEX persistent PostgreSQL/pgvector memory, voice I/O, and productivity suite.",
+  "requestFramePermissions": ["microphone", "camera", "geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="barbiCoreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF9D1A" />
+      <stop offset="45%" stop-color="#D96800" stop-opacity="0.88" />
+      <stop offset="100%" stop-color="#020100" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="barbiRingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5B860" />
+      <stop offset="50%" stop-color="#D96800" />
+      <stop offset="100%" stop-color="#7A2E00" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="#020100" />
+  <circle cx="256" cy="256" r="210" fill="url(#barbiCoreGlow)" opacity="0.28" />
+  <circle cx="256" cy="256" r="176" fill="none" stroke="url(#barbiRingGrad)" stroke-width="5" opacity="0.92" />
+  <circle cx="256" cy="256" r="144" fill="none" stroke="#D96800" stroke-width="2.5" stroke-dasharray="18 10" opacity="0.72" />
+  <ellipse cx="256" cy="256" rx="176" ry="68" fill="none" stroke="#F0820A" stroke-width="3" opacity="0.65" transform="rotate(-24 256 256)" />
+  <ellipse cx="256" cy="256" rx="176" ry="68" fill="none" stroke="#D96800" stroke-width="3" opacity="0.65" transform="rotate(24 256 256)" />
+  <ellipse cx="256" cy="256" rx="68" ry="176" fill="none" stroke="#F5B860" stroke-width="2.4" opacity="0.55" />
+  <polygon points="256,162 338,209 338,303 256,350 174,303 174,209" fill="rgba(217,104,0,0.12)" stroke="#FF9D1A" stroke-width="4" />
+  <polygon points="256,192 312,224 312,288 256,320 200,288 200,224" fill="rgba(255,157,26,0.18)" stroke="#F5B860" stroke-width="2.5" />
+  <circle cx="256" cy="256" r="24" fill="#FF9D1A" />
+  <circle cx="256" cy="256" r="10" fill="#020100" />
+  <circle cx="256" cy="80" r="6" fill="#FF9D1A" />
+  <circle cx="256" cy="432" r="6" fill="#FF9D1A" />
+  <circle cx="80" cy="256" r="6" fill="#FF9D1A" />
+  <circle cx="432" cy="256" r="6" fill="#FF9D1A" />
+</svg>
