@@ -8,6 +8,7 @@ import {
   subscribeAuthState,
 } from '../lib/firebase';
 import { barbiVoiceEngine } from '../voice/voiceEngine';
+import posthog, { isPostHogConfigured } from '../lib/posthog';
 
 export interface BarbiBridgeApi {
   voice: typeof barbiVoiceEngine;
@@ -53,6 +54,10 @@ export interface BarbiBridgeApi {
 
 let bridgeMounted = false;
 let boundDirectoryHandle: FileSystemDirectoryHandle | null = null;
+
+function captureBarbiEvent(event: string, properties?: Record<string, string | number | boolean>): void {
+  if (isPostHogConfigured) posthog.capture(event, properties);
+}
 
 export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; workspace?: Record<string, unknown> }) => void): void {
   if (bridgeMounted) return;
@@ -112,6 +117,7 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
       if (!getCurrentFirebaseUser()) return;
       try {
         await barbiApi.saveMemory(node);
+        captureBarbiEvent('memory_saved');
       } catch {
         // Offline queue captures retries
       }
@@ -121,6 +127,7 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
       if (!getCurrentFirebaseUser()) return;
       try {
         await barbiApi.deleteMemory(nodeKey);
+        captureBarbiEvent('memory_deleted');
       } catch {
         // Offline queue captures retries
       }
@@ -130,7 +137,9 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
       if (!getCurrentFirebaseUser()) return [];
       try {
         const out = await barbiApi.semanticSearch(query, 6);
-        return out.results || [];
+        const results = out.results || [];
+        captureBarbiEvent('memory_search_completed', { result_count: results.length });
+        return results;
       } catch {
         return [];
       }
@@ -140,6 +149,7 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
       if (!getCurrentFirebaseUser()) return;
       try {
         await barbiApi.saveHabit(habit);
+        captureBarbiEvent('habit_saved');
       } catch {
         // Queued offline
       }
@@ -149,6 +159,7 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
       if (!getCurrentFirebaseUser()) return;
       try {
         await barbiApi.deleteHabit(habitKey);
+        captureBarbiEvent('habit_deleted');
       } catch {
         // Queued offline
       }
@@ -158,6 +169,7 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
       if (!getCurrentFirebaseUser()) return;
       try {
         await barbiApi.logTimerSession(session);
+        captureBarbiEvent('timer_session_logged');
       } catch {
         // Queued offline
       }
@@ -175,11 +187,14 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
     async exportBackup(localFallback) {
       if (getCurrentFirebaseUser()) {
         try {
-          return await barbiApi.exportBackup();
+          const backup = await barbiApi.exportBackup();
+          captureBarbiEvent('backup_exported', { source: 'cloud' });
+          return backup;
         } catch {
           // fallback below
         }
       }
+      captureBarbiEvent('backup_exported', { source: 'local' });
       return localFallback;
     },
 
@@ -188,6 +203,7 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
       if (typeof picker !== 'function') return null;
       try {
         boundDirectoryHandle = await picker({ mode: 'readwrite' });
+        captureBarbiEvent('folder_sync_bound');
         return boundDirectoryHandle.name || 'Windows Local Folder';
       } catch {
         return null;
@@ -212,7 +228,13 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
     },
 
     async chatTurn(payload) {
-      return barbiApi.chatTurn(payload);
+      const response = await barbiApi.chatTurn(payload);
+      captureBarbiEvent('ai_chat_completed', {
+        provider: response.provider,
+        used_fallback: response.fallback,
+        tool_count: response.toolInvocations.length,
+      });
+      return response;
     },
 
     async getProviders() {
@@ -233,7 +255,9 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
 
     async switchProvider(providerId) {
       try {
-        return await barbiApi.switchProvider(providerId);
+        const result = await barbiApi.switchProvider(providerId);
+        captureBarbiEvent('ai_provider_changed');
+        return result;
       } catch {
         return null;
       }
@@ -266,6 +290,7 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
     async sendTelegram(text, chatId) {
       try {
         const r = await barbiApi.sendTelegram(text, chatId);
+        if (r.ok) captureBarbiEvent('telegram_message_sent');
         return Boolean(r.ok);
       } catch {
         return false;
@@ -283,15 +308,21 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
     },
 
     async reaStudyUrl(payload) {
-      return barbiApi.reaStudyUrl(payload);
+      const result = await barbiApi.reaStudyUrl(payload);
+      captureBarbiEvent('rea_generation_completed', { workflow: 'study_url' });
+      return result;
     },
 
     async reaBuildAgent(payload) {
-      return barbiApi.reaBuildAgent(payload);
+      const result = await barbiApi.reaBuildAgent(payload);
+      captureBarbiEvent('rea_generation_completed', { workflow: 'build_agent' });
+      return result;
     },
 
     async reaBuildSystem(payload) {
-      return barbiApi.reaBuildSystem(payload);
+      const result = await barbiApi.reaBuildSystem(payload);
+      captureBarbiEvent('rea_generation_completed', { workflow: 'build_system' });
+      return result;
     },
 
     async reaListHosted() {
@@ -303,7 +334,9 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
     },
 
     async studioGenerateStudyPack(payload) {
-      return barbiApi.studioGenerateStudyPack(payload);
+      const result = await barbiApi.studioGenerateStudyPack(payload);
+      captureBarbiEvent('study_pack_generated');
+      return result;
     },
 
     async downloadBundleZip(slug: string, files: Record<string, string>) {
@@ -320,6 +353,7 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+      captureBarbiEvent('bundle_downloaded', { file_count: Object.keys(files).length });
     },
 
     openExternalSafely(url: string) {

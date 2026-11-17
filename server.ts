@@ -8,6 +8,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createServer as createViteServer } from 'vite';
 import { apiRouter } from './src/server/routes/api.ts';
+import { emitPostHogLog, shutdownPostHogLogs } from './src/server/posthogLogs.ts';
 import { getHostedSystemsRootDir } from './src/server/rea/reaService.ts';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -102,9 +103,35 @@ async function bootstrapServer() {
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`B.A.R.B.I 2.0 PIOS server listening on http://0.0.0.0:${PORT}`);
+  emitPostHogLog('INFO', 'server_bootstrapped', {
+    event: 'server_bootstrapped',
+    runtime: isProduction ? 'production' : 'development',
   });
+
+  const server = app.listen(PORT, '0.0.0.0', () => {
+    console.log(`B.A.R.B.I 2.0 PIOS server listening on http://0.0.0.0:${PORT}`);
+    emitPostHogLog('INFO', 'server_listening', {
+      event: 'server_listening',
+      port: PORT,
+    });
+  });
+
+  let isShuttingDown = false;
+  const shutdown = () => {
+    if (isShuttingDown) return;
+    isShuttingDown = true;
+
+    const flushTimeout = new Promise<void>((resolve) => {
+      setTimeout(resolve, 2_000).unref();
+    });
+
+    void Promise.race([shutdownPostHogLogs(), flushTimeout]).finally(() => {
+      server.close(() => process.exit(0));
+    });
+  };
+
+  process.once('SIGINT', shutdown);
+  process.once('SIGTERM', shutdown);
 }
 
 bootstrapServer().catch((err) => {

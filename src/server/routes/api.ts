@@ -7,6 +7,7 @@ import {
   hasConfiguredGeminiKey,
   transcribeAudioBuffer,
 } from '../ai/geminiService.ts';
+import { createAiObservabilityContext } from '../ai/observability.ts';
 import {
   callOpenAiCompatibleProvider,
   estimateTokenCount,
@@ -662,6 +663,10 @@ apiRouter.post('/ai/chat', optionalAuth, async (req: AuthRequest, res) => {
   const uid = req.user?.uid;
   const userKey = uid || 'guest';
   const conversationKey = parsed.data.conversationKey || `conv-session-${Date.now()}`;
+  const observability = createAiObservabilityContext({
+    sessionId: conversationKey,
+    ...(uid ? { distinctId: uid } : {}),
+  });
 
   let memoryContext = '';
   let conversationContext = '';
@@ -670,8 +675,8 @@ apiRouter.post('/ai/chat', optionalAuth, async (req: AuthRequest, res) => {
   if (uid) {
     try {
       const [semNodes, pastTurns] = await Promise.all([
-        semanticSearchKnowledgeNodes(uid, parsed.data.prompt, 6),
-        retrieveRelevantPastConversations(uid, parsed.data.prompt, 4),
+        semanticSearchKnowledgeNodes(uid, parsed.data.prompt, 6, observability),
+        retrieveRelevantPastConversations(uid, parsed.data.prompt, 4, observability),
       ]);
       if (semNodes.results.length > 0) {
         memoryContext = semNodes.results
@@ -749,6 +754,7 @@ apiRouter.post('/ai/chat', optionalAuth, async (req: AuthRequest, res) => {
           attachments: parsed.data.attachments,
           deepThink: parsed.data.deepThink,
           quickMode: parsed.data.quickMode,
+          observability,
           onToolCall: uid
             ? async (fnName, args) => {
                 if (fnName === 'save_archivex_memory') {
@@ -759,7 +765,7 @@ apiRouter.post('/ai/chat', optionalAuth, async (req: AuthRequest, res) => {
                     domain: typeof args.domain === 'string' ? args.domain : undefined,
                     source: 'BARBI_TOOL_CALL',
                     verificationStatus: 'USER_REPORTED',
-                  });
+                  }, { observability });
                   return {
                     saved: true,
                     nodeKey: saved.node.nodeKey,
@@ -801,6 +807,7 @@ apiRouter.post('/ai/chat', optionalAuth, async (req: AuthRequest, res) => {
           systemInstruction,
           prompt: parsed.data.prompt,
           history: parsed.data.history,
+          observability,
         });
         aiResult = {
           reply: extRes.reply,
@@ -833,6 +840,7 @@ apiRouter.post('/ai/chat', optionalAuth, async (req: AuthRequest, res) => {
           content: parsed.data.prompt,
           model: aiResult.model,
           activatedNodes: activatedNodeKeys,
+          observability,
         });
         await appendConversationTurn(uid, {
           conversationKey,
@@ -841,6 +849,7 @@ apiRouter.post('/ai/chat', optionalAuth, async (req: AuthRequest, res) => {
           model: aiResult.model,
           thinkingUsed: aiResult.thinkingLevel !== 'LOW',
           activatedNodes: activatedNodeKeys,
+          observability,
         });
       } catch (persistErr) {
         console.warn('Conversation turn persistence warning:', persistErr);
@@ -910,7 +919,14 @@ apiRouter.post('/ai/transcribe', optionalAuth, async (req, res) => {
     });
   }
   try {
-    const transcript = await transcribeAudioBuffer(parsed.data.audioBase64, parsed.data.mimeType);
+    const transcript = await transcribeAudioBuffer(
+      parsed.data.audioBase64,
+      parsed.data.mimeType,
+      createAiObservabilityContext({
+        sessionId: `transcription-${Date.now()}`,
+        ...(req.user?.uid ? { distinctId: req.user.uid } : {}),
+      })
+    );
     return res.json({ transcript });
   } catch (err) {
     return sendError(res, 502, (err as Error)?.message || 'Audio transcription failed.');

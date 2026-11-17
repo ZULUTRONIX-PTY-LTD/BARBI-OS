@@ -1,4 +1,6 @@
+import { randomUUID } from 'node:crypto';
 import { generateBarbiChatTurn } from './geminiService.ts';
+import { createAiObservabilityContext } from './observability.ts';
 import {
   callOpenAiCompatibleProvider,
   estimateTokenCount,
@@ -33,6 +35,10 @@ export async function executePooledAiText(params: {
   allowAutoFailover?: boolean;
   providerId?: string;
 }): Promise<PooledAiResult> {
+  const observability = createAiObservabilityContext({
+    sessionId: `workflow-${randomUUID()}`,
+    ...(params.userKey === 'guest' ? {} : { distinctId: params.userKey }),
+  });
   const estimatedTokens = estimateTokenCount(params.systemInstruction + params.prompt) + 600;
   const prefsSnapshot = getProviderQuotaSnapshot(params.userKey);
   const routingDecision = selectBestAvailableProvider(
@@ -86,6 +92,7 @@ export async function executePooledAiText(params: {
         const gRes = await generateBarbiChatTurn({
           prompt: `${params.systemInstruction}\n\n${params.prompt}`,
           quickMode: false,
+          observability,
         });
         if (gRes.reply) {
           reply = gRes.reply;
@@ -99,6 +106,7 @@ export async function executePooledAiText(params: {
           providerId: candidateId,
           systemInstruction: params.systemInstruction,
           prompt: params.prompt,
+          observability,
         });
         reply = extRes.reply;
         modelUsed = `${candidateId}:${extRes.model}`;
