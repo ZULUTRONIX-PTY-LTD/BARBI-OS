@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { syncPendingOfflineMutations } from '../api/barbiClient';
+import posthog, { isPostHogConfigured } from '../lib/posthog';
 import { usePWAInstall } from './usePWAInstall';
 
 export function PWAInstallAndSyncBadge() {
@@ -24,6 +25,11 @@ export function PWAInstallAndSyncBadge() {
     };
   }, []);
 
+  const handleInstall = async () => {
+    const accepted = await install();
+    if (accepted && isPostHogConfigured) posthog.capture('pwa_install_accepted');
+  };
+
   return (
     <div className="fixed bottom-3 right-3.5 z-40 flex items-center gap-1.5 pointer-events-auto">
       {!isOnline && (
@@ -40,7 +46,7 @@ export function PWAInstallAndSyncBadge() {
           {canInstallNative ? (
             <button
               type="button"
-              onClick={() => void install()}
+              onClick={() => void handleInstall()}
               className="hover:text-white transition cursor-pointer"
               title="Install B.A.R.B.I on Windows, macOS, or Android"
             >

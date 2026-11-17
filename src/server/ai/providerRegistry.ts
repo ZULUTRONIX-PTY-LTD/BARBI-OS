@@ -1,3 +1,5 @@
+import { captureManualAiGeneration, type AiObservabilityContext } from './observability.ts';
+
 export type SwitchMode = 'auto' | 'recommend';
 
 export interface ProviderFreeTierSpec {
@@ -483,6 +485,7 @@ export async function callOpenAiCompatibleProvider(params: {
   systemInstruction: string;
   prompt: string;
   history?: Array<{ role: 'user' | 'assistant'; content: string }>;
+  observability?: AiObservabilityContext;
 }): Promise<{ reply: string; model: string; tokensUsed: number; latencyMs: number }> {
   const spec = FREE_PROVIDER_CATALOG.find((p) => p.id === params.providerId);
   if (!spec || spec.endpoint.startsWith('SDK:')) {
@@ -563,7 +566,27 @@ export async function callOpenAiCompatibleProvider(params: {
       estimateTokenCount(params.systemInstruction + params.prompt + reply);
     const latencyMs = Date.now() - startMs;
     recordProviderUsage(spec.id, { tokensUsed, latencyMs });
+    captureManualAiGeneration({
+      context: params.observability,
+      provider: spec.id,
+      model: spec.modelId,
+      input: messages,
+      output: reply,
+      inputTokens: estimateTokenCount(params.systemInstruction + params.prompt),
+      outputTokens: Math.max(1, tokensUsed - estimateTokenCount(params.systemInstruction + params.prompt)),
+      latencyMs,
+    });
     return { reply, model: spec.modelId, tokensUsed, latencyMs };
+  } catch (err) {
+    captureManualAiGeneration({
+      context: params.observability,
+      provider: spec.id,
+      model: spec.modelId,
+      input: messages,
+      latencyMs: Date.now() - startMs,
+      error: (err as Error)?.message || 'Provider request failed',
+    });
+    throw err;
   } finally {
     clearTimeout(timer);
   }

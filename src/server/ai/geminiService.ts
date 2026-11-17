@@ -1,5 +1,11 @@
 import { GoogleGenAI, ThinkingLevel, Type, type FunctionDeclaration } from '@google/genai';
 import { deterministicEmbed768, VECTOR_DIMENSIONS } from '../../lib/vectorMath.ts';
+import {
+  captureAiToolSpan,
+  captureManualAiEmbedding,
+  captureManualAiGeneration,
+  type AiObservabilityContext,
+} from './observability.ts';
 import { selectAiRoutingConfig, type BarbiThinkingMode } from './complexity.ts';
 import {
   estimateTokenCount,
@@ -15,14 +21,15 @@ function getAiClient(): GoogleGenAI | null {
     return null;
   }
   if (!_aiClient) {
-    _aiClient = new GoogleGenAI({
+    const options = {
       apiKey: key,
       httpOptions: {
         headers: {
           'User-Agent': 'aistudio-build',
         },
       },
-    });
+    };
+    _aiClient = new GoogleGenAI(options);
   }
   return _aiClient;
 }
@@ -47,7 +54,59 @@ function mapThinkingLevel(level: BarbiThinkingMode): ThinkingLevel {
   }
 }
 
-export async function generateEmbedding768(text: string): Promise<{
+interface GeminiGenerationResponse {
+  text?: string;
+  usageMetadata?: {
+    promptTokenCount?: number;
+    candidatesTokenCount?: number;
+    totalTokenCount?: number;
+  };
+}
+
+async function runObservedGeminiGeneration<T extends GeminiGenerationResponse>(params: {
+  context?: AiObservabilityContext;
+  model: string;
+  input: Array<{ role: string; content: string }>;
+  execute: () => Promise<T>;
+}): Promise<T> {
+  const startMs = Date.now();
+  try {
+    const response = await params.execute();
+    const output = response.text || '';
+    captureManualAiGeneration({
+      context: params.context,
+      provider: 'google',
+      model: params.model,
+      input: params.input,
+      output,
+      inputTokens:
+        response.usageMetadata?.promptTokenCount ||
+        estimateTokenCount(params.input.map((message) => message.content).join('\n')),
+      outputTokens:
+        response.usageMetadata?.candidatesTokenCount || estimateTokenCount(output),
+      latencyMs: Date.now() - startMs,
+    });
+    return response;
+  } catch (error) {
+    captureManualAiGeneration({
+      context: params.context,
+      provider: 'google',
+      model: params.model,
+      input: params.input,
+      output: '',
+      inputTokens: estimateTokenCount(params.input.map((message) => message.content).join('\n')),
+      outputTokens: 0,
+      latencyMs: Date.now() - startMs,
+      error: (error as Error)?.message || 'Gemini request failed',
+    });
+    throw error;
+  }
+}
+
+export async function generateEmbedding768(
+  text: string,
+  observability?: AiObservabilityContext
+): Promise<{
   vector: number[];
   provider: 'gemini-embedding-2' | 'deterministic-fallback';
 }> {
@@ -61,6 +120,7 @@ export async function generateEmbedding768(text: string): Promise<{
     return { vector: deterministicEmbed768(clean), provider: 'deterministic-fallback' };
   }
 
+  const embeddingStartMs = Date.now();
   try {
     const res = await ai.models.embedContent({
       model: 'gemini-embedding-2',
@@ -69,11 +129,28 @@ export async function generateEmbedding768(text: string): Promise<{
         outputDimensionality: VECTOR_DIMENSIONS,
       },
     });
+    captureManualAiEmbedding({
+      context: observability,
+      provider: 'google',
+      model: 'gemini-embedding-2',
+      input: clean.slice(0, 4000),
+      inputTokens: estimateTokenCount(clean.slice(0, 4000)),
+      latencyMs: Date.now() - embeddingStartMs,
+    });
     const values = res?.embeddings?.[0]?.values;
     if (Array.isArray(values) && values.length === VECTOR_DIMENSIONS) {
       return { vector: values, provider: 'gemini-embedding-2' };
     }
   } catch (err) {
+    captureManualAiEmbedding({
+      context: observability,
+      provider: 'google',
+      model: 'gemini-embedding-2',
+      input: clean.slice(0, 4000),
+      inputTokens: estimateTokenCount(clean.slice(0, 4000)),
+      latencyMs: Date.now() - embeddingStartMs,
+      error: (err as Error)?.message || 'Gemini embedding failed',
+    });
     console.warn('Gemini embedding fallback engaged:', (err as Error)?.message || err);
   }
 
@@ -98,6 +175,7 @@ export interface ChatTurnInput {
   deepThink?: boolean;
   quickMode?: boolean;
   onToolCall?: (name: string, args: Record<string, unknown>) => Promise<Record<string, unknown>>;
+  observability?: AiObservabilityContext;
 }
 
 export interface ChatTurnResult {
@@ -220,10 +298,16 @@ export async function generateBarbiChatTurn(input: ChatTurnInput): Promise<ChatT
       config.tools = [{ functionDeclarations: BARBI_TOOL_DECLARATIONS }];
     }
 
-    let response = await ai.models.generateContent({
+    let response = await runObservedGeminiGeneration({
+      context: input.observability,
       model: routing.model,
-      contents,
-      config,
+      input: [{ role: 'user', content: input.prompt }],
+      execute: () =>
+        ai.models.generateContent({
+          model: routing.model,
+          contents,
+          config,
+        }),
     });
 
     // Execute up to 3 function calls if the model chooses to invoke ARCHIVEX / Habit tools
@@ -232,7 +316,15 @@ export async function generateBarbiChatTurn(input: ChatTurnInput): Promise<ChatT
       for (const fc of response.functionCalls.slice(0, 3)) {
         const fnName = fc.name || 'unknown';
         const fnArgs = (fc.args || {}) as Record<string, unknown>;
+        const toolStartMs = Date.now();
         const result = await input.onToolCall(fnName, fnArgs);
+        captureAiToolSpan({
+          context: input.observability,
+          name: fnName,
+          input: fnArgs,
+          output: result,
+          latencyMs: Date.now() - toolStartMs,
+        });
         toolInvocations.push({ name: fnName, args: fnArgs, result });
         fnResponses.push({
           functionResponse: {
@@ -242,19 +334,25 @@ export async function generateBarbiChatTurn(input: ChatTurnInput): Promise<ChatT
         });
       }
       const modelCandidateParts = response.candidates?.[0]?.content?.parts || [];
-      response = await ai.models.generateContent({
+      response = await runObservedGeminiGeneration({
+        context: input.observability,
         model: routing.model,
-        contents: [
-          ...contents,
-          { role: 'model', parts: modelCandidateParts as Array<Record<string, unknown>> },
-          { role: 'user', parts: fnResponses },
-        ],
-        config: {
-          systemInstruction,
-          thinkingConfig: {
-            thinkingLevel: mapThinkingLevel(routing.thinkingLevel),
-          },
-        },
+        input: [{ role: 'user', content: input.prompt }],
+        execute: () =>
+          ai.models.generateContent({
+            model: routing.model,
+            contents: [
+              ...contents,
+              { role: 'model', parts: modelCandidateParts as Array<Record<string, unknown>> },
+              { role: 'user', parts: fnResponses },
+            ],
+            config: {
+              systemInstruction,
+              thinkingConfig: {
+                thinkingLevel: mapThinkingLevel(routing.thinkingLevel),
+              },
+            },
+          }),
       });
     }
 
@@ -296,27 +394,34 @@ export async function generateBarbiChatTurn(input: ChatTurnInput): Promise<ChatT
 
 export async function transcribeAudioBuffer(
   base64Audio: string,
-  mimeType: string
+  mimeType: string,
+  observability?: AiObservabilityContext
 ): Promise<string> {
   const ai = getAiClient();
   if (!ai) {
     throw new Error('Server transcription requires a configured GEMINI_API_KEY.');
   }
-  const res = await ai.models.generateContent({
+  const res = await runObservedGeminiGeneration({
+    context: observability,
     model: 'gemini-3.5-transcribe',
-    contents: {
-      parts: [
-        {
-          inlineData: {
-            mimeType: mimeType || 'audio/webm',
-            data: base64Audio,
-          },
+    input: [{ role: 'user', content: '[audio transcription request]' }],
+    execute: () =>
+      ai.models.generateContent({
+        model: 'gemini-3.5-transcribe',
+        contents: {
+          parts: [
+            {
+              inlineData: {
+                mimeType: mimeType || 'audio/webm',
+                data: base64Audio,
+              },
+            },
+            {
+              text: 'Transcribe the spoken audio accurately as plain text.',
+            },
+          ],
         },
-        {
-          text: 'Transcribe the spoken audio accurately as plain text.',
-        },
-      ],
-    },
+      }),
   });
   return (res.text || '').trim();
 }

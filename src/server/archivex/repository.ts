@@ -18,6 +18,7 @@ import {
   toPgVectorLiteral,
 } from '../../lib/vectorMath.ts';
 import { generateEmbedding768 } from '../ai/geminiService.ts';
+import type { AiObservabilityContext } from '../ai/observability.ts';
 
 export interface KnowledgeNodeInput {
   nodeKey?: string;
@@ -303,10 +304,11 @@ export async function listKnowledgeNodes(
 export async function semanticSearchKnowledgeNodes(
   userUid: string,
   query: string,
-  limit = 8
+  limit = 8,
+  observability?: AiObservabilityContext
 ) {
   try {
-    const { vector, provider } = await generateEmbedding768(query);
+    const { vector, provider } = await generateEmbedding768(query, observability);
     const vecLiteral = toPgVectorLiteral(vector);
 
     const rows = await db
@@ -341,7 +343,7 @@ export async function semanticSearchKnowledgeNodes(
 export async function createOrUpdateKnowledgeNode(
   userUid: string,
   input: KnowledgeNodeInput,
-  options?: { skipConflictScan?: boolean }
+  options?: { skipConflictScan?: boolean; observability?: AiObservabilityContext }
 ) {
   try {
     const inferredMeta = classifyMemoryNodeMeta(`${input.label} ${input.content}`);
@@ -356,14 +358,20 @@ export async function createOrUpdateKnowledgeNode(
       .limit(1);
 
     const { vector } = await generateEmbedding768(
-      `${input.label}. ${input.summary || ''}. ${input.content}`
+      `${input.label}. ${input.summary || ''}. ${input.content}`,
+      options?.observability
     );
 
     let detectedContradiction: { id?: number; topic: string; reason: string } | null = null;
 
     if (!options?.skipConflictScan && existingRows.length === 0) {
       // Compare against top semantically closest nodes to catch contradictions automatically
-      const similar = await semanticSearchKnowledgeNodes(userUid, `${input.label} ${input.content}`, 3);
+      const similar = await semanticSearchKnowledgeNodes(
+        userUid,
+        `${input.label} ${input.content}`,
+        3,
+        options?.observability
+      );
       for (const candidate of similar.results) {
         const analysis = detectContradictionOrProgression(candidate.content, input.content);
         if (analysis.relation === 'CONTRADICTION') {
@@ -716,6 +724,7 @@ export async function appendConversationTurn(
     thinkingUsed?: boolean;
     activatedNodes?: string[];
     attachments?: Array<{ name: string; type: string; mimeType?: string }>;
+    observability?: AiObservabilityContext;
   }
 ) {
   try {
@@ -739,7 +748,7 @@ export async function appendConversationTurn(
       })
       .returning();
 
-    const { vector } = await generateEmbedding768(params.content);
+    const { vector } = await generateEmbedding768(params.content, params.observability);
 
     const [msg] = await db
       .insert(conversationMessages)
@@ -766,10 +775,11 @@ export async function appendConversationTurn(
 export async function retrieveRelevantPastConversations(
   userUid: string,
   query: string,
-  limit = 5
+  limit = 5,
+  observability?: AiObservabilityContext
 ) {
   try {
-    const { vector } = await generateEmbedding768(query);
+    const { vector } = await generateEmbedding768(query, observability);
     const vecLiteral = toPgVectorLiteral(vector);
     return await db
       .select({
