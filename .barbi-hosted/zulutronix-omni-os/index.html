@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050301" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>ZULUTRONIX Omni-OS</title>
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="badge">FORGED BY B.A.R.B.I • R.E.A AGENT FORGE (morluto/rea)</div>
+      <h1>ZULUTRONIX Omni-OS</h1>
+      <p class="tagline">Unified Cross-Platform Robotics Telemetry, Edge Control &amp; REA MCP Diagnostics</p>
+      <div class="platform-row"><span class="platform-chip" data-platform="web">WEB</span><span class="platform-chip" data-platform="windows">WINDOWS</span><span class="platform-chip" data-platform="macos">MACOS</span><span class="platform-chip" data-platform="ios">IOS</span><span class="platform-chip" data-platform="android">ANDROID</span></div>
+    </div>
+    <div class="actions">
+      <button id="btn-runtime-info" class="btn" type="button">Runtime Target</button>
+      <button id="btn-export-json" class="btn" type="button">Export Data (.json)</button>
+      <button id="btn-add-item" class="btn btn-primary" type="button">+ New Operation</button>
+    </div>
+  </header>
+
+  <section class="runtime-banner" id="runtime-banner">
+    <span><strong>Target Host:</strong> <span id="detected-host">Detecting platform...</span></span>
+    <span><strong>Bundle ID:</strong> <code>co.za.zulutronix.zulutronixomnios</code></span>
+    <span><strong>REA MCP:</strong> <code>npx rea-agents@latest setup</code></span>
+  </section>
+
+  <main class="grid">
+    
+    <section class="card" data-idx="0">
+      <div class="card-head">
+        <span>Robotics Telemetry Bus</span>
+        <span class="pill">Active ROS2 / Edge Streams</span>
+      </div>
+      <div class="metric-val" id="metric-val-0">12 Nodes @ 100 Hz</div>
+      <button class="btn card-btn" type="button" onclick="triggerModuleAction(0, 'Robotics Telemetry Bus')">Inspect Telemetry</button>
+    </section>
+
+    <section class="card" data-idx="1">
+      <div class="card-head">
+        <span>Edge Device Control</span>
+        <span class="pill">Actuator &amp; Relay Latency</span>
+      </div>
+      <div class="metric-val" id="metric-val-1">4.2 ms E2E</div>
+      <button class="btn card-btn" type="button" onclick="triggerModuleAction(1, 'Edge Device Control')">Open Control Deck</button>
+    </section>
+
+    <section class="card" data-idx="2">
+      <div class="card-head">
+        <span>Offline Mission Log</span>
+        <span class="pill">Local SQLite WAL Sync Queue</span>
+      </div>
+      <div class="metric-val" id="metric-val-2">1,480 Records Cached</div>
+      <button class="btn card-btn" type="button" onclick="triggerModuleAction(2, 'Offline Mission Log')">Sync &amp; Export Logs</button>
+    </section>
+
+    <section class="card" data-idx="3">
+      <div class="card-head">
+        <span>REA MCP Diagnostics</span>
+        <span class="pill">Agent Server Health</span>
+      </div>
+      <div class="metric-val" id="metric-val-3">4/4 Channels Online</div>
+      <button class="btn card-btn" type="button" onclick="triggerModuleAction(3, 'REA MCP Diagnostics')">Run MCP Probe</button>
+    </section>
+  </main>
+
+  <section class="panel">
+    <h2>Interactive Command, Telemetry &amp; Sync Console</h2>
+    <div class="input-row">
+      <input id="op-input" type="text" placeholder="Enter operational task, telemetry note, or REA automation command..." />
+      <button class="btn btn-primary" type="button" onclick="appendUserOperation()">Persist &amp; Sync</button>
+    </div>
+    <ul id="op-log" class="log-list"></ul>
+  </section>
+
+  <section class="panel caps-panel">
+    <h2>Bundled Cross-Platform Capabilities</h2>
+    <ul class="caps-list">
+      <li>Web: WebSerial, WebUSB, WebSocket telemetry streaming, and IndexedDB offline mission caching</li>
+      <li>Windows: Native COM/USB-UART hardware bridge, system tray daemon, and DirectX hardware-accelerated 3D pose viewport</li>
+      <li>macOS: CoreBluetooth BLE edge discovery, Apple Silicon Metal telemetry plots, and sandboxed local MCP subprocess runner</li>
+      <li>iOS: CoreBluetooth field controller, Haptic E-Stop feedback, and background SQLite mission sync</li>
+      <li>Android: USB OTG serial driver, Bluetooth Low Energy GATT edge provisioning, and offline foreground telemetry logger</li>
+    </ul>
+  </section>
+
+  <script src="./app.js"></script>
+</body>
+</html>

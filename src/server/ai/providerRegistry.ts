@@ -523,7 +523,8 @@ export async function callOpenAiCompatibleProvider(params: {
 
   const startMs = Date.now();
   const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), 22000);
+  const timeoutMs = spec.id === 'ollama' ? 2500 : 18000;
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
     const res = await fetch(url, {
       method: 'POST',
@@ -564,6 +565,134 @@ export async function callOpenAiCompatibleProvider(params: {
     const latencyMs = Date.now() - startMs;
     recordProviderUsage(spec.id, { tokensUsed, latencyMs });
     return { reply, model: spec.modelId, tokensUsed, latencyMs };
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+export async function streamOpenAiCompatibleProvider(params: {
+  providerId: string;
+  systemInstruction: string;
+  prompt: string;
+  history?: Array<{ role: 'user' | 'assistant'; content: string }>;
+  onChunk: (delta: string) => void;
+}): Promise<{ reply: string; model: string; tokensUsed: number; latencyMs: number }> {
+  const spec = FREE_PROVIDER_CATALOG.find((p) => p.id === params.providerId);
+  if (!spec || spec.endpoint.startsWith('SDK:')) {
+    throw new Error(`Unsupported OpenAI-compatible provider: ${params.providerId}`);
+  }
+  const envVal = process.env[spec.envVarName]?.trim();
+  if (!envVal) {
+    throw new Error(`Provider ${spec.name} is not configured.`);
+  }
+
+  const url =
+    spec.id === 'ollama'
+      ? envVal.endsWith('/chat/completions')
+        ? envVal
+        : `${envVal.replace(/\/$/, '')}/v1/chat/completions`
+      : spec.endpoint;
+
+  const headers: Record<string, string> = {
+    'Content-Type': 'application/json',
+  };
+  if (spec.id !== 'ollama') {
+    headers.Authorization = `Bearer ${envVal}`;
+  }
+  if (spec.id === 'github_models') {
+    headers.Accept = 'application/vnd.github+json';
+    headers['X-GitHub-Api-Version'] = '2022-11-28';
+  }
+  if (spec.id === 'openrouter' || spec.id === 'openrouter_mistral') {
+    headers['HTTP-Referer'] = process.env.APP_URL || 'http://localhost:3000';
+    headers['X-Title'] = 'B.A.R.B.I 2.0 PIOS';
+  }
+
+  const messages = [
+    { role: 'system', content: params.systemInstruction },
+    ...(params.history || []).slice(-10),
+    { role: 'user', content: params.prompt },
+  ];
+
+  const startMs = Date.now();
+  const ctrl = new AbortController();
+  const timeoutMs = spec.id === 'ollama' ? 2500 : 22000;
+  const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers,
+      signal: ctrl.signal,
+      body: JSON.stringify({
+        model: spec.modelId,
+        messages,
+        stream: true,
+      }),
+    });
+
+    if (res.status === 429 || res.status === 402) {
+      const retryHeader = Number(res.headers.get('retry-after') || '60');
+      const errTxt = await res.text().catch(() => '');
+      markProviderRateLimited(
+        spec.id,
+        `HTTP ${res.status} rate/quota limit reached`,
+        Number.isFinite(retryHeader) && retryHeader > 0 ? retryHeader : 60
+      );
+      throw new Error(`RATE_LIMIT:${spec.id}:${errTxt.slice(0, 120)}`);
+    }
+
+    if (!res.ok) {
+      const errTxt = await res.text().catch(() => '');
+      throw new Error(`HTTP ${res.status}: ${errTxt.slice(0, 140)}`);
+    }
+
+    if (!res.body) {
+      return callOpenAiCompatibleProvider(params);
+    }
+
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    let fullReply = '';
+
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true }).replace(/\r\n/g, '\n');
+      const lines = buffer.split('\n');
+      buffer = lines.pop() ?? '';
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || !trimmed.startsWith('data:')) continue;
+        const payload = trimmed.slice(5).trim();
+        if (payload === '[DONE]') continue;
+        try {
+          const parsed = JSON.parse(payload) as {
+            choices?: Array<{ delta?: { content?: string }; message?: { content?: string } }>;
+          };
+          const delta =
+            parsed?.choices?.[0]?.delta?.content ??
+            parsed?.choices?.[0]?.message?.content ??
+            '';
+          if (delta) {
+            fullReply += delta;
+            params.onChunk(delta);
+          }
+        } catch {
+          // ignore keepalive / non-JSON comment chunks
+        }
+      }
+    }
+
+    const cleanReply = fullReply.trim();
+    if (!cleanReply) throw new Error(`Empty streaming response from ${spec.name}`);
+
+    const tokensUsed = estimateTokenCount(params.systemInstruction + params.prompt + cleanReply);
+    const latencyMs = Date.now() - startMs;
+    recordProviderUsage(spec.id, { tokensUsed, latencyMs });
+    return { reply: cleanReply, model: spec.modelId, tokensUsed, latencyMs };
   } finally {
     clearTimeout(timer);
   }

@@ -3,6 +3,7 @@ import { z } from 'zod';
 import os from 'node:os';
 import { optionalAuth, requireAuth, type AuthRequest } from '../../middleware/auth.ts';
 import {
+  generateBarbiChatStream,
   generateBarbiChatTurn,
   hasConfiguredGeminiKey,
   transcribeAudioBuffer,
@@ -12,13 +13,16 @@ import {
   estimateTokenCount,
   getProviderQuotaSnapshot,
   selectBestAvailableProvider,
+  streamOpenAiCompatibleProvider,
   updateUserRoutingPrefs,
 } from '../ai/providerRegistry.ts';
 import {
   buildAndHostSystemBundle,
   buildCustomAgentBlueprint,
+  getHostedSystemBundle,
   listHostedSystems,
   studyExternalPlatform,
+  syncReaGithubRepo,
 } from '../rea/reaService.ts';
 import { generateNotebookStudyPack } from '../studio/studyStudioService.ts';
 import {
@@ -49,6 +53,22 @@ import {
   upsertHabit,
 } from '../archivex/repository.ts';
 import { testDbConnection } from '../../db/index.ts';
+import { collectEdgeControlHealth } from '../health/edgeHealthService.ts';
+import {
+  assimilateCustomGitHubRepo,
+  exportDeploymentStack,
+  getV4CatalogSnapshot,
+  mountStarterPack,
+  mountV4Module,
+  removeAssimilatedRepo,
+  searchGitHubForAssimilation,
+  setFinTechRailMode,
+  syncModuleFromGitHub,
+  syncPackOrTierFromGitHub,
+  unmountV4Module,
+} from '../v4/githubModuleService.ts';
+import { fetchGodsEyeFeedsSnapshot } from '../v4/godsEyeService.ts';
+import { runFsAgentAnalysis } from '../ai/fsAgentService.ts';
 
 export const apiRouter = Router();
 
@@ -88,6 +108,17 @@ apiRouter.get('/system/telemetry', (_req, res) => {
     memoryFreeGb: Number((freeMem / 1024 ** 3).toFixed(2)),
     uptimeSeconds: Math.round(os.uptime()),
   });
+});
+
+// 2B. Edge-Native Control Layer System Health Summary
+apiRouter.get('/system/edge-health', optionalAuth, async (req: AuthRequest, res) => {
+  try {
+    const userKey = req.user?.uid || 'guest';
+    const summary = await collectEdgeControlHealth(userKey);
+    return res.json(summary);
+  } catch (err) {
+    return sendError(res, 500, (err as Error)?.message || 'Failed to collect edge-native health metrics.');
+  }
 });
 
 // 3. Server-Side Weather Proxy (Open-Meteo, zero client API key needed)
@@ -599,6 +630,7 @@ const aiChatSchema = z.object({
   honorific: z.string().max(64).optional(),
   deepThink: z.boolean().optional(),
   quickMode: z.boolean().optional(),
+  enableGoogleSearch: z.boolean().optional(),
   history: z
     .array(
       z.object({
@@ -609,7 +641,9 @@ const aiChatSchema = z.object({
     .max(20)
     .optional(),
   localNodesContext: z.string().max(6000).optional(),
+  uiSnapshot: z.string().max(4000).optional(),
   providerId: z.string().max(40).optional(),
+  preferredGeminiModel: z.enum(['gemini-4-hydrogen', 'gemini-3.1-flash-lite']).optional(),
   allowAutoFailover: z.boolean().optional(),
   attachments: z
     .array(
@@ -723,8 +757,13 @@ apiRouter.post('/ai/chat', optionalAuth, async (req: AuthRequest, res) => {
     });
   }
 
+  const enableGoogleSearch = parsed.data.enableGoogleSearch !== false;
+  const geminiReady = prefsSnapshot.providers.some(
+    (p) => p.id === 'gemini' && p.enabled && p.configured && (p.status === 'READY' || p.status === 'LOW_QUOTA')
+  );
   const orderedCandidates = [
     ...(parsed.data.providerId ? [parsed.data.providerId] : []),
+    ...(!parsed.data.providerId && enableGoogleSearch && geminiReady ? ['gemini'] : []),
     ...(routingDecision.primary ? [routingDecision.primary.id] : []),
     ...prefsSnapshot.providers
       .filter((p) => p.enabled && p.configured && (p.status === 'READY' || p.status === 'LOW_QUOTA'))
@@ -746,9 +785,11 @@ apiRouter.post('/ai/chat', optionalAuth, async (req: AuthRequest, res) => {
           memoryContext,
           conversationContext,
           graphContext: parsed.data.localNodesContext,
+          uiSnapshot: parsed.data.uiSnapshot,
           attachments: parsed.data.attachments,
           deepThink: parsed.data.deepThink,
           quickMode: parsed.data.quickMode,
+          enableGoogleSearch,
           onToolCall: uid
             ? async (fnName, args) => {
                 if (fnName === 'save_archivex_memory') {
@@ -789,6 +830,7 @@ apiRouter.post('/ai/chat', optionalAuth, async (req: AuthRequest, res) => {
         const systemInstruction = [
           `You are B.A.R.B.I. (Brilliant Adaptive Reasoning Brain Interface), the personal cognitive AI operating system of Treasure Trinity Zulu.`,
           `Address the user respectfully as "${parsed.data.honorific || 'Chief Engineer'}" or "Treasure".`,
+          parsed.data.uiSnapshot ? `[Live B.A.R.B.I. Screen State]\n${parsed.data.uiSnapshot}` : '',
           memoryContext ? `[ARCHIVEX Persistent Memories]\n${memoryContext}` : '',
           conversationContext ? `[Retrieved Prior Conversations]\n${conversationContext}` : '',
           parsed.data.localNodesContext ? `[Active Knowledge Graph]\n${parsed.data.localNodesContext}` : '',
@@ -812,13 +854,15 @@ apiRouter.post('/ai/chat', optionalAuth, async (req: AuthRequest, res) => {
         failoverTrail.push({ providerId: candidateId, status: 'succeeded' });
         break;
       }
-    } catch (err) {
+      } catch (err) {
+      const reason = (err as Error)?.message || 'error';
       failoverTrail.push({
         providerId: candidateId,
         status: 'failed',
-        reason: (err as Error)?.message || 'error',
+        reason,
       });
-      if (prefsSnapshot.switchMode === 'recommend' && !parsed.data.allowAutoFailover) {
+      const isTransient = /503|502|504|UNAVAILABLE|overloaded|high demand|timeout|abort/i.test(reason);
+      if (prefsSnapshot.switchMode === 'recommend' && parsed.data.allowAutoFailover === false && !isTransient) {
         break;
       }
     }
@@ -869,8 +913,12 @@ apiRouter.post('/ai/chat', optionalAuth, async (req: AuthRequest, res) => {
   }
 
   const postFailDecision = selectBestAvailableProvider(userKey);
+  const lastFailureReason =
+    failoverTrail.find((f) => f.status === 'failed' && f.reason)?.reason ||
+    'No configured AI provider returned a response.';
   return res.json({
     reply: '',
+    error: lastFailureReason,
     model: 'gemini-4-hydrogen',
     thinkingLevel: 'HIGH',
     provider: 'local-archivex-fallback',
@@ -892,6 +940,272 @@ apiRouter.post('/ai/chat', optionalAuth, async (req: AuthRequest, res) => {
         }
       : {}),
   });
+});
+
+// 11B. Real-Time Streaming LLM Chat Endpoint (SSE)
+apiRouter.post('/ai/chat/stream', optionalAuth, async (req: AuthRequest, res) => {
+  const parsed = aiChatSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return sendError(res, 400, 'Invalid AI chat stream request.', parsed.error.flatten());
+  }
+
+  res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-cache, no-transform');
+  res.setHeader('Connection', 'keep-alive');
+  res.setHeader('X-Accel-Buffering', 'no');
+  res.flushHeaders?.();
+
+  let clientClosed = false;
+  req.on('close', () => {
+    clientClosed = true;
+  });
+
+  const emitSse = (event: string, data: unknown) => {
+    if (clientClosed || res.writableEnded) return;
+    res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
+  };
+
+  const uid = req.user?.uid;
+  const userKey = uid || 'guest';
+  const conversationKey = parsed.data.conversationKey || `conv-session-${Date.now()}`;
+  const startTotalMs = Date.now();
+
+  let memoryContext = '';
+  let conversationContext = '';
+  const activatedNodeKeys: string[] = [];
+
+  if (uid) {
+    try {
+      const [semNodes, pastTurns] = await Promise.all([
+        semanticSearchKnowledgeNodes(uid, parsed.data.prompt, 6),
+        retrieveRelevantPastConversations(uid, parsed.data.prompt, 4),
+      ]);
+      if (semNodes.results.length > 0) {
+        memoryContext = semNodes.results
+          .map((n) => {
+            activatedNodeKeys.push(n.nodeKey);
+            return `- ${n.label} [${n.verificationStatus}, sim=${n.similarity.toFixed(2)}]: ${n.content}`;
+          })
+          .join('\n');
+      }
+      if (pastTurns.length > 0) {
+        conversationContext = pastTurns
+          .map((t) => `- [${t.sender}] ${t.content.slice(0, 240)}`)
+          .join('\n');
+      }
+    } catch (err) {
+      console.warn('Semantic retrieval skipped:', (err as Error)?.message || err);
+    }
+  }
+
+  const estimatedTokens = estimateTokenCount(parsed.data.prompt + memoryContext + conversationContext) + 500;
+  const prefsSnapshot = getProviderQuotaSnapshot(userKey);
+  const routingDecision = selectBestAvailableProvider(userKey, [], Date.now(), estimatedTokens);
+
+  const enableGoogleSearch = parsed.data.enableGoogleSearch !== false;
+  const geminiReady = prefsSnapshot.providers.some(
+    (p) => p.id === 'gemini' && p.enabled && p.configured && (p.status === 'READY' || p.status === 'LOW_QUOTA')
+  );
+  const allowFailover = parsed.data.allowAutoFailover !== false;
+  const orderedCandidates = parsed.data.providerId
+    ? [
+        parsed.data.providerId,
+        ...(allowFailover
+          ? prefsSnapshot.providers
+              .filter((p) => p.id !== parsed.data.providerId && p.enabled && p.configured && (p.status === 'READY' || p.status === 'LOW_QUOTA'))
+              .map((p) => p.id)
+          : []),
+      ]
+    : [
+        ...(enableGoogleSearch && geminiReady ? ['gemini'] : []),
+        ...(routingDecision.primary ? [routingDecision.primary.id] : []),
+        ...prefsSnapshot.providers
+          .filter((p) => p.enabled && p.configured && (p.status === 'READY' || p.status === 'LOW_QUOTA'))
+          .map((p) => p.id),
+      ].filter((id, idx, arr) => arr.indexOf(id) === idx);
+
+  const failoverTrail: Array<{ providerId: string; status: string; reason?: string }> = [];
+  let succeededResult: {
+    reply: string;
+    model: string;
+    thinkingLevel: string;
+    activeProviderId: string;
+    toolInvocations: Array<{ name: string; args: Record<string, unknown>; result: Record<string, unknown> }>;
+    grounding?: { webSearchQueries: string[]; sources: Array<{ title: string; uri: string; domain: string }> };
+  } | null = null;
+
+  for (const candidateId of orderedCandidates) {
+    if (clientClosed) break;
+    let emittedAnyDelta = false;
+
+    try {
+      if (candidateId === 'gemini') {
+        const gRes = await generateBarbiChatStream({
+          prompt: parsed.data.prompt,
+          honorific: parsed.data.honorific,
+          history: parsed.data.history,
+          memoryContext,
+          conversationContext,
+          graphContext: parsed.data.localNodesContext,
+          uiSnapshot: parsed.data.uiSnapshot,
+          attachments: parsed.data.attachments,
+          deepThink: parsed.data.deepThink,
+          quickMode: parsed.data.quickMode,
+          enableGoogleSearch,
+          preferredModel: parsed.data.preferredGeminiModel,
+          onModelSelected: (model, thinkingLevel) => {
+            emitSse('meta', {
+              conversationKey,
+              providerId: 'gemini',
+              model,
+              thinkingLevel,
+              activatedNodes: activatedNodeKeys,
+            });
+          },
+          onGrounding: (grounding) => {
+            emitSse('grounding', grounding);
+          },
+          onChunk: (deltaText) => {
+            emittedAnyDelta = true;
+            emitSse('delta', { text: deltaText });
+          },
+          onToolCall: uid
+            ? async (fnName, args) => {
+                if (fnName === 'save_archivex_memory') {
+                  const saved = await createOrUpdateKnowledgeNode(uid, {
+                    label: String(args.label || 'Captured Insight'),
+                    content: String(args.content || parsed.data.prompt),
+                    category: typeof args.category === 'string' ? args.category : 'KNOWLEDGE',
+                    domain: typeof args.domain === 'string' ? args.domain : undefined,
+                    source: 'BARBI_TOOL_CALL',
+                    verificationStatus: 'USER_REPORTED',
+                  });
+                  return {
+                    saved: true,
+                    nodeKey: saved.node.nodeKey,
+                    contradiction: saved.detectedContradiction,
+                  };
+                }
+                if (fnName === 'create_productivity_habit') {
+                  const habit = await upsertHabit(uid, {
+                    title: String(args.title || 'Follow-up Engineering Action'),
+                    category: typeof args.category === 'string' ? args.category : 'professional',
+                    completed: false,
+                    streak: 0,
+                  });
+                  return { created: true, habitKey: habit.habitKey, title: habit.title };
+                }
+                return { ok: false, reason: 'Unknown tool' };
+              }
+            : undefined,
+        });
+
+        succeededResult = {
+          reply: gRes.reply,
+          model: gRes.model,
+          thinkingLevel: gRes.thinkingLevel,
+          activeProviderId: 'gemini',
+          toolInvocations: gRes.toolInvocations,
+          ...(gRes.grounding ? { grounding: gRes.grounding } : {}),
+        };
+        failoverTrail.push({ providerId: 'gemini', status: 'succeeded' });
+        break;
+      } else {
+        const providerSpec = prefsSnapshot.providers.find((p) => p.id === candidateId);
+        emitSse('meta', {
+          conversationKey,
+          providerId: candidateId,
+          model: providerSpec?.modelId || candidateId,
+          thinkingLevel: 'MEDIUM',
+          activatedNodes: activatedNodeKeys,
+        });
+
+        const systemInstruction = [
+          `You are B.A.R.B.I. (Brilliant Adaptive Reasoning Brain Interface), a general-purpose AI assistant and personal cognitive operating system of Treasure Trinity Zulu.`,
+          `Respond clearly, helpfully, and naturally using clean Markdown formatting when appropriate.`,
+          parsed.data.uiSnapshot ? `[Live B.A.R.B.I. Screen State]\n${parsed.data.uiSnapshot}` : '',
+          memoryContext ? `[ARCHIVEX Persistent Memories]\n${memoryContext}` : '',
+          conversationContext ? `[Retrieved Prior Conversations]\n${conversationContext}` : '',
+          parsed.data.localNodesContext ? `[Active Knowledge Graph]\n${parsed.data.localNodesContext}` : '',
+        ]
+          .filter(Boolean)
+          .join('\n');
+
+        const extRes = await streamOpenAiCompatibleProvider({
+          providerId: candidateId,
+          systemInstruction,
+          prompt: parsed.data.prompt,
+          history: parsed.data.history,
+          onChunk: (deltaText) => {
+            emittedAnyDelta = true;
+            emitSse('delta', { text: deltaText });
+          },
+        });
+
+        succeededResult = {
+          reply: extRes.reply,
+          model: extRes.model,
+          thinkingLevel: 'MEDIUM',
+          activeProviderId: candidateId,
+          toolInvocations: [],
+        };
+        failoverTrail.push({ providerId: candidateId, status: 'succeeded' });
+        break;
+      }
+    } catch (err) {
+      const reason = (err as Error)?.message || 'Streaming error';
+      failoverTrail.push({ providerId: candidateId, status: 'failed', reason });
+      if (emittedAnyDelta || !allowFailover) {
+        break;
+      }
+    }
+  }
+
+  if (succeededResult && !clientClosed) {
+    if (uid) {
+      try {
+        await appendConversationTurn(uid, {
+          conversationKey,
+          sender: 'user',
+          content: parsed.data.prompt,
+          model: succeededResult.model,
+          activatedNodes: activatedNodeKeys,
+        });
+        await appendConversationTurn(uid, {
+          conversationKey,
+          sender: 'barbi',
+          content: succeededResult.reply,
+          model: succeededResult.model,
+          thinkingUsed: succeededResult.thinkingLevel !== 'LOW',
+          activatedNodes: activatedNodeKeys,
+        });
+      } catch (persistErr) {
+        console.warn('Stream conversation turn persistence warning:', persistErr);
+      }
+    }
+
+    emitSse('done', {
+      ...succeededResult,
+      latencyMs: Date.now() - startTotalMs,
+      conversationKey,
+      activatedNodes: activatedNodeKeys,
+      failoverTrail,
+      quotaSnapshot: getProviderQuotaSnapshot(userKey),
+    });
+  } else if (!clientClosed) {
+    const lastFailure =
+      failoverTrail.find((f) => f.status === 'failed' && f.reason)?.reason ||
+      'No AI provider could fulfill the request.';
+    emitSse('error', {
+      error: lastFailure,
+      failoverTrail,
+      quotaSnapshot: getProviderQuotaSnapshot(userKey),
+    });
+  }
+
+  if (!res.writableEnded) {
+    res.end();
+  }
 });
 
 const transcribeSchema = z.object({
@@ -935,9 +1249,21 @@ apiRouter.post('/rea/study-url', optionalAuth, async (req: AuthRequest, res) => 
   }
 });
 
+apiRouter.get('/rea/github-repo', async (req, res) => {
+  const repoParam = typeof req.query.repo === 'string' ? req.query.repo.trim() : undefined;
+  try {
+    const reaRepo = await syncReaGithubRepo(repoParam);
+    return res.json({ reaRepo });
+  } catch (err) {
+    return sendError(res, 400, (err as Error)?.message || 'Invalid REA GitHub repository URL.');
+  }
+});
+
 apiRouter.post('/rea/build-agent', optionalAuth, async (req: AuthRequest, res) => {
   const schema = z.object({
     prompt: z.string().min(4).max(4000),
+    reaRepoUrl: z.string().max(400).optional(),
+    platforms: z.array(z.enum(['web', 'windows', 'macos', 'ios', 'android'])).optional(),
     allowAutoFailover: z.boolean().optional(),
   });
   const parsed = schema.safeParse(req.body);
@@ -955,6 +1281,8 @@ apiRouter.post('/rea/build-system', optionalAuth, async (req: AuthRequest, res) 
   const schema = z.object({
     systemName: z.string().min(2).max(120),
     prompt: z.string().min(5).max(8000),
+    platforms: z.array(z.enum(['web', 'windows', 'macos', 'ios', 'android'])).optional(),
+    reaRepoUrl: z.string().max(400).optional(),
     allowAutoFailover: z.boolean().optional(),
   });
   const parsed = schema.safeParse(req.body);
@@ -970,6 +1298,13 @@ apiRouter.post('/rea/build-system', optionalAuth, async (req: AuthRequest, res) 
 
 apiRouter.get('/rea/hosted', (_req, res) => {
   return res.json({ hostedApps: listHostedSystems() });
+});
+
+apiRouter.get('/rea/hosted/:slug/bundle', (req, res) => {
+  const slug = String(req.params.slug || '').trim();
+  const bundle = getHostedSystemBundle(slug);
+  if (!bundle) return sendError(res, 404, 'Forged system bundle not found.');
+  return res.json(bundle);
 });
 
 // 13. NotebookLM-Style Study Guide & Animated Explainer Video Storyboard Studio
@@ -989,3 +1324,240 @@ apiRouter.post('/studio/generate-study-pack', optionalAuth, async (req: AuthRequ
     return sendError(res, 500, (err as Error)?.message || 'Study Studio generation failed.');
   }
 });
+
+// 14. B.A.R.B.I. OS v4.0 — 55-Module Sovereign Stack & Live GitHub Integration Bus
+apiRouter.get('/v4/modules', optionalAuth, (_req, res) => {
+  try {
+    return res.json(getV4CatalogSnapshot());
+  } catch (err) {
+    return sendError(res, 500, (err as Error)?.message || 'Failed to load v4.0 module catalog.');
+  }
+});
+
+apiRouter.post('/v4/modules/:id/sync-github', optionalAuth, async (req, res) => {
+  const moduleId = Number(req.params.id);
+  if (!Number.isInteger(moduleId) || moduleId < 1 || moduleId > 55) {
+    return sendError(res, 400, 'Invalid v4.0 module ID (expected 1-55).');
+  }
+  try {
+    const force = req.body?.force !== false;
+    const out = await syncModuleFromGitHub(moduleId, force);
+    return res.json(out);
+  } catch (err) {
+    return sendError(res, 502, (err as Error)?.message || 'Live GitHub sync failed.');
+  }
+});
+
+apiRouter.post('/v4/modules/sync-pack', optionalAuth, async (req, res) => {
+  const schema = z.object({
+    packId: z
+      .enum([
+        'pack-1-core',
+        'pack-2-fintech',
+        'pack-3-spatial',
+        'pack-4-factory',
+        'pack-5-embodiment',
+        'pack-6-intel',
+      ])
+      .optional(),
+    tier: z.enum(['A', 'B', 'C', 'D', 'E', 'F']).optional(),
+    maxModules: z.number().int().min(1).max(20).optional(),
+  });
+  const parsed = schema.safeParse(req.body || {});
+  if (!parsed.success) return sendError(res, 400, 'Invalid batch GitHub sync parameters.');
+  try {
+    const out = await syncPackOrTierFromGitHub(parsed.data);
+    return res.json(out);
+  } catch (err) {
+    return sendError(res, 502, (err as Error)?.message || 'Batch GitHub sync failed.');
+  }
+});
+
+apiRouter.post('/v4/modules/:id/mount', optionalAuth, (req, res) => {
+  const moduleId = Number(req.params.id);
+  if (!Number.isInteger(moduleId) || moduleId < 1 || moduleId > 55) {
+    return sendError(res, 400, 'Invalid v4.0 module ID.');
+  }
+  const schema = z.object({
+    requestedMode: z.enum(['PAPER_SANDBOX', 'LIVE_APPROVED', 'NATIVE_RUNTIME']).optional(),
+    approvalConfirmed: z.boolean().optional(),
+    approvedBy: z.string().max(120).optional(),
+  });
+  const parsed = schema.safeParse(req.body || {});
+  if (!parsed.success) return sendError(res, 400, 'Invalid mount payload.');
+  try {
+    const out = mountV4Module({ moduleId, ...parsed.data });
+    return res.json(out);
+  } catch (err) {
+    return sendError(res, 500, (err as Error)?.message || 'Failed to mount module.');
+  }
+});
+
+apiRouter.post('/v4/modules/:id/unmount', optionalAuth, (req, res) => {
+  const moduleId = Number(req.params.id);
+  if (!Number.isInteger(moduleId) || moduleId < 1 || moduleId > 55) {
+    return sendError(res, 400, 'Invalid v4.0 module ID.');
+  }
+  try {
+    return res.json(unmountV4Module(moduleId));
+  } catch (err) {
+    return sendError(res, 500, (err as Error)?.message || 'Failed to unmount module.');
+  }
+});
+
+apiRouter.post('/v4/packs/:packId/mount', optionalAuth, (req, res) => {
+  const packSchema = z.enum([
+    'pack-1-core',
+    'pack-2-fintech',
+    'pack-3-spatial',
+    'pack-4-factory',
+    'pack-5-embodiment',
+    'pack-6-intel',
+  ]);
+  const packParsed = packSchema.safeParse(req.params.packId);
+  if (!packParsed.success) return sendError(res, 400, 'Invalid starter pack ID.');
+  try {
+    const approvalConfirmed = Boolean(req.body?.approvalConfirmed);
+    return res.json(mountStarterPack(packParsed.data, approvalConfirmed));
+  } catch (err) {
+    return sendError(res, 500, (err as Error)?.message || 'Failed to mount starter pack.');
+  }
+});
+
+apiRouter.post('/v4/github/search', optionalAuth, async (req, res) => {
+  const schema = z.object({ query: z.string().min(2).max(120) });
+  const parsed = schema.safeParse(req.body || {});
+  if (!parsed.success) return sendError(res, 400, 'Provide a search query of at least 2 characters.');
+  try {
+    const out = await searchGitHubForAssimilation(parsed.data.query);
+    return res.json(out);
+  } catch (err) {
+    return sendError(res, 502, (err as Error)?.message || 'Live GitHub search failed.');
+  }
+});
+
+apiRouter.post('/v4/github/assimilate', optionalAuth, (req, res) => {
+  const schema = z.object({
+    fullName: z.string().min(3).max(160),
+    htmlUrl: z.string().max(300).optional(),
+    description: z.string().max(600).default(''),
+    stars: z.number().min(0).default(0),
+    language: z.string().max(64).default('Unknown'),
+    license: z.string().max(64).default('Unknown'),
+    tier: z.enum(['A', 'B', 'C', 'D', 'E', 'F']).default('A'),
+    governanceTier: z.enum(['PRE_AUTHORIZED', 'CAPITAL_GATE']).default('PRE_AUTHORIZED'),
+    securityStatus: z.enum(['VERIFIED', 'CAUTION', 'UNVERIFIED']).default('VERIFIED'),
+  });
+  const parsed = schema.safeParse(req.body || {});
+  if (!parsed.success) return sendError(res, 400, 'Invalid GitHub assimilation payload.');
+  try {
+    const out = assimilateCustomGitHubRepo({
+      ...parsed.data,
+      htmlUrl: parsed.data.htmlUrl || `https://github.com/${parsed.data.fullName}`,
+    });
+    return res.status(201).json(out);
+  } catch (err) {
+    return sendError(res, 400, (err as Error)?.message || 'Failed to assimilate repository.');
+  }
+});
+
+apiRouter.delete('/v4/github/assimilate/:id', optionalAuth, (req, res) => {
+  try {
+    return res.json(removeAssimilatedRepo(String(req.params.id || '')));
+  } catch (err) {
+    return sendError(res, 500, (err as Error)?.message || 'Failed to remove assimilated repo.');
+  }
+});
+
+apiRouter.post('/v4/fintech/execution-mode', optionalAuth, (req, res) => {
+  const schema = z.object({
+    railId: z.string().min(2).max(64),
+    targetMode: z.enum(['PAPER_SANDBOX', 'LIVE_APPROVED']),
+    approvalConfirmed: z.boolean().default(false),
+    riskCapNote: z.string().max(200).optional(),
+  });
+  const parsed = schema.safeParse(req.body || {});
+  if (!parsed.success) return sendError(res, 400, 'Invalid FinTech execution-mode payload.');
+  try {
+    return res.json(setFinTechRailMode(parsed.data));
+  } catch (err) {
+    return sendError(res, 400, (err as Error)?.message || 'Failed to update FinTech rail mode.');
+  }
+});
+
+apiRouter.post('/v4/export-stack', optionalAuth, (req, res) => {
+  const schema = z.object({
+    pack: z
+      .enum([
+        'pack-1-core',
+        'pack-2-fintech',
+        'pack-3-spatial',
+        'pack-4-factory',
+        'pack-5-embodiment',
+        'pack-6-intel',
+        'mounted',
+        'all',
+      ])
+      .default('pack-1-core'),
+    companyName: z.string().min(2).max(120).optional(),
+  });
+  const parsed = schema.safeParse(req.body || {});
+  if (!parsed.success) return sendError(res, 400, 'Invalid stack export specification.');
+  try {
+    return res.json(exportDeploymentStack(parsed.data));
+  } catch (err) {
+    return sendError(res, 500, (err as Error)?.message || 'Failed to export deployment stack.');
+  }
+});
+
+// 18. God's Eye Live Spatial OSINT Aggregator (Module M11)
+apiRouter.get('/gods-eye/feeds', optionalAuth, async (req, res) => {
+  try {
+    const forceRefresh = req.query.refresh === '1' || req.query.refresh === 'true';
+    const snapshot = await fetchGodsEyeFeedsSnapshot(forceRefresh);
+    return res.json(snapshot);
+  } catch (err) {
+    return sendError(res, 502, (err as Error)?.message || 'Failed to load God\'s Eye OSINT feeds.');
+  }
+});
+
+// 19. File System Agent — Scoped Local File Analysis & Diff Proposal Endpoint
+apiRouter.post('/fs-agent/analyze', optionalAuth, async (req, res) => {
+  const schema = z.object({
+    rootName: z.string().min(1).max(160),
+    mode: z.enum(['analyze', 'modify']).default('analyze'),
+    instruction: z.string().min(1).max(2000),
+    projectTree: z.string().max(24000).default(''),
+    selectedFiles: z
+      .array(
+        z.object({
+          path: z.string().min(1).max(320),
+          content: z.string().max(120000),
+          language: z.string().max(40).optional(),
+        })
+      )
+      .min(1)
+      .max(15),
+  });
+
+  const parsed = schema.safeParse(req.body || {});
+  if (!parsed.success) {
+    return sendError(res, 400, 'Invalid File System Agent payload.', parsed.error.flatten());
+  }
+
+  for (const file of parsed.data.selectedFiles) {
+    if (file.path.includes('..') || file.path.startsWith('/')) {
+      return sendError(res, 400, `Unsafe relative path rejected: ${file.path}`);
+    }
+  }
+
+  try {
+    const result = await runFsAgentAnalysis(parsed.data);
+    return res.json(result);
+  } catch (err) {
+    return sendError(res, 502, (err as Error)?.message || 'File System Agent analysis failed.');
+  }
+});
+
+
+

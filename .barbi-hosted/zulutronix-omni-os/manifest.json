@@ -1,0 +1,111 @@
+{
+  "slug": "zulutronix-omni-os",
+  "appTitle": "ZULUTRONIX Omni-OS",
+  "tagline": "Unified Cross-Platform Robotics Telemetry, Edge Control & REA MCP Diagnostics",
+  "bundleId": "co.za.zulutronix.zulutronixomnios",
+  "hostedUrl": "/hosted/zulutronix-omni-os/",
+  "platforms": [
+    "web",
+    "windows",
+    "macos",
+    "ios",
+    "android"
+  ],
+  "platformDeliverables": [
+    {
+      "platform": "web",
+      "label": "Web App & PWA",
+      "artifactFormat": "Live Hosted SPA + Express API + Service Worker",
+      "buildCommand": "npm install && npm run build:web && npm start",
+      "entryFiles": [
+        "web/index.html",
+        "web/app.js",
+        "web/manifest.webmanifest",
+        "web/sw.js",
+        "server.js"
+      ]
+    },
+    {
+      "platform": "windows",
+      "label": "Windows Native",
+      "artifactFormat": "Tauri v2 x64 Installer (.exe NSIS + .msi) + Edge App Launcher",
+      "buildCommand": "powershell -ExecutionPolicy Bypass -File scripts/build-windows.ps1",
+      "entryFiles": [
+        "src-tauri/tauri.conf.json",
+        "src-tauri/Cargo.toml",
+        "src-tauri/src/main.rs",
+        "scripts/build-windows.ps1",
+        "launch-windows-app.bat"
+      ]
+    },
+    {
+      "platform": "macos",
+      "label": "macOS Native",
+      "artifactFormat": "Universal Apple Silicon + Intel (.dmg & .app)",
+      "buildCommand": "bash scripts/build-macos.sh",
+      "entryFiles": [
+        "src-tauri/tauri.macos.conf.json",
+        "macos/Info.plist",
+        "scripts/build-macos.sh"
+      ]
+    },
+    {
+      "platform": "ios",
+      "label": "iOS Native",
+      "artifactFormat": "Capacitor Xcode Project + XCArchive / .ipa Export",
+      "buildCommand": "bash scripts/build-ios.sh",
+      "entryFiles": [
+        "capacitor.config.ts",
+        "ios/App/App/Info.plist",
+        "ios/ExportOptions.plist",
+        "scripts/build-ios.sh"
+      ]
+    },
+    {
+      "platform": "android",
+      "label": "Android Native",
+      "artifactFormat": "Capacitor Gradle Project (.apk + Play Store .aab)",
+      "buildCommand": "bash scripts/build-android.sh",
+      "entryFiles": [
+        "capacitor.config.ts",
+        "android/app/src/main/AndroidManifest.xml",
+        "android/app/build.gradle",
+        "scripts/build-android.sh"
+      ]
+    }
+  ],
+  "fileCount": 28,
+  "reaRepo": {
+    "fullName": "morluto/rea",
+    "htmlUrl": "https://github.com/morluto/rea",
+    "cliCommand": "npx rea-agents@latest setup",
+    "source": "github-live"
+  },
+  "modules": [
+    {
+      "title": "Robotics Telemetry Bus",
+      "metric": "Active ROS2 / Edge Streams",
+      "value": "12 Nodes @ 100 Hz",
+      "actionLabel": "Inspect Telemetry"
+    },
+    {
+      "title": "Edge Device Control",
+      "metric": "Actuator & Relay Latency",
+      "value": "4.2 ms E2E",
+      "actionLabel": "Open Control Deck"
+    },
+    {
+      "title": "Offline Mission Log",
+      "metric": "Local SQLite WAL Sync Queue",
+      "value": "1,480 Records Cached",
+      "actionLabel": "Sync & Export Logs"
+    },
+    {
+      "title": "REA MCP Diagnostics",
+      "metric": "Agent Server Health",
+      "value": "4/4 Channels Online",
+      "actionLabel": "Run MCP Probe"
+    }
+  ],
+  "createdAt": "2026-11-19T21:02:53.730Z"
+}

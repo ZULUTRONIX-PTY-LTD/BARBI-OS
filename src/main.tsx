@@ -2,8 +2,17 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { registerSW } from 'virtual:pwa-register';
 import App from './App.tsx';
+import {
+  ensureWritableFetchDescriptor,
+  installExtensionFetchErrorGuard,
+} from './lib/fetchGuard';
 import './index.css';
 import './barbi/barbiStyles.css';
+
+if (typeof window !== 'undefined') {
+  ensureWritableFetchDescriptor(window);
+  installExtensionFetchErrorGuard(window as unknown as EventTarget & Record<string, unknown>);
+}
 
 if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
   registerSW({

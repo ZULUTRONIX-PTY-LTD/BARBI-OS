@@ -3,110 +3,78 @@
   <!-- ===================================================================== -->
   <div id="sphere-viewport" class="fixed inset-0 z-0 w-full h-full overflow-hidden bg-black">
     <div id="ambient-vignette" class="pointer-events-none absolute inset-0 z-[6]"
-         style="background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0) 45%, rgba(2, 1, 0, 0.82) 88%, rgba(0, 0, 0, 0.97) 100%);"></div>
+         style="background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0) 52%, rgba(2, 1, 0, 0.36) 86%, rgba(0, 0, 0, 0.62) 100%);"></div>
 
-    <!-- Dense Edge-Only Live PCB Trace Bus (Fades Smoothly into the Starfield Background) -->
+    <!-- Asymmetric Ultra-Thin Live Sci-Fi PCB Trace Border -->
     <svg id="pcb-edge-overlay" class="pcb-edge-svg pointer-events-none absolute inset-0 z-10 w-full h-full" viewBox="0 0 1920 1080" preserveAspectRatio="none" fill="none">
-      <!-- TOP-LEFT DENSE EDGE PCB BUS -->
-      <g stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M 0 18 L 210 18 L 245 53 L 490 53 L 520 23 L 760 23" />
-        <path d="M 0 32 L 195 32 L 230 67 L 460 67" class="pcb-trace-animated" stroke-width="1.9" />
-        <path d="M 0 46 L 180 46 L 215 81 L 410 81 L 440 51 L 640 51" />
-        <path d="M 0 60 L 165 60 L 200 95 L 350 95" class="pcb-trace-animated" stroke-width="1.7" />
-        <path d="M 0 74 L 150 74 L 185 109 L 295 109" />
-        <path d="M 0 88 L 135 88 L 170 123 L 245 123" />
-        <path d="M 16 0 L 16 240 L 48 272 L 48 510" />
-        <path d="M 30 0 L 30 225 L 62 257 L 62 460" class="pcb-trace-animated" stroke-width="1.8" />
-        <path d="M 44 0 L 44 210 L 76 242 L 76 410" />
-        <path d="M 58 0 L 58 195 L 90 227 L 90 360" class="pcb-trace-animated" stroke-width="1.6" />
-        <path d="M 72 0 L 72 180 L 104 212 L 104 310" />
-        <path d="M 86 0 L 86 165 L 118 197 L 118 265" />
-        <circle cx="760" cy="23" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="460" cy="67" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="640" cy="51" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="350" cy="95" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="295" cy="109" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="48" cy="510" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="62" cy="460" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="76" cy="410" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="90" cy="360" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="104" cy="310" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <rect x="208" y="45" width="16" height="16" rx="2" fill="#000" stroke="currentColor" stroke-width="1.5" />
+      <!-- Perimeter Hairline Frame + Corner Fiducials -->
+      <g stroke="currentColor" stroke-width="0.65" stroke-linecap="round" stroke-linejoin="round" opacity="0.55">
+        <path d="M 10 10 L 580 10 L 598 22 L 880 22" />
+        <path d="M 1040 22 L 1340 22 L 1362 10 L 1910 10" />
+        <path d="M 1910 10 L 1910 380 L 1898 396 L 1898 690 L 1910 706 L 1910 1070" />
+        <path d="M 1910 1070 L 1310 1070 L 1292 1058 L 1020 1058" />
+        <path d="M 900 1058 L 610 1058 L 590 1070 L 10 1070" />
+        <path d="M 10 1070 L 10 720 L 22 704 L 22 390 L 10 374 L 10 10" />
       </g>
 
-      <!-- TOP-RIGHT DENSE EDGE PCB BUS -->
-      <g stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M 1920 18 L 1710 18 L 1675 53 L 1430 53 L 1400 23 L 1160 23" />
-        <path d="M 1920 32 L 1725 32 L 1690 67 L 1460 67" class="pcb-trace-animated" stroke-width="1.9" />
-        <path d="M 1920 46 L 1740 46 L 1705 81 L 1510 81 L 1480 51 L 1280 51" />
-        <path d="M 1920 60 L 1755 60 L 1720 95 L 1570 95" class="pcb-trace-animated" stroke-width="1.7" />
-        <path d="M 1920 74 L 1770 74 L 1735 109 L 1625 109" />
-        <path d="M 1920 88 L 1785 88 L 1750 123 L 1675 123" />
-        <path d="M 1904 0 L 1904 240 L 1872 272 L 1872 510" />
-        <path d="M 1890 0 L 1890 225 L 1858 257 L 1858 460" class="pcb-trace-animated" stroke-width="1.8" />
-        <path d="M 1876 0 L 1876 210 L 1844 242 L 1844 410" />
-        <path d="M 1862 0 L 1862 195 L 1830 227 L 1830 360" class="pcb-trace-animated" stroke-width="1.6" />
-        <path d="M 1848 0 L 1848 180 L 1816 212 L 1816 310" />
-        <path d="M 1834 0 L 1834 165 L 1802 197 L 1802 265" />
-        <circle cx="1160" cy="23" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1460" cy="67" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1280" cy="51" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1570" cy="95" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1625" cy="109" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1872" cy="510" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1858" cy="460" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1844" cy="410" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1830" cy="360" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1816" cy="310" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <rect x="1696" y="45" width="16" height="16" rx="2" fill="#000" stroke="currentColor" stroke-width="1.5" />
+      <!-- TOP-LEFT: 45-deg Chamfered IC Fanout & Staggered Via Array -->
+      <g stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 0 24 L 148 24 L 176 52 L 420 52 L 444 28 L 710 28" />
+        <path d="M 0 34 L 140 34 L 168 62 L 365 62" class="pcb-trace-fast" stroke-width="1.05" />
+        <path d="M 0 44 L 132 44 L 160 72 L 290 72 L 312 94 L 510 94" />
+        <path d="M 0 54 L 122 54 L 150 82 L 238 82" class="pcb-trace-slow" stroke-width="0.95" />
+        <path d="M 28 0 L 28 190 L 54 216 L 54 440 L 38 456 L 38 525" />
+        <path d="M 38 0 L 38 180 L 64 206 L 64 385" class="pcb-trace-animated" stroke-width="1.05" />
+        <path d="M 48 0 L 48 168 L 74 194 L 74 315 L 92 333" />
+        <rect x="172" y="44" width="14" height="14" rx="1.5" fill="#000" stroke="currentColor" stroke-width="0.85" />
+        <circle cx="710" cy="28" r="2.6" fill="#000" stroke="currentColor" stroke-width="1.0" class="pcb-via-pulse" />
+        <circle cx="510" cy="94" r="2.4" fill="#000" stroke="currentColor" stroke-width="0.9" />
+        <circle cx="365" cy="62" r="2.2" fill="#000" stroke="currentColor" stroke-width="0.9" />
+        <circle cx="38" cy="525" r="2.6" fill="#000" stroke="currentColor" stroke-width="1.0" class="pcb-via-pulse" />
+        <circle cx="92" cy="333" r="2.2" fill="#000" stroke="currentColor" stroke-width="0.9" />
       </g>
 
-      <!-- BOTTOM-LEFT DENSE EDGE PCB BUS -->
-      <g stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M 0 1062 L 210 1062 L 245 1027 L 490 1027 L 520 1057 L 760 1057" />
-        <path d="M 0 1048 L 195 1048 L 230 1013 L 460 1013" class="pcb-trace-animated" stroke-width="1.9" />
-        <path d="M 0 1034 L 180 1034 L 215 999 L 410 999 L 440 1029 L 640 1029" />
-        <path d="M 0 1020 L 165 1020 L 200 985 L 350 985" class="pcb-trace-animated" stroke-width="1.7" />
-        <path d="M 0 1006 L 150 1006 L 185 971 L 295 971" />
-        <path d="M 16 1080 L 16 840 L 48 808 L 48 570" />
-        <path d="M 30 1080 L 30 855 L 62 823 L 62 620" class="pcb-trace-animated" stroke-width="1.8" />
-        <path d="M 44 1080 L 44 870 L 76 838 L 76 670" />
-        <path d="M 58 1080 L 58 885 L 90 853 L 90 720" class="pcb-trace-animated" stroke-width="1.6" />
-        <path d="M 72 1080 L 72 900 L 104 868 L 104 770" />
-        <circle cx="760" cy="1057" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="460" cy="1013" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="640" cy="1029" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="350" cy="985" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="295" cy="971" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="48" cy="570" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="62" cy="620" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="76" cy="670" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="90" cy="720" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <rect x="110" y="930" width="28" height="18" rx="2" fill="#000" stroke="currentColor" stroke-width="1.5" />
+      <!-- TOP-RIGHT: Differential-Pair Meander & Clock Tap -->
+      <g stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 1920 28 L 1760 28 L 1736 52 L 1590 52 L 1578 40 L 1566 52 L 1554 40 L 1542 52 L 1380 52 L 1358 30 L 1185 30" />
+        <path d="M 1920 38 L 1752 38 L 1728 62 L 1425 62" class="pcb-trace-reverse" stroke-width="1.05" />
+        <path d="M 1920 50 L 1742 50 L 1712 80 L 1510 80 L 1488 102 L 1320 102" />
+        <path d="M 1892 0 L 1892 155 L 1866 181 L 1866 310 L 1882 326 L 1882 490" />
+        <path d="M 1880 0 L 1880 145 L 1854 171 L 1854 415" class="pcb-trace-fast" stroke-width="1.05" />
+        <path d="M 1868 0 L 1868 135 L 1842 161 L 1842 268" />
+        <circle cx="1185" cy="30" r="2.6" fill="#000" stroke="currentColor" stroke-width="1.0" class="pcb-via-pulse" />
+        <circle cx="1320" cy="102" r="2.2" fill="#000" stroke="currentColor" stroke-width="0.9" />
+        <circle cx="1425" cy="62" r="2.4" fill="#000" stroke="currentColor" stroke-width="0.9" />
+        <circle cx="1882" cy="490" r="2.6" fill="#000" stroke="currentColor" stroke-width="1.0" />
+        <circle cx="1854" cy="415" r="2.2" fill="#000" stroke="currentColor" stroke-width="0.9" class="pcb-via-pulse" />
       </g>
 
-      <!-- BOTTOM-RIGHT DENSE EDGE PCB BUS -->
-      <g stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M 1920 1062 L 1710 1062 L 1675 1027 L 1430 1027 L 1400 1057 L 1160 1057" />
-        <path d="M 1920 1048 L 1725 1048 L 1690 1013 L 1460 1013" class="pcb-trace-animated" stroke-width="1.9" />
-        <path d="M 1920 1034 L 1740 1034 L 1705 999 L 1510 999 L 1480 1029 L 1280 1029" />
-        <path d="M 1920 1020 L 1755 1020 L 1720 985 L 1570 985" class="pcb-trace-animated" stroke-width="1.7" />
-        <path d="M 1920 1006 L 1770 1006 L 1735 971 L 1625 971" />
-        <path d="M 1904 1080 L 1904 840 L 1872 808 L 1872 570" />
-        <path d="M 1890 1080 L 1890 855 L 1858 823 L 1858 620" class="pcb-trace-animated" stroke-width="1.8" />
-        <path d="M 1876 1080 L 1876 870 L 1844 838 L 1844 670" />
-        <path d="M 1862 1080 L 1862 885 L 1830 853 L 1830 720" class="pcb-trace-animated" stroke-width="1.6" />
-        <path d="M 1848 1080 L 1848 900 L 1816 868 L 1816 770" />
-        <circle cx="1160" cy="1057" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1460" cy="1013" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1280" cy="1029" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1570" cy="985" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1625" cy="971" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1872" cy="570" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1858" cy="620" r="4" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1844" cy="670" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <circle cx="1830" cy="720" r="3.5" fill="#000" stroke="currentColor" stroke-width="1.8" />
-        <rect x="1782" y="930" width="28" height="18" rx="2" fill="#000" stroke="currentColor" stroke-width="1.5" />
+      <!-- BOTTOM-LEFT: Angled Bus Breakout & Dual Test Pads -->
+      <g stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 0 1052 L 185 1052 L 215 1022 L 430 1022 L 456 1048 L 690 1048" />
+        <path d="M 0 1038 L 172 1038 L 202 1008 L 350 1008 L 372 986 L 520 986" class="pcb-trace-animated" stroke-width="1.05" />
+        <path d="M 0 1024 L 158 1024 L 188 994 L 285 994" />
+        <path d="M 32 1080 L 32 880 L 58 854 L 58 640 L 42 624 L 42 565" />
+        <path d="M 46 1080 L 46 894 L 72 868 L 72 745" class="pcb-trace-reverse" stroke-width="1.0" />
+        <rect x="86" y="948" width="22" height="12" rx="1.5" fill="#000" stroke="currentColor" stroke-width="0.85" />
+        <circle cx="690" cy="1048" r="2.6" fill="#000" stroke="currentColor" stroke-width="1.0" />
+        <circle cx="520" cy="986" r="2.4" fill="#000" stroke="currentColor" stroke-width="0.9" class="pcb-via-pulse" />
+        <circle cx="42" cy="565" r="2.4" fill="#000" stroke="currentColor" stroke-width="0.9" />
+        <circle cx="72" cy="745" r="2.2" fill="#000" stroke="currentColor" stroke-width="0.9" />
+      </g>
+
+      <!-- BOTTOM-RIGHT: Serpentine Timing-Matched Trace & Telemetry Spine -->
+      <g stroke="currentColor" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M 1920 1054 L 1735 1054 L 1705 1024 L 1520 1024 L 1506 1038 L 1492 1024 L 1478 1038 L 1464 1024 L 1310 1024 L 1286 1048 L 1140 1048" />
+        <path d="M 1920 1040 L 1720 1040 L 1690 1010 L 1390 1010" class="pcb-trace-slow" stroke-width="1.05" />
+        <path d="M 1920 1022 L 1702 1022 L 1672 992 L 1560 992" />
+        <path d="M 1888 1080 L 1888 860 L 1862 834 L 1862 610" class="pcb-trace-fast" stroke-width="1.05" />
+        <path d="M 1874 1080 L 1874 875 L 1848 849 L 1848 720 L 1834 706" />
+        <rect x="1796" y="952" width="18" height="14" rx="1.5" fill="#000" stroke="currentColor" stroke-width="0.85" />
+        <circle cx="1140" cy="1048" r="2.6" fill="#000" stroke="currentColor" stroke-width="1.0" class="pcb-via-pulse" />
+        <circle cx="1390" cy="1010" r="2.4" fill="#000" stroke="currentColor" stroke-width="0.9" />
+        <circle cx="1862" cy="610" r="2.6" fill="#000" stroke="currentColor" stroke-width="1.0" class="pcb-via-pulse" />
+        <circle cx="1834" cy="706" r="2.2" fill="#000" stroke="currentColor" stroke-width="0.9" />
       </g>
     </svg>
 
@@ -156,28 +124,42 @@
     <div id="barbi-brand-hud"
          data-hud-template="1"
          data-hud-fixed="true"
-         onclick="toggleBarbiCommandMode()"
+         onclick="if (!this.classList.contains('brand-collapsed')) toggleBarbiCommandMode()"
          title="Toggle B.A.R.B.I Cognitive Navigation Drawer"
          class="hud-popup-surface group cursor-pointer relative flex items-center justify-between gap-3 px-6 py-3 transition-all duration-200 overflow-hidden">
-      <span class="relative flex items-center justify-center w-4 h-4 rounded-full bg-white/10 border border-white/35 shrink-0">
-        <span id="brand-pulse-dot" class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_#ffffff] animate-pulse"></span>
-      </span>
+      <button id="btn-brand-collapse-dot"
+              type="button"
+              onclick="event.stopPropagation(); toggleBarbiBrandCollapse();"
+              aria-expanded="true"
+              aria-controls="barbi-brand-text-wrap"
+              title="Collapse or Expand B.A.R.B.I Panel"
+              class="relative z-40 flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/15 hover:bg-amber-500/30 border border-amber-400/50 shrink-0 cursor-pointer transition">
+        <span id="brand-pulse-dot" class="w-2 h-2 rounded-full bg-amber-300 shadow-[0_0_8px_rgba(245,158,11,0.85)] transition-all"></span>
+      </button>
 
       <!-- Strictly Centered Vertical Stack: B.A.R.B.I Centered Directly Above Subtitle -->
-      <div class="flex flex-col items-center justify-center text-center">
+      <div id="barbi-brand-text-wrap" class="flex flex-col items-center justify-center text-center transition-all duration-200">
         <button id="btn-sidebar-toggle"
                 type="button"
-                class="text-center text-xs font-bold tracking-[0.28em] text-white leading-none focus:outline-none">
+                style="color: #F59E0B; text-shadow: 0 0 10px rgba(245, 158, 11, 0.35);"
+                class="text-center text-xs font-bold tracking-[0.28em] leading-none focus:outline-none">
           B.A.R.B.I
         </button>
-        <div class="text-[8.5px] font-mono-tech tracking-wider text-slate-300/90 leading-tight mt-1 text-center">
+        <div class="text-[8.5px] font-mono-tech tracking-wider text-amber-200/75 leading-tight mt-1 text-center">
           Brilliant Adaptive Reasoning Brain Interface
         </div>
       </div>
 
-      <svg id="sidebar-chevron" class="w-3.5 h-3.5 text-slate-300 group-hover:text-white transition-transform duration-200 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h10"/>
-      </svg>
+      <button id="btn-brand-focus-power"
+              type="button"
+              onclick="event.stopPropagation(); toggleFocusMode();"
+              aria-pressed="false"
+              title="Power Toggle: Deep Zen Focus Mode"
+              class="relative z-40 flex items-center justify-center w-6 h-6 rounded-full bg-amber-500/10 hover:bg-amber-500/25 border border-amber-500/35 text-amber-200/85 hover:text-amber-100 shrink-0 cursor-pointer transition-all duration-200">
+        <svg id="brand-power-icon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1" d="M12 3v8m5.657-4.657a8 8 0 11-11.314 0"/>
+        </svg>
+      </button>
     </div>
 
     <!-- Compact Control Row Stacked Underneath with Sci-Fi HUD Border (No Rounded Edges) -->
@@ -189,9 +171,10 @@
               type="button"
               onclick="toggleTopLeftControls()"
               title="Collapse or Expand Quick Controls"
-              class="flex items-center justify-center w-5 h-5 rounded-lg bg-white/10 hover:bg-white/20 text-white shrink-0 transition">
-        <svg id="top-controls-arrow" class="w-3 h-3 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M15 19l-7-7 7-7"/>
+              aria-label="Collapse or expand quick controls"
+              class="flex items-center justify-center w-7 h-7 rounded-full bg-amber-500/15 hover:bg-amber-500/30 border border-amber-400/60 text-amber-300 hover:text-amber-100 shrink-0 cursor-pointer transition-all duration-200 shadow-[0_0_12px_rgba(245,158,11,0.24)]">
+        <svg id="top-controls-arrow" class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/>
         </svg>
       </button>
 
@@ -211,9 +194,12 @@
           <button id="btn-depth-3" type="button" onclick="setSphereDepthTier(3)" class="px-1.5 py-0.2 rounded text-amber-300/70 hover:text-amber-200 transition" title="Depth Tier 3: Deep Inner Geodesic Core (R = 31)">
             3·CORE
           </button>
+          <button id="btn-depth-4" type="button" onclick="setSphereDepthTier(4)" class="px-1.5 py-0.2 rounded text-amber-300/70 hover:text-amber-200 transition" title="Depth Tier 4: Inside the Inner Core Lattice">
+            4·INNER CORE
+          </button>
         </div>
         <span class="text-white/15">|</span>
-        <button id="btn-focus-mode" onclick="toggleFocusMode()" class="px-1.5 py-0.5 rounded-lg hover:bg-white/15 transition flex items-center gap-1" title="Toggle Red Tactical Focus Mode">
+        <button id="btn-focus-mode" onclick="toggleFocusMode()" class="px-1.5 py-0.5 rounded-lg hover:bg-white/15 transition flex items-center gap-1" title="Toggle Deep Zen Focus Mode">
           <span>Focus Mode:</span>
           <span id="focus-mode-state" class="font-mono-tech text-slate-400">OFF</span>
         </button>
@@ -238,6 +224,18 @@
         <span class="text-white/15">|</span>
         <button id="btn-evo-backend-hud" onclick="openEvoBackendModal()" class="flex px-1.5 py-0.5 rounded-lg hover:bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 transition items-center gap-1" title="Open B.A.R.B.I. Core Subsystems & Capability Matrix">
           <span>⚡ Core Matrix</span>
+        </button>
+        <span class="text-white/15">|</span>
+        <button id="btn-sphere-config" type="button" onclick="window.dispatchEvent(new CustomEvent('barbi:toggle-sphere-config'))" aria-expanded="false" class="flex px-1.5 py-0.5 rounded-lg hover:bg-amber-500/20 text-amber-200 border border-amber-400/35 transition items-center gap-1 cursor-pointer" title="Configure 3D Cognitive Sphere Rotation Speed, Visual Complexity & Color Themes">
+          <span>⚙ Sphere Config</span>
+        </button>
+        <span class="text-white/15">|</span>
+        <button id="btn-v4-stack-hub" type="button" onclick="window.dispatchEvent(new CustomEvent('barbi:toggle-v4-hub'))" aria-expanded="false" class="flex px-1.5 py-0.5 rounded-lg hover:bg-amber-500/25 text-amber-200 border border-amber-400/45 transition items-center gap-1 cursor-pointer whitespace-nowrap shrink-0" title="Open B.A.R.B.I. OS v4.0 — 55-Module GitHub Integration, FinTech Governance & Docker/MCP Hub">
+          <span>v4.0 · 55 Modules</span>
+        </button>
+        <span class="text-white/15">|</span>
+        <button id="btn-fs-agent-hud" type="button" onclick="window.dispatchEvent(new CustomEvent('barbi:toggle-fs-agent'))" aria-expanded="false" class="flex px-1.5 py-0.5 rounded-lg hover:bg-cyan-500/25 text-cyan-200 border border-cyan-400/45 transition items-center gap-1 cursor-pointer whitespace-nowrap shrink-0" title="Open B.A.R.B.I. File System Agent — Mount Local Folders, Inspect Structure & Review AI Diffs">
+          <span>File Agent</span>
         </button>
         <button id="btn-habit-toggle" onclick="toggleHabitSystemPanel()" class="hidden"><span>Habits & To-Do</span><span id="habit-hud-badge">6/10</span></button>
         <button id="btn-apps-toggle" onclick="toggleApplicationsDrawer()" class="hidden"><span>⬡ Applications</span></button>
@@ -331,20 +329,19 @@
        data-hud-fixed="true"
        data-click-opens-timer="true"
        title="Drag to move • Click to launch B.A.R.B.I. Smart Timer & PolyGhost Hourglass"
-       class="fixed top-3 left-1/2 -translate-x-1/2 z-30 hud-popup-surface px-7 py-2.5 flex flex-col items-center pointer-events-auto transition-colors">
-    <div class="w-full flex items-center justify-between gap-3 text-[9px] font-mono-tech uppercase tracking-widest text-slate-300">
-      <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping shrink-0" id="clock-pulse-dot" title="Second Count Pulse"></span>
-      <span id="clock-day-of-year" class="font-semibold text-white tracking-wider">48 DAYS LEFT IN 2026</span>
-      <span class="w-1.5 h-1.5 opacity-0"></span>
+       class="fixed top-3 left-1/2 -translate-x-1/2 z-30 hud-popup-surface px-5 py-1.5 flex flex-col items-center justify-center text-center pointer-events-auto transition-colors">
+    <div class="flex items-center justify-center gap-2 text-[8.5px] font-mono-tech uppercase tracking-widest text-slate-300 leading-none">
+      <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping shrink-0" id="clock-pulse-dot" title="Second Count Pulse"></span>
+      <span id="clock-day-of-year" class="font-semibold text-white tracking-wider">45 DAYS LEFT IN 2026</span>
     </div>
     <div id="realtime-countdown-clock"
-         class="font-mono-tech text-xs sm:text-sm font-bold tracking-wider text-white tabular-nums leading-tight mt-0.5">
+         class="font-mono-tech text-xs font-bold tracking-wider text-white tabular-nums leading-none mt-1 text-center">
       23:59:59.999
     </div>
-    <div class="w-32 sm:w-40 h-1 rounded-full bg-white/10 mt-1 overflow-hidden">
-      <div id="clock-progress-bar" class="h-full bg-white transition-all duration-150" style="width: 50%;"></div>
+    <div class="w-32 sm:w-36 h-1 rounded-full bg-white/15 mt-1 overflow-hidden">
+      <div id="clock-progress-bar" class="h-full bg-amber-400 transition-all duration-150" style="width: 50%;"></div>
     </div>
-    <div id="clock-cycle-pct" class="font-mono-tech text-[9px] accent-soft-text font-semibold tracking-wider mt-0.5">
+    <div id="clock-cycle-pct" class="font-mono-tech text-[8.5px] accent-soft-text font-semibold tracking-wider leading-none mt-0.5 text-center">
       --%
     </div>
   </div>
@@ -396,11 +393,9 @@
   </div>
 
   <!-- ===================================================================== -->
-  <!-- 3. EQUALLY SPACED LOCKED TOP TELEMETRY ROW (TIME → BAT → CPU → CORE)  -->
+  <!-- 3. TOP-RIGHT TELEMETRY CLUSTER (BAT + CPU)                            -->
   <!-- ===================================================================== -->
-  <div class="hidden sm:flex fixed top-3 left-[calc(50%+88px)] right-3.5 z-40 items-center justify-between pointer-events-none">
-    <!-- Equal Spacer 1 (Between Time Panel and Battery Panel) -->
-    <div class="flex-1"></div>
+  <div class="hidden sm:flex fixed top-3 left-[calc(50%+128px)] right-3.5 z-40 items-center justify-end gap-3 pointer-events-none">
 
     <!-- INTERACTIVE SCI-FI BATTERY ICON HUD (Click to Open Power & PMIC Specs Pop-Up) -->
     <button id="device-battery-hud"
@@ -440,60 +435,30 @@
         <div id="battery-state-readout" class="text-[8px] font-mono-tech text-slate-300 uppercase tracking-wider">
           12.4V × 2.15A
         </div>
+        <div id="battery-eta-sub" class="text-[7.5px] font-mono-tech text-amber-300/90 uppercase tracking-wider">3h 53m TO LOW</div>
       </div>
     </button>
 
-    <!-- Equal Spacer 2 (Between Battery Panel and CPU Thermal Panel) -->
-    <div class="flex-1"></div>
-
-    <!-- SCI-FI CPU CORE & THERMAL TELEMETRY HUD (Locked Midway) -->
+    <!-- B.A.R.B.I. SYSTEM STATE & LIVE ACTIVITY HUD (Right Corner) -->
     <div id="device-cpu-hud"
          data-hud-template="4"
          data-hud-fixed="true"
          onclick="pulseCpuTelemetryDiagnostic()"
-         title="CPU Core & Thermal Telemetry (Click for hardware diagnostic)"
-         class="hud-popup-surface pointer-events-auto hidden md:flex relative items-center gap-2 px-3.5 py-2 text-xs transition overflow-hidden select-none shrink-0">
-      <div class="relative flex items-center justify-center">
-        <svg id="cpu-scifi-svg" class="w-5 h-5 text-sky-300 transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <polygon points="7,4 17,4 20,7 20,17 17,20 7,20 4,17 4,7" stroke-width="1.5" fill="rgba(56,189,248,0.06)"/>
-          <rect x="8.5" y="8.5" width="7" height="7" stroke-width="1.4" fill="rgba(255,255,255,0.12)"/>
-          <path d="M9 1.5V4M12 1.5V4M15 1.5V4M9 20V22.5M12 20V22.5M15 20V22.5M1.5 9H4M1.5 12H4M1.5 15H4M20 9H22.5M20 12H22.5M20 15H22.5" stroke-width="1.4" stroke-linecap="round"/>
-        </svg>
+         title="B.A.R.B.I. System State & Live Activity (Click for recent log)"
+         class="hud-popup-surface pointer-events-auto hidden md:flex relative items-center gap-2 px-3.5 py-1.5 text-xs transition overflow-hidden select-none shrink-0 max-w-[265px] cursor-pointer">
+      <div class="relative flex items-center justify-center shrink-0">
+        <span id="system-state-dot" class="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.9)] animate-pulse"></span>
       </div>
-      <div class="text-left leading-tight">
-        <div class="flex items-center gap-1">
-          <span id="cpu-temp-readout" class="font-mono-tech text-[10.5px] font-bold tracking-wider text-white">46.8°C</span>
-          <span id="cpu-load-badge" class="text-[8.5px] font-mono-tech px-1 py-0.2 bg-sky-500/20 border border-sky-400/40 text-sky-200">16%</span>
+      <div class="text-left leading-tight min-w-0">
+        <div class="flex items-center gap-1.5">
+          <span id="cpu-spec-readout" class="font-mono-tech text-[9.5px] font-bold tracking-wider text-amber-300 uppercase">SYSTEM STATE</span>
+          <span id="cpu-load-badge" class="text-[8px] font-mono-tech px-1.5 py-0.2 bg-amber-500/20 border border-amber-400/45 text-amber-100 shrink-0 uppercase">STANDBY</span>
         </div>
-        <div id="cpu-cores-readout" class="text-[8px] font-mono-tech text-slate-300 uppercase tracking-wider">
-          8 CORES • NOMINAL
+        <div id="system-activity-readout" class="text-[8px] font-mono-tech text-slate-200 uppercase tracking-wider truncate mt-0.5">
+          CORE NOMINAL • AWAITING INPUT
         </div>
       </div>
     </div>
-
-    <!-- Equal Spacer 3 (Between CPU Thermal Panel and Cognitive Core Panel) -->
-    <div class="flex-1"></div>
-
-    <button id="btn-status-hud"
-            data-hud-template="5"
-            data-hud-fixed="true"
-            onclick="openNavDrawer('agents')"
-            title="View Active Cognitive Agents & Telemetry"
-            class="hud-popup-surface pointer-events-auto shrink-0 relative flex items-center gap-2 px-4 py-2 text-xs transition overflow-hidden">
-      <span class="relative flex h-2 w-2">
-        <span id="status-ping" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-        <span id="status-dot" class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-      </span>
-      <div class="text-left leading-tight">
-        <div class="flex items-center gap-1.5">
-          <span id="operational-status-label" class="font-mono-tech text-[10px] font-semibold tracking-wider text-white">COGNITIVE CORE ONLINE</span>
-          <span class="inline text-[10px] font-mono-tech text-slate-300">• <span id="hud-node-count">254</span> NODES</span>
-        </div>
-        <div id="hud-agent-ticker" class="text-[10px] text-slate-300 truncate max-w-[140px] sm:max-w-[195px]">
-          Flower & Tree of Life • 8 Apps Active
-        </div>
-      </div>
-    </button>
   </div>
 
   <!-- ===================================================================== -->
@@ -572,6 +537,18 @@
         <div class="flex items-center justify-between"><span class="text-slate-400">12V Jetson Orin Cluster:</span><span class="text-white">12.02 V • 0.85 A</span></div>
         <div class="flex items-center justify-between"><span class="text-slate-400">5.0V Raspberry Pi 5 Hub:</span><span class="text-white">5.04 V • 0.42 A</span></div>
         <div class="flex items-center justify-between"><span class="text-slate-400">3.3V ESP32-S3 CAN Bus:</span><span class="text-emerald-300">3.31 V • 0.15 A</span></div>
+      </div>
+    </div>
+
+    <!-- Time Remaining to Full / Low Battery Horizon Bar -->
+    <div id="pmic-time-horizon-bar" class="p-2.5 bg-amber-500/[0.06] border border-amber-400/35 flex flex-wrap items-center justify-between gap-2 font-mono-tech text-[10px]">
+      <div class="flex items-center gap-2">
+        <span id="pmic-horizon-dot" class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+        <span id="pmic-horizon-label" class="text-amber-200 uppercase tracking-wider font-semibold">TIME LEFT TO LOW BATTERY (15%):</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="pmic-horizon-primary" class="text-xs font-bold text-amber-300">3h 53m</span>
+        <span id="pmic-horizon-secondary" class="text-[9.5px] text-slate-300">Total Reserve: 4h 41m</span>
       </div>
     </div>
   </section>
@@ -1421,7 +1398,7 @@
                   src="https://www.youtube-nocookie.com/embed/wkfEZmsQqiA?rel=0&modestbranding=1"
                   title="B.A.R.B.I. YouTube Stream"
                   class="w-full h-full border-0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowfullscreen></iframe>
         </div>
 
@@ -2523,30 +2500,56 @@
       <div id="evo-registry-audit-output" class="max-h-56 overflow-y-auto p-3 rounded-2xl bg-black/65 border border-white/15 font-mono-tech text-[10px] space-y-1.5 text-slate-200"></div>
     </div>
 
-    <!-- TAB 5: R.E.A. PLATFORM STUDY, AGENT BUILDER & PROMPT-TO-SYSTEM + WINDOWS/WEB HOSTING -->
-    <div id="evo-tab-rea" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-4 text-xs">
-      <div class="lg:col-span-6 bg-black/55 border border-white/15 rounded-2xl p-3.5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-[10px] font-mono-tech text-amber-300 uppercase font-semibold">R.E.A. Platform, Website &amp; GUI Architecture Study</span>
-          <span class="text-[9px] font-mono-tech text-emerald-300">LIVE DOM SCRAPE + ARCHIVEX</span>
-        </div>
-        <div class="flex gap-1.5">
-          <input id="rea-study-target" type="text" placeholder="https://example.com or Platform/GUI name (e.g. Linear UI, Obsidian)..."
-                 class="flex-1 bg-black/60 border border-white/20 rounded-xl px-2.5 py-1.5 text-[11px] font-mono-tech text-white select-text focus:outline-none focus:border-amber-400" />
-          <button type="button" onclick="runReaPlatformStudy()" class="px-3 py-1.5 rounded-xl bg-amber-500/25 hover:bg-amber-500/40 border border-amber-400/50 text-[10px] font-mono-tech text-amber-200 font-semibold">
-            ⌕ Study GUI
-          </button>
-        </div>
-        <input id="rea-study-notes" type="text" placeholder="Optional engineering focus (e.g. navigation patterns, state model, shortcuts)..."
-               class="w-full bg-black/60 border border-white/15 rounded-xl px-2.5 py-1 text-[10px] font-mono-tech text-slate-200 select-text focus:outline-none" />
-        <div id="rea-study-output" class="max-h-40 overflow-y-auto p-2.5 rounded-xl bg-black/65 border border-white/10 font-mono-tech text-[10px] text-slate-200 whitespace-pre-wrap">Enter any website URL or GUI system above to inspect its UI topology and synthesize automation blueprints.</div>
-
-        <div class="pt-2 border-t border-white/10 space-y-2">
-          <div class="text-[10px] font-mono-tech text-cyan-300 uppercase font-semibold">Prompt-to-Agent Builder</div>
+    <!-- TAB 5: R.E.A. AGENT FORGE — END-TO-END MULTI-PLATFORM BUILDER (WEB, WINDOWS, MACOS, IOS, ANDROID) + REA GITHUB REPO -->
+    <div id="evo-tab-rea" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-3.5 text-xs">
+      <!-- Left Column: REA GitHub Repo Bridge + Platform Study + Agent Builder -->
+      <div class="lg:col-span-5 bg-black/55 border border-white/15 rounded-2xl p-3.5 space-y-3">
+        <!-- REA GitHub Repository Integration -->
+        <div class="space-y-2 pb-2.5 border-b border-white/10">
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-[10px] font-mono-tech text-amber-300 uppercase font-semibold">REA GitHub Repo Bridge</span>
+            <span id="rea-repo-source-badge" class="text-[9px] font-mono-tech px-1.5 py-0.5 bg-amber-500/15 border border-amber-400/35 text-amber-200">morluto/rea</span>
+          </div>
           <div class="flex gap-1.5">
-            <input id="rea-agent-prompt" type="text" placeholder="Describe an autonomous agent (e.g. TUT Past-Paper Grader & Formula Verifier)..."
-                   class="flex-1 bg-black/60 border border-white/20 rounded-xl px-2.5 py-1.5 text-[11px] font-mono-tech text-white select-text focus:outline-none" />
-            <button type="button" onclick="forgeCustomAgentFromRea()" class="px-3 py-1.5 rounded-xl bg-cyan-500/25 hover:bg-cyan-500/40 border border-cyan-400/50 text-[10px] font-mono-tech text-cyan-200 font-semibold">
+            <label for="rea-github-repo-url" class="sr-only">REA GitHub Repository URL</label>
+            <input id="rea-github-repo-url" type="text" value="https://github.com/morluto/rea"
+                   placeholder="https://github.com/morluto/rea or owner/repo..."
+                   class="flex-1 bg-black/60 border border-white/20 rounded-xl px-2.5 py-1.5 text-[10.5px] font-mono-tech text-amber-100 select-text focus:outline-none focus:border-amber-400" />
+            <button id="btn-sync-rea-repo" type="button" onclick="syncReaGithubRepoFromUI(false)"
+                    class="px-2.5 py-1.5 rounded-xl bg-amber-500/25 hover:bg-amber-500/40 border border-amber-400/55 text-[10px] font-mono-tech text-amber-200 font-semibold shrink-0 cursor-pointer">
+              ↻ Sync Repo
+            </button>
+          </div>
+          <div id="rea-repo-status" class="p-2 rounded-xl bg-black/65 border border-white/10 font-mono-tech text-[9.5px] text-slate-300 leading-relaxed">
+            Ready to sync <span class="text-amber-300">morluto/rea</span> (MCP server + <code>npx rea-agents@latest setup</code>) for multi-platform reverse-engineering &amp; system synthesis.
+          </div>
+        </div>
+
+        <!-- Platform / GUI Study -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-mono-tech text-amber-300 uppercase font-semibold">Platform &amp; GUI Architecture Study</span>
+            <span class="text-[9px] font-mono-tech text-emerald-300">DOM + ARCHIVEX</span>
+          </div>
+          <div class="flex gap-1.5">
+            <input id="rea-study-target" type="text" placeholder="https://example.com or Platform/GUI (e.g. Linear, Obsidian)..."
+                   class="flex-1 bg-black/60 border border-white/20 rounded-xl px-2.5 py-1.5 text-[10.5px] font-mono-tech text-white select-text focus:outline-none focus:border-amber-400" />
+            <button type="button" onclick="runReaPlatformStudy()" class="px-2.5 py-1.5 rounded-xl bg-amber-500/25 hover:bg-amber-500/40 border border-amber-400/50 text-[10px] font-mono-tech text-amber-200 font-semibold shrink-0 cursor-pointer">
+              ⌕ Study
+            </button>
+          </div>
+          <input id="rea-study-notes" type="text" placeholder="Focus notes (navigation, state model, native bridges)..."
+                 class="w-full bg-black/60 border border-white/15 rounded-xl px-2.5 py-1 text-[10px] font-mono-tech text-slate-200 select-text focus:outline-none" />
+          <div id="rea-study-output" class="max-h-28 overflow-y-auto p-2 rounded-xl bg-black/65 border border-white/10 font-mono-tech text-[9.5px] text-slate-200 whitespace-pre-wrap">Inspect any website URL or GUI system to synthesize cross-platform rebuild blueprints.</div>
+        </div>
+
+        <!-- Prompt-to-Agent Builder -->
+        <div class="pt-2 border-t border-white/10 space-y-2">
+          <div class="text-[10px] font-mono-tech text-cyan-300 uppercase font-semibold">Prompt-to-Agent Forge (REA MCP Enabled)</div>
+          <div class="flex gap-1.5">
+            <input id="rea-agent-prompt" type="text" placeholder="Describe an autonomous REA agent..."
+                   class="flex-1 bg-black/60 border border-white/20 rounded-xl px-2.5 py-1.5 text-[10.5px] font-mono-tech text-white select-text focus:outline-none" />
+            <button type="button" onclick="forgeCustomAgentFromRea()" class="px-2.5 py-1.5 rounded-xl bg-cyan-500/25 hover:bg-cyan-500/40 border border-cyan-400/50 text-[10px] font-mono-tech text-cyan-200 font-semibold shrink-0 cursor-pointer">
               ⚡ Forge Agent
             </button>
           </div>
@@ -2554,25 +2557,62 @@
         </div>
       </div>
 
-      <div class="lg:col-span-6 bg-black/55 border border-white/15 rounded-2xl p-3.5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-[10px] font-mono-tech text-emerald-300 uppercase font-semibold">Prompt-to-System Forge (Windows + Live Website Hosting)</span>
-          <button type="button" onclick="refreshHostedSystemsList()" class="text-[9px] font-mono-tech text-cyan-300 hover:text-white">↻ Hosted Apps</button>
+      <!-- Right Column: End-to-End Multi-Platform System Forge -->
+      <div class="lg:col-span-7 bg-black/55 border border-white/15 rounded-2xl p-3.5 space-y-2.5 flex flex-col">
+        <div class="flex items-center justify-between gap-2">
+          <span class="text-[10px] font-mono-tech text-emerald-300 uppercase font-semibold">End-to-End Multi-Platform System Forge (Web · Win · macOS · iOS · Android)</span>
+          <button type="button" onclick="refreshHostedSystemsList(true)" class="text-[9.5px] font-mono-tech text-cyan-300 hover:text-white cursor-pointer shrink-0">↻ Hosted Systems</button>
         </div>
-        <input id="rea-system-name" type="text" placeholder="System Name (e.g. Solar Edge Telemetry SCADA)..."
-               class="w-full bg-black/60 border border-white/20 rounded-xl px-2.5 py-1.5 text-[11px] font-mono-tech text-white select-text focus:outline-none" />
-        <textarea id="rea-system-prompt" rows="3" placeholder="Describe the complete software system, panels, workflows, and Windows/Web deliverables..."
-                  class="w-full bg-black/60 border border-white/20 rounded-xl p-2 text-[11px] font-mono-tech text-white select-text focus:outline-none"></textarea>
+
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+          <input id="rea-system-name" type="text" placeholder="System Name (e.g. ZULUTRONIX Fleet Command)..."
+                 class="sm:col-span-5 bg-black/60 border border-white/20 rounded-xl px-2.5 py-1.5 text-[11px] font-mono-tech text-white select-text focus:outline-none focus:border-emerald-400" />
+          <input id="rea-system-prompt" type="text" placeholder="Describe modules, workflows, offline sync &amp; native capabilities..."
+                 class="sm:col-span-7 bg-black/60 border border-white/20 rounded-xl px-2.5 py-1.5 text-[11px] font-mono-tech text-white select-text focus:outline-none focus:border-emerald-400" />
+        </div>
+
+        <!-- 5-Platform Target Matrix -->
+        <div class="space-y-1">
+          <div class="text-[9.5px] font-mono-tech text-slate-400 uppercase tracking-wider">Target Build Platforms (Unified Core + Native Packaging + GitHub Actions CI)</div>
+          <div id="rea-platform-targets" class="flex flex-wrap gap-1.5">
+            <label class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-emerald-500/20 border border-emerald-400/50 text-[10px] font-mono-tech text-emerald-200 cursor-pointer select-none">
+              <input type="checkbox" class="rea-platform-cb accent-emerald-400" value="web" checked disabled />
+              <span>Web / PWA</span>
+            </label>
+            <label class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-amber-500/15 border border-amber-400/45 text-[10px] font-mono-tech text-amber-100 cursor-pointer select-none">
+              <input type="checkbox" class="rea-platform-cb accent-amber-400" value="windows" checked />
+              <span>Windows (.exe/.msi)</span>
+            </label>
+            <label class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-amber-500/15 border border-amber-400/45 text-[10px] font-mono-tech text-amber-100 cursor-pointer select-none">
+              <input type="checkbox" class="rea-platform-cb accent-amber-400" value="macos" checked />
+              <span>macOS (.dmg/.app)</span>
+            </label>
+            <label class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-amber-500/15 border border-amber-400/45 text-[10px] font-mono-tech text-amber-100 cursor-pointer select-none">
+              <input type="checkbox" class="rea-platform-cb accent-amber-400" value="ios" checked />
+              <span>iOS (.ipa/Xcode)</span>
+            </label>
+            <label class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-amber-500/15 border border-amber-400/45 text-[10px] font-mono-tech text-amber-100 cursor-pointer select-none">
+              <input type="checkbox" class="rea-platform-cb accent-amber-400" value="android" checked />
+              <span>Android (.apk/.aab)</span>
+            </label>
+          </div>
+        </div>
+
         <div class="flex flex-wrap gap-2">
-          <button type="button" onclick="forgeAndHostSystem()" class="flex-1 py-1.5 px-3 rounded-xl bg-emerald-500/25 hover:bg-emerald-500/40 border border-emerald-400/60 text-[10.5px] font-mono-tech text-emerald-200 font-semibold">
-            🚀 Build &amp; Host System (Web + Windows)
+          <button id="btn-forge-multiplatform-system" type="button" onclick="forgeAndHostSystem()"
+                  class="flex-1 py-1.5 px-3 rounded-xl bg-emerald-500/25 hover:bg-emerald-500/40 border border-emerald-400/60 text-[10.5px] font-mono-tech text-emerald-200 font-semibold cursor-pointer">
+            🚀 Build End-to-End System (All Selected Platforms)
           </button>
-          <button id="btn-download-forged-zip" type="button" onclick="downloadLatestForgedZip()" class="hidden py-1.5 px-3 rounded-xl bg-amber-500/25 hover:bg-amber-500/40 border border-amber-400/60 text-[10.5px] font-mono-tech text-amber-200 font-semibold">
-            ⬇ Download Project .zip
+          <button id="btn-download-forged-zip" type="button" onclick="downloadLatestForgedZip()"
+                  class="hidden py-1.5 px-3 rounded-xl bg-amber-500/25 hover:bg-amber-500/40 border border-amber-400/60 text-[10.5px] font-mono-tech text-amber-200 font-semibold cursor-pointer">
+            ⬇ Download Multi-Platform .zip
           </button>
         </div>
-        <div id="rea-forged-result" class="max-h-48 overflow-y-auto p-2.5 rounded-xl bg-black/65 border border-white/10 font-mono-tech text-[10px] space-y-1.5 text-slate-200">
-          <div class="text-slate-400">Generated systems include live Express hosting at <code>/hosted/&lt;slug&gt;/</code>, Tauri v2 <code>.exe/.msi</code> config, PowerShell installer builder, and standalone HTML/JS app.</div>
+
+        <div id="rea-forged-result" class="flex-1 max-h-64 overflow-y-auto p-2.5 rounded-xl bg-black/65 border border-white/10 font-mono-tech text-[10px] space-y-2 text-slate-200">
+          <div class="text-slate-400 leading-relaxed">
+            Forges a complete end-to-end project using <span class="text-amber-300">morluto/rea</span> MCP workflows: live Express + PWA hosting at <code>/hosted/&lt;slug&gt;/</code>, Tauri v2 native desktop packages (Windows <code>.exe/.msi</code> + macOS universal <code>.dmg/.app</code>), Capacitor mobile native projects (iOS <code>Xcode/.ipa</code> + Android <code>Gradle .apk/.aab</code>), <code>.rea/rea-mcp.json</code>, and a 5-target GitHub Actions release workflow.
+          </div>
         </div>
       </div>
     </div>
@@ -3230,46 +3270,63 @@
       </div>
     </div>
 
-    <!-- MEMORY SEARCH BUTTON DIRECTLY ABOVE THE HALF-BRAIN / HALF-CIRCUIT BUTTON -->
-    <button id="btn-open-memory-search"
-            type="button"
-            onclick="openMemorySearchModal()"
-            title="Search Memory Sphere & Open Node HUD"
-            aria-label="Search Memory Sphere"
-            class="glass-composer pointer-events-auto mb-1.5 flex items-center justify-center w-9 h-9 rounded-full text-slate-200 hover:text-white hover:scale-110 active:scale-95 transition-all duration-200 shadow-lg">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
-      </svg>
-    </button>
+    <!-- BOTTOM-CENTER COMMAND DOCK: MEMORY SEARCH · B.A.R.B.I CHAT · VOICE MODE -->
+    <div class="pointer-events-auto flex items-center justify-center gap-3 mb-0.5">
+      <button id="btn-open-memory-search"
+              type="button"
+              onclick="openMemorySearchModal()"
+              title="Search Memory Sphere & Open Node HUD"
+              aria-label="Search Memory Sphere"
+              class="glass-composer flex items-center justify-center w-9 h-9 rounded-full text-slate-200 hover:text-white hover:scale-110 active:scale-95 transition-all duration-200 shadow-lg cursor-pointer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/>
+        </svg>
+      </button>
 
-    <!-- SMALL CENTRE-BOTTOM EXPAND / COLLAPSE CHAT BUTTON (HALF-BRAIN / HALF-PCB CIRCUIT ICON ONLY) -->
-    <button id="btn-chat-launcher"
-            onclick="toggleChatComposerCollapse()"
-            title="Expand or Collapse B.A.R.B.I Conversational Interface"
-            aria-label="Expand or Collapse B.A.R.B.I Chat"
-            class="glass-composer pointer-events-auto flex items-center justify-center w-11 h-11 rounded-full text-white hover:scale-110 active:scale-95 transition-all duration-200 shadow-2xl">
-      <span id="launcher-orb-dot" class="hidden"></span>
-      <span id="chat-launcher-label" class="hidden"></span>
-      <svg id="chat-launcher-chevron" class="w-6 h-6 text-white transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <!-- Center Spine Divider -->
-        <line x1="12" y1="2.5" x2="12" y2="21.5" stroke-width="1.4" stroke-linecap="round" opacity="0.85"/>
-        <!-- Left Hemisphere: Organic Brain Cortex & Gyri Folds -->
-        <path d="M12 4C9.2 4 7.2 5.4 6.6 7.4C5.1 7.9 4 9.3 4 11C4 12.4 4.8 13.7 6 14.3C5.8 15.1 6 16.2 6.8 17.1C7.8 18.3 9.5 19.2 12 19.2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M12 7.5C10.1 7.5 8.8 8.3 8.2 9.5" stroke-width="1.25" stroke-linecap="round"/>
-        <path d="M11.8 11.5C9.6 11.5 8.2 10.7 7.2 12.1" stroke-width="1.25" stroke-linecap="round"/>
-        <path d="M12 15.2C10.2 15.2 9.1 14.5 8.3 15.8" stroke-width="1.25" stroke-linecap="round"/>
-        <!-- Right Hemisphere: Angular PCB Circuit Traces & Solder Via Pads -->
-        <path d="M12 6H15.2L17.4 3.8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="18.3" cy="3.0" r="1.25" fill="currentColor" stroke="none"/>
-        <path d="M12 9.6H16.6L18.8 7.4H20.2" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="21.2" cy="7.4" r="1.25" fill="currentColor" stroke="none"/>
-        <path d="M12 13H17.2L19.4 15.2" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="20.3" cy="16.1" r="1.25" fill="currentColor" stroke="none"/>
-        <path d="M12 16.6H15.0L17.2 19.2H18.6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="19.8" cy="19.2" r="1.25" fill="currentColor" stroke="none"/>
-        <circle cx="14.6" cy="11.3" r="1.0" fill="currentColor" stroke="none"/>
-      </svg>
-    </button>
+      <!-- CENTRE-BOTTOM EXPAND / COLLAPSE CHAT BUTTON (HALF-BRAIN / HALF-PCB CIRCUIT ICON) -->
+      <button id="btn-chat-launcher"
+              type="button"
+              onclick="toggleChatComposerCollapse()"
+              title="Expand or Collapse B.A.R.B.I Conversational Interface"
+              aria-label="Expand or Collapse B.A.R.B.I Chat"
+              class="glass-composer flex items-center justify-center w-11 h-11 rounded-full text-white hover:scale-110 active:scale-95 transition-all duration-200 shadow-2xl cursor-pointer">
+        <span id="launcher-orb-dot" class="hidden"></span>
+        <span id="chat-launcher-label" class="hidden"></span>
+        <svg id="chat-launcher-chevron" class="w-6 h-6 text-white transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <!-- Center Spine Divider -->
+          <line x1="12" y1="2.5" x2="12" y2="21.5" stroke-width="1.4" stroke-linecap="round" opacity="0.85"/>
+          <!-- Left Hemisphere: Organic Brain Cortex & Gyri Folds -->
+          <path d="M12 4C9.2 4 7.2 5.4 6.6 7.4C5.1 7.9 4 9.3 4 11C4 12.4 4.8 13.7 6 14.3C5.8 15.1 6 16.2 6.8 17.1C7.8 18.3 9.5 19.2 12 19.2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 7.5C10.1 7.5 8.8 8.3 8.2 9.5" stroke-width="1.25" stroke-linecap="round"/>
+          <path d="M11.8 11.5C9.6 11.5 8.2 10.7 7.2 12.1" stroke-width="1.25" stroke-linecap="round"/>
+          <path d="M12 15.2C10.2 15.2 9.1 14.5 8.3 15.8" stroke-width="1.25" stroke-linecap="round"/>
+          <!-- Right Hemisphere: Angular PCB Circuit Traces & Solder Via Pads -->
+          <path d="M12 6H15.2L17.4 3.8" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="18.3" cy="3.0" r="1.25" fill="currentColor" stroke="none"/>
+          <path d="M12 9.6H16.6L18.8 7.4H20.2" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="21.2" cy="7.4" r="1.25" fill="currentColor" stroke="none"/>
+          <path d="M12 13H17.2L19.4 15.2" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="20.3" cy="16.1" r="1.25" fill="currentColor" stroke="none"/>
+          <path d="M12 16.6H15.0L17.2 19.2H18.6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="19.8" cy="19.2" r="1.25" fill="currentColor" stroke="none"/>
+          <circle cx="14.6" cy="11.3" r="1.0" fill="currentColor" stroke="none"/>
+        </svg>
+      </button>
+
+      <!-- DEDICATED ON-SCREEN VOICE MODE BUTTON -->
+      <button id="btn-open-voice-hud"
+              type="button"
+              onclick="window.dispatchEvent(new CustomEvent('barbi:open-voice-mode', { detail: { autoConnect: true } }))"
+              title="Activate B.A.R.B.I Voice Mode"
+              aria-label="Activate B.A.R.B.I Voice Mode"
+              class="glass-composer flex items-center justify-center w-9 h-9 rounded-full border border-amber-400/55 bg-amber-500/15 text-amber-300 hover:text-amber-100 hover:bg-amber-500/28 hover:scale-110 active:scale-95 transition-all duration-200 shadow-[0_0_16px_rgba(245,158,11,0.28)] cursor-pointer">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+          <line x1="12" y1="19" x2="12" y2="22"/>
+        </svg>
+      </button>
+    </div>
 
     <!-- COMPANY NAME DIRECTLY UNDERNEATH THE EXPAND/COLLAPSE CHAT BUTTON -->
     <div id="bottom-company-signature"

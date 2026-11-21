@@ -617,9 +617,11 @@
         nodeId: 'cat-intelligence',
         label: 'Intelligence',
         angleDeg: 0,
-        description: 'B.A.R.B.I Core, AI/ML, Autonomous Agents, Edge NPU Clusters & Cognitive Weaver',
+        description: 'B.A.R.B.I Core, OmniRouter & DAG, R.E.A Forge, AI/ML & Edge NPU Clusters',
         nodeIds: [
           'barbi-core',
+          'sys-omnir-dag',
+          'sys-rea-forge',
           'artificial-intelligence',
           'jetson-cluster',
           'oneiros-sentience',
@@ -648,9 +650,12 @@
         nodeId: 'cat-engineering',
         label: 'Engineering',
         angleDeg: 90,
-        description: 'Mechanical, Mechatronics, Robotics, Control Systems, PLC, PCB & CAD/CAE Stack',
+        description: 'Mechanical, Mechatronics, Circuit & Crucible, Acoustic Guard, Power PMIC, PLC & PCB',
         nodeIds: [
           'robotics',
+          'sys-circuit-crucible',
+          'sys-acoustic-guard',
+          'sys-power-pmic',
           'proj-solar-edge-surveillance',
           'shap-zx1',
           'prosthetics-3d',
@@ -699,8 +704,9 @@
         nodeId: 'cat-research',
         label: 'Research',
         angleDeg: 180,
-        description: 'First-Principles Mathematics, Physics, Academic Modules, Papers & Research Library',
+        description: 'First-Principles Math, Study & Explainer Studio, Physics, Modules & Papers',
         nodeIds: [
+          'sys-study-studio',
           'mathematics',
           'first-principles-methodology',
           'velocity-scaling',
@@ -736,8 +742,10 @@
         nodeId: 'cat-system',
         label: 'System',
         angleDeg: 270,
-        description: 'Core OS Configuration, Hardware Diagnostics, Power Telemetry & System Controls',
+        description: '74-Cap Spec Registry, Spatial Gesture D3, Core OS Configuration & Diagnostics',
         nodeIds: [
+          'sys-spec-registry',
+          'sys-gesture-d3',
           'cmd-settings'
         ]
       },
@@ -1258,6 +1266,220 @@
           { label: 'Fetch LoRa SX1262 Link Budget Reference', recipient: 'Open Engineering Corpus', task: 'Retrieve sub-GHz LoRa path-loss and solar autonomy equations.' }
         ],
         keywords: ['api', 'free api', 'arxiv', 'rest', 'fetch']
+      },
+
+      // INTEGRATED CORE & MULTI-LAYER IMPLEMENTATION SUBSYSTEM NODES (INNER / MID / OUTER SHELLS)
+      {
+        id: 'sys-omnir-dag',
+        label: 'OmniRouter & DAG',
+        domain: 'ai',
+        tier: 'subsystem',
+        layerDepth: 'inner',
+        evoTab: 'router',
+        nodeCategory: 'TECHNOLOGY',
+        verificationStatus: VERIFICATION_STATUS.VERIFIED,
+        datePrecision: DATE_PRECISION.EXACT_CONVERSATION_TIMESTAMP,
+        isoTimestamp: '2026-11-15',
+        year: 2026,
+        confidence: '96.0% (VERIFIED)',
+        weight: '0.98 Engine',
+        source: 'B.A.R.B.I Server AI Orchestrator & Kahn DAG Planner',
+        evidence: 'Multi-provider failover routing paired with 3-Tier intent classification and topological DAG dependency scheduling.',
+        summary: 'Inner-core routing intelligence balancing provider quotas, complexity scoring, and task DAGs.',
+        keywords: ['omnirouter', 'dag', 'openrouter', 'planner', 'provider', 'routing', 'core matrix']
+      },
+      {
+        id: 'sys-rea-forge',
+        label: 'R.E.A Agent Forge',
+        domain: 'ai',
+        tier: 'subsystem',
+        layerDepth: 'inner',
+        evoTab: 'rea',
+        nodeCategory: 'PROJECT',
+        verificationStatus: VERIFICATION_STATUS.VERIFIED,
+        datePrecision: DATE_PRECISION.EXACT_CONVERSATION_TIMESTAMP,
+        isoTimestamp: '2026-11-15',
+        year: 2026,
+        confidence: '95.0% (VERIFIED)',
+        weight: '0.97 Engine',
+        source: 'Reactive Embodied Architecture & System Forge',
+        evidence: 'Compiles, hosts, and inspects self-contained autonomous engineering systems with live artifact preview.',
+        summary: 'Inner-core agentic code & system synthesis forge integrated into the sphere.',
+        keywords: ['rea', 'agent forge', 'system forge', 'hosted systems', 'synthesize']
+      },
+      {
+        id: 'sys-spec-registry',
+        label: '74-Cap Registry',
+        domain: 'core',
+        tier: 'subsystem',
+        layerDepth: 'inner',
+        evoTab: 'registry',
+        nodeCategory: 'TECHNOLOGY',
+        verificationStatus: VERIFICATION_STATUS.VERIFIED,
+        datePrecision: DATE_PRECISION.EXACT_CONVERSATION_TIMESTAMP,
+        isoTimestamp: '2026-11-15',
+        year: 2026,
+        confidence: '96.0% (VERIFIED)',
+        weight: '0.97 Kernel',
+        source: 'ZX Nexus Core Spec 003 & Spec 004 Audit',
+        evidence: 'Enforces 74 frozen capabilities across 8 Nexus domains with sandboxing, permissions, and epistemic integrity checks.',
+        summary: 'Inner-core capability governance registry and Spec 003/004 compliance monitor.',
+        keywords: ['74 cap', 'registry', 'spec 003', 'spec 004', 'capabilities', 'audit']
+      },
+      {
+        id: 'sys-circuit-crucible',
+        label: 'Circuit & Crucible',
+        domain: 'control',
+        tier: 'subsystem',
+        layerDepth: 'mid',
+        evoTab: 'circuit',
+        nodeCategory: 'TECHNOLOGY',
+        verificationStatus: VERIFICATION_STATUS.VERIFIED,
+        datePrecision: DATE_PRECISION.EXACT_CONVERSATION_TIMESTAMP,
+        isoTimestamp: '2026-11-15',
+        year: 2026,
+        confidence: '95.0% (VERIFIED)',
+        weight: '0.96 Module',
+        source: 'Electronics Solver & AST Sandbox Crucible',
+        evidence: 'Solves Kirchhoff nodal networks & 32-QFN pinouts alongside AST security verification before code execution.',
+        summary: 'Mid-layer hardware circuit solver paired with static AST safety verification.',
+        keywords: ['circuit', 'crucible', 'ast', 'kirchhoff', 'solver', 'electronics']
+      },
+      {
+        id: 'sys-acoustic-guard',
+        label: 'Acoustic Guard',
+        domain: 'control',
+        tier: 'subsystem',
+        layerDepth: 'mid',
+        evoTab: 'echo',
+        nodeCategory: 'TECHNOLOGY',
+        verificationStatus: VERIFICATION_STATUS.VERIFIED,
+        datePrecision: DATE_PRECISION.EXACT_CONVERSATION_TIMESTAMP,
+        isoTimestamp: '2026-11-15',
+        year: 2026,
+        confidence: '94.5% (VERIFIED)',
+        weight: '0.95 Module',
+        source: '8-Band Formant Spectral Subtraction & AEC Engine',
+        evidence: 'Real-time 8-band voice activity and echo cancellation guard protecting full-duplex voice interaction.',
+        summary: 'Mid-layer spectral subtraction and 8-band acoustic echo guard.',
+        keywords: ['acoustic', 'echo', '8-band', 'audio', 'voice', 'spectral']
+      },
+      {
+        id: 'sys-study-studio',
+        label: 'Study & Explainer',
+        domain: 'academic',
+        tier: 'subsystem',
+        layerDepth: 'mid',
+        evoTab: 'studio',
+        nodeCategory: 'EDUCATION',
+        verificationStatus: VERIFICATION_STATUS.VERIFIED,
+        datePrecision: DATE_PRECISION.EXACT_CONVERSATION_TIMESTAMP,
+        isoTimestamp: '2026-11-15',
+        year: 2026,
+        confidence: '95.0% (VERIFIED)',
+        weight: '0.96 Studio',
+        source: 'First-Principles Study & Motion Explainer Studio',
+        evidence: 'Generates visual engineering walkthrough scenes, exam drills, and animated derivation storyboards.',
+        summary: 'Mid-layer visual study studio for SOM307B, CMH316B, MEP307B, and engineering explainers.',
+        keywords: ['study studio', 'explainer', 'video', 'storyboard', 'exam', 'derivations']
+      },
+      {
+        id: 'sys-power-pmic',
+        label: 'Power & PMIC',
+        domain: 'control',
+        tier: 'subsystem',
+        layerDepth: 'mid',
+        actionModal: 'power',
+        nodeCategory: 'TECHNOLOGY',
+        verificationStatus: VERIFICATION_STATUS.VERIFIED,
+        datePrecision: DATE_PRECISION.EXACT_CONVERSATION_TIMESTAMP,
+        isoTimestamp: '2026-11-15',
+        year: 2026,
+        confidence: '94.0% (VERIFIED)',
+        weight: '0.95 Telemetry',
+        source: 'Live Web Battery API & PMIC Bus Telemetry',
+        evidence: 'Tracks live voltage (V), current draw (A), instantaneous wattage, thermal load, and 48h rail diagnostics.',
+        summary: 'Mid-layer live electrical power & battery rail diagnostics module.',
+        keywords: ['power', 'pmic', 'battery', 'voltage', 'watt', 'telemetry']
+      },
+      {
+        id: 'sys-gesture-d3',
+        label: 'Gesture D3',
+        domain: 'robotics',
+        tier: 'subsystem',
+        layerDepth: 'outer',
+        actionModal: 'gesture',
+        nodeCategory: 'TECHNOLOGY',
+        verificationStatus: VERIFICATION_STATUS.VERIFIED,
+        datePrecision: DATE_PRECISION.EXACT_CONVERSATION_TIMESTAMP,
+        isoTimestamp: '2026-11-15',
+        year: 2026,
+        confidence: '95.0% (VERIFIED)',
+        weight: '0.96 Control',
+        source: 'Stage D3 21-Point Spatial Hand-Gesture Engine',
+        evidence: 'Hysteresis-stabilized pinch, open-palm zoom, and rotational hand tracking via webcam or simulator.',
+        summary: 'Outer-shell spatial hand-gesture control interface bound directly to 3D sphere kinematics.',
+        keywords: ['gesture', 'd3', 'hand tracking', 'pinch', 'webcam', 'spatial control']
+      },
+      {
+        id: 'sys-gods-eye',
+        label: "God's Eye (M11)",
+        icon: '👁️',
+        domain: 'ai',
+        tier: 'subsystem',
+        layerDepth: 'outer',
+        actionModal: 'gods-eye',
+        nodeCategory: 'TECHNOLOGY',
+        verificationStatus: VERIFICATION_STATUS.VERIFIED,
+        datePrecision: DATE_PRECISION.EXACT_CONVERSATION_TIMESTAMP,
+        isoTimestamp: '2026-11-21',
+        year: 2026,
+        confidence: '98.0% (VERIFIED)',
+        weight: '0.99 OSINT',
+        source: 'B.A.R.B.I. OS v4.0 Module M11 (bilawalsidhu/gods-eye-view & koala73/worldmonitor)',
+        evidence: 'Registered in Tier B of the 55-module stack for real-time 3D global OSINT globe and spatial event reconstruction.',
+        summary: "Click to open God's Eye (Module M11) directly inside the B.A.R.B.I. OS v4.0 Hub to inspect GitHub telemetry, mount, or export.",
+        keywords: ['gods eye', "god's eye", 'godseye', 'm11', 'osint', 'worldmonitor', 'globe', 'spatial']
+      },
+      {
+        id: 'sys-v4-modules',
+        label: 'v4.0 · 55 Modules',
+        icon: '⬡',
+        domain: 'core',
+        tier: 'subsystem',
+        layerDepth: 'outer',
+        actionModal: 'v4-hub',
+        nodeCategory: 'TECHNOLOGY',
+        verificationStatus: VERIFICATION_STATUS.VERIFIED,
+        datePrecision: DATE_PRECISION.EXACT_CONVERSATION_TIMESTAMP,
+        isoTimestamp: '2026-11-21',
+        year: 2026,
+        confidence: '99.0% (VERIFIED)',
+        weight: '0.99 Core OS',
+        source: 'B.A.R.B.I. OS v4.0 Complete 55-Module Architecture Stack',
+        evidence: 'Live GitHub sync, Module 33 Zero-Trust audit, Dual-Tier approval gates, FinTech command, and Docker/MCP deployment forge.',
+        summary: 'Click to open the full 55-module B.A.R.B.I. OS v4.0 Command Hub.',
+        keywords: ['v4', '55 modules', 'modules', 'github', 'docker', 'mcp', 'hub']
+      },
+      {
+        id: 'sys-voice-mode',
+        label: 'Voice Mode',
+        icon: '🎙️',
+        domain: 'ai',
+        tier: 'subsystem',
+        layerDepth: 'outer',
+        actionModal: 'voice-mode',
+        nodeCategory: 'TECHNOLOGY',
+        verificationStatus: VERIFICATION_STATUS.VERIFIED,
+        datePrecision: DATE_PRECISION.EXACT_CONVERSATION_TIMESTAMP,
+        isoTimestamp: '2026-11-21',
+        year: 2026,
+        confidence: '99.0% (VERIFIED)',
+        weight: '0.98 Voice',
+        source: 'B.A.R.B.I. Acoustic Command Deck (Gemini 3.8 Live)',
+        evidence: 'Real-time voice conversation with direct interface control, system inspection, and ZULUTRONIX Chief Engineer identity.',
+        summary: 'Click to open B.A.R.B.I. Acoustic Voice Command Deck.',
+        keywords: ['voice', 'voice mode', 'mic', 'speak', 'live voice', 'acoustic']
       },
 
       // 1. Robotics, Mechatronics & Edge Surveillance Cluster
@@ -2038,6 +2260,15 @@
       ['barbi-core', 'app-github', 'RELATED_TO', 'GitHub firmware & repository bridge'],
       ['barbi-core', 'app-free-apis', 'RELATED_TO', 'Scientific REST API bridge'],
 
+      ['barbi-core', 'sys-omnir-dag', 'DEPENDS_ON', 'Inner-core AI router & Kahn DAG orchestrator'],
+      ['barbi-core', 'sys-rea-forge', 'CREATED', 'Inner-core R.E.A. Agent & System Forge'],
+      ['barbi-core', 'sys-spec-registry', 'VALIDATES', 'Inner-core 74-capability & Spec 003/004 compliance'],
+      ['sys-circuit-crucible', 'control-systems', 'CONTRIBUTES_TO', 'Mid-layer circuit solver & AST safety verification'],
+      ['sys-acoustic-guard', 'app-xiaozhi-mcp', 'CONTRIBUTES_TO', 'Mid-layer 8-band spectral echo guard for voice AI'],
+      ['sys-study-studio', 'academic-path', 'CONTRIBUTES_TO', 'Mid-layer animated study & derivation studio'],
+      ['sys-power-pmic', 'control-systems', 'VALIDATES', 'Mid-layer live battery & PMIC rail telemetry'],
+      ['sys-gesture-d3', 'robotics', 'CONTRIBUTES_TO', 'Outer-shell spatial hand-gesture kinematic control'],
+
       ['app-google-maps', 'rf-tracker', 'CONTRIBUTES_TO', 'Provides live GPS coordinate telemetry for vehicle tracking'],
       ['app-google-maps', 'proj-solar-edge-surveillance', 'CONTRIBUTES_TO', 'Maps estate entrance node placement coordinates'],
       ['app-weather-api', 'solar-thermal', 'CONTRIBUTES_TO', 'Supplies solar irradiance and ambient temperature data'],
@@ -2452,6 +2683,13 @@
 
       let appIdx = 0;
       let memIndexByDomain = {};
+      const subsystemNodes = INITIAL_NODES.filter(n => n.tier === 'subsystem');
+      const subInnerTotal = Math.max(1, subsystemNodes.filter(n => n.layerDepth === 'inner').length);
+      const subMidTotal = Math.max(1, subsystemNodes.filter(n => n.layerDepth === 'mid').length);
+      const subOuterTotal = Math.max(1, subsystemNodes.filter(n => n.layerDepth === 'outer').length);
+      let subInnerIdx = 0;
+      let subMidIdx = 0;
+      let subOuterIdx = 0;
 
       INITIAL_NODES.forEach((item) => {
         if (item.tier === 'core') {
@@ -2461,6 +2699,50 @@
             baseX: 0, baseY: 0, baseZ: 0,
             radius: 16,
             phase: 0,
+            screenX: 0, screenY: 0, screenZ: 0, screenScale: 1, visible: true
+          });
+        } else if (item.tier === 'subsystem') {
+          let rShell = 236;
+          let thetaSub = 0;
+          let phiSub = Math.PI / 2;
+          if (item.layerDepth === 'inner') {
+            rShell = 114;
+            const innerAngles = [
+              { theta: 0.35, phi: 0.78 },
+              { theta: 2.45, phi: 2.34 },
+              { theta: 4.55, phi: 0.92 }
+            ];
+            const slot = innerAngles[subInnerIdx % innerAngles.length];
+            thetaSub = slot.theta;
+            phiSub = slot.phi;
+            subInnerIdx++;
+          } else if (item.layerDepth === 'mid') {
+            rShell = 238;
+            const midAngles = [
+              { theta: 0.55, phi: 0.72 },
+              { theta: 2.18, phi: 2.38 },
+              { theta: 3.72, phi: 0.95 },
+              { theta: 5.28, phi: 2.14 }
+            ];
+            const slot = midAngles[subMidIdx % midAngles.length];
+            thetaSub = slot.theta;
+            phiSub = slot.phi;
+            subMidIdx++;
+          } else {
+            rShell = 340;
+            thetaSub = (subOuterIdx / subOuterTotal) * Math.PI * 2 + 1.95;
+            phiSub = 0.62;
+            subOuterIdx++;
+          }
+          const x = rShell * Math.sin(phiSub) * Math.cos(thetaSub);
+          const y = rShell * Math.cos(phiSub);
+          const z = rShell * Math.sin(phiSub) * Math.sin(thetaSub);
+          state.nodes.push({
+            ...item,
+            x, y, z,
+            baseX: x, baseY: y, baseZ: z,
+            radius: item.layerDepth === 'inner' ? 9.5 : 11,
+            phase: (subInnerIdx + subMidIdx + subOuterIdx) * 0.9,
             screenX: 0, screenY: 0, screenZ: 0, screenScale: 1, visible: true
           });
         } else if (item.tier === 'app') {
@@ -2479,7 +2761,7 @@
             screenX: 0, screenY: 0, screenZ: 0, screenScale: 1, visible: true
           });
         } else if (item.tier === 'stack') {
-          // 13 Red-dot software stack nodes distributed evenly around the sphere
+          // 13 software stack nodes distributed evenly around the outer sphere
           const stackIdx = INITIAL_NODES.filter(n => n.tier === 'stack').indexOf(item);
           const totalStack = 13;
           const gAngle = Math.PI * (3 - Math.sqrt(5));
@@ -3015,7 +3297,7 @@
       }
       if (clockBarEl) {
         clockBarEl.style.width = `${pctRemaining}%`;
-        clockBarEl.style.backgroundColor = state.focusMode ? '#EF4444' : '#FFFFFF';
+        clockBarEl.style.backgroundColor = state.focusMode ? '#F59E0B' : '#E58010';
       }
     }
 
@@ -3085,8 +3367,16 @@
         'stack-ltspice': `<svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><path d="M2 12h4l2-5 3 10 3-8 2 3h6" stroke="#F87171" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
         'stack-proteus': `<span class="w-4 h-4 rounded bg-blue-600 text-white font-mono-tech text-[9px] font-extrabold flex items-center justify-center shrink-0">P</span>`,
         'stack-timer': `<svg class="w-4 h-4 shrink-0 text-red-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg>`,
-        'stack-chess': `<span class="w-4 h-4 rounded bg-zinc-800 border border-white/25 text-white text-[11px] flex items-center justify-center shrink-0 leading-none">♞</span>`,
-        'stack-youtube': `<svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="4" fill="#EF4444"/><polygon points="10,9 16,12 10,15" fill="#FFFFFF"/></svg>`
+        'stack-chess': `<span class="w-4 h-4 rounded bg-zinc-800 border border-amber-500/35 text-amber-200 text-[11px] flex items-center justify-center shrink-0 leading-none">♞</span>`,
+        'stack-youtube': `<svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="4" fill="#EF4444"/><polygon points="10,9 16,12 10,15" fill="#FFFFFF"/></svg>`,
+        'sys-omnir-dag': `<svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>`,
+        'sys-rea-forge': `<svg class="w-3.5 h-3.5 text-amber-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>`,
+        'sys-spec-registry': `<svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z"/></svg>`,
+        'sys-circuit-crucible': `<svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1.5" stroke-width="1.8"/><path stroke-linecap="round" stroke-width="1.8" d="M9 3v4m6-4v4M9 17v4m6-4v4M3 9h4m-4 6h4m10-6h4m-4 6h4"/></svg>`,
+        'sys-acoustic-guard': `<svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12v0m4-5v10m4-13v16m4-11v6m4-4v2"/></svg>`,
+        'sys-study-studio': `<svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 6h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/></svg>`,
+        'sys-power-pmic': `<svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="7" width="16" height="10" rx="2" stroke-width="1.8"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M21 10v4M11 9.5L8.5 13h3L10 15.5"/></svg>`,
+        'sys-gesture-d3': `<svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 11V6a1.5 1.5 0 013 0v4m0-4V4.5a1.5 1.5 0 013 0V10m0-3.5a1.5 1.5 0 013 0V12m0-2a1.5 1.5 0 013 0v5a6 6 0 01-6 6h-1.5A5.5 5.5 0 015 15.5V12a1.5 1.5 0 012-1z"/></svg>`
       };
       logos['app-whatsapp'] = `<svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2z" fill="#25D366"/><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z" fill="#FFFFFF"/></svg>`;
       const cmdLineIcons = {
@@ -3121,7 +3411,7 @@
         philosophy: '◈'
       };
       const iconChar = node.icon || domainLogos[node.domain] || '◆';
-      return `<span class="text-[11px] leading-none shrink-0 text-white/90">${iconChar}</span>`;
+      return `<span class="text-[11px] leading-none shrink-0 text-amber-300">${iconChar}</span>`;
     }
 
     function createLabelElementForNode(node) {
@@ -3129,7 +3419,11 @@
       const isCore = node.tier === 'core';
       const isApp = node.tier === 'app';
       const isStack = node.tier === 'stack';
+      const isSubsystem = node.tier === 'subsystem';
+      const isHub = node.tier === 'hub';
       const div = document.createElement('div');
+      div.dataset.nodeId = node.id;
+      div.dataset.tier = node.tier || '';
 
       if (node.tier === 'command') {
         div.className = 'node-label flex items-center gap-2 cursor-pointer group rounded-full px-1.5 py-0.5';
@@ -3141,11 +3435,18 @@
           </span>
           <span class="text-[11px] font-mono-tech font-semibold text-amber-200 bg-black/70 border border-amber-500/35 px-2 py-0.5 backdrop-blur-md tracking-wide whitespace-nowrap group-hover:border-amber-400/80 transition">${node.label}</span>
         `;
-      } else if (isApp) {
-        div.className = 'node-label app-node-badge rounded-2xl px-2.5 py-1 flex items-center gap-1.5 backdrop-blur-md';
+      } else if (isSubsystem || isApp || isStack || isHub) {
+        div.className = 'node-label node-icon-named flex items-center cursor-pointer group';
+        const nameCls = isSubsystem
+          ? 'text-[10px] font-mono-tech font-medium text-slate-300/85 tracking-wide'
+          : (isApp
+            ? 'text-[10px] font-mono-tech font-medium text-slate-300/80 tracking-tight'
+            : (isStack || isHub ? 'text-[10px] font-mono-tech font-medium text-slate-300/80' : 'text-[9.5px] font-mono-tech text-slate-400/75'));
         div.innerHTML = `
-          ${(node.id === 'app-whatsapp' || node.id === 'app-telegram') ? getNodeLogoHtml(node) : `<span class="text-xs leading-none text-amber-400">${node.icon || '⬡'}</span>`}
-          <span class="text-[10px] font-mono-tech font-semibold text-amber-200/90 tracking-tight">${node.label}</span>
+          <span class="node-icon-emblem" title="${node.label}">
+            ${getNodeLogoHtml(node)}
+          </span>
+          <span class="node-name-aside ${nameCls}">${node.label}</span>
         `;
       } else {
         div.className = 'node-label rounded-full px-2 py-0.5 flex items-center gap-1.5 backdrop-blur-sm transition-colors';
@@ -3158,14 +3459,56 @@
 
         div.innerHTML = `
           ${getNodeLogoHtml(node)}
-          <span class="font-mono-tech ${isCore ? 'text-[11px] font-bold text-amber-300 tracking-wide' : (node.tier === 'hub' || isStack ? 'text-[10.5px] font-semibold text-amber-300/90' : 'text-[9.5px] font-medium text-amber-400/75')}">${node.label}</span>
+          <span class="font-mono-tech ${isCore ? 'text-[11px] font-bold text-amber-300 tracking-wide' : 'text-[9.5px] font-medium text-amber-400/75'}">${node.label}</span>
         `;
       }
 
       div.addEventListener('click', (e) => {
         e.stopPropagation();
         let openInspector = true;
-        if (node.id === 'app-google-maps') {
+        if (node.tier === 'subsystem') {
+          if (node.evoTab) {
+            openEvoBackendModal(node.evoTab);
+            openInspector = false;
+          } else if (node.actionModal === 'power') {
+            openPowerTelemetryModal();
+            openInspector = false;
+          } else if (node.actionModal === 'gesture') {
+            openGestureControlModal();
+            openInspector = false;
+          } else if (node.actionModal === 'gods-eye') {
+            if (typeof window.openBarbiV4Hub === 'function') {
+              window.openBarbiV4Hub('catalog', { moduleId: 11, tier: 'B' });
+            } else {
+              window.dispatchEvent(new CustomEvent('barbi:toggle-v4-hub', { detail: { open: true, tab: 'catalog', moduleId: 11, tier: 'B' } }));
+            }
+            openInspector = false;
+          } else if (node.actionModal === 'v4-hub') {
+            if (typeof window.openBarbiV4Hub === 'function') {
+              window.openBarbiV4Hub('catalog');
+            } else {
+              window.dispatchEvent(new CustomEvent('barbi:toggle-v4-hub', { detail: { open: true, tab: 'catalog' } }));
+            }
+            openInspector = false;
+          } else if (node.actionModal === 'voice-mode') {
+            window.dispatchEvent(new CustomEvent('barbi:open-voice-mode'));
+            openInspector = false;
+          }
+        } else if (node.id === 'zulutronix') {
+          if (typeof window.openBarbiV4Hub === 'function') {
+            window.openBarbiV4Hub('fintech');
+          } else {
+            window.dispatchEvent(new CustomEvent('barbi:toggle-v4-hub', { detail: { open: true, tab: 'fintech' } }));
+          }
+          openInspector = false;
+        } else if (node.id === 'app-github') {
+          if (typeof window.openBarbiV4Hub === 'function') {
+            window.openBarbiV4Hub('assimilator');
+          } else {
+            window.dispatchEvent(new CustomEvent('barbi:toggle-v4-hub', { detail: { open: true, tab: 'assimilator' } }));
+          }
+          openInspector = false;
+        } else if (node.id === 'app-google-maps') {
           openGtaMapModal();
           openInspector = false;
         } else if (node.id === 'app-weather-api') {
@@ -3188,7 +3531,6 @@
           openInspector = false;
         } else if (node.tier === 'command' && node.isCategoryNode && node.categoryKey) {
           if (state.activeNexusCategory === node.categoryKey) {
-            // Clicking the active category anchor again deselects the category back to the 8-category ring
             toggleNexusCategoryMode(true);
           } else {
             selectNexusCategory(node.categoryKey);
@@ -3296,10 +3638,14 @@
           state.chatSummonAnim.spinBoost = 0.0;
         }
       }
+      const cfgSpeedMult = (window.__barbiSphereConfig && window.__barbiSphereConfig.config && typeof window.__barbiSphereConfig.config.rotationSpeed === 'number')
+        ? window.__barbiSphereConfig.config.rotationSpeed
+        : 1.0;
       if (state.camera.autoRotate && !state.camera.isDragging && !state.searchQuery.trim() && !state.camera.frontCommandNodeId) {
-        const baseOrbitSpeed = state.chatExpanded ? (state.settings.orbitSpeed * 0.58) : state.settings.orbitSpeed;
+        const focusSpeedScale = state.focusMode ? 0.38 : 1.0;
+        const baseOrbitSpeed = (state.chatExpanded ? (state.settings.orbitSpeed * 0.58) : state.settings.orbitSpeed) * focusSpeedScale * cfgSpeedMult;
         state.camera.targetRotY += baseOrbitSpeed + summonSpinBoost;
-        state.camera.targetCmdOrbitAngle += (state.chatExpanded ? 0.0007 : 0.0012) + summonSpinBoost * 0.45;
+        state.camera.targetCmdOrbitAngle += ((state.chatExpanded ? 0.0007 : 0.0012) * focusSpeedScale * cfgSpeedMult) + summonSpinBoost * 0.45;
       } else if (summonActive) {
         state.camera.targetRotY += summonSpinBoost;
         state.camera.targetCmdOrbitAngle += summonSpinBoost * 0.45;
@@ -3363,7 +3709,7 @@
         } else if (state.barbiCommandMode) {
           n.activeInFilter = (n.tier === 'core');
         } else {
-          n.activeInFilter = (state.retrievedNodeId === n.id) || (inTimeline && matchesSearch && (!state.focusMode || isHighlighted || n.tier === 'core' || n.tier === 'app'));
+          n.activeInFilter = (state.retrievedNodeId === n.id) || (inTimeline && matchesSearch && (!state.focusMode || isHighlighted || n.tier === 'core' || n.tier === 'app' || n.tier === 'subsystem'));
         }
 
         if (n.tier === 'command') {
@@ -3592,12 +3938,12 @@
 
         if (isNewlyDiscovered) {
           synapseCtx.strokeStyle = state.focusMode
-            ? `rgba(239, 68, 68, ${0.9 * depthFade})`
-            : `rgba(255, 255, 255, ${0.9 * depthFade})`;
+            ? `rgba(251, 191, 36, ${0.92 * depthFade})`
+            : `rgba(255, 224, 178, ${0.9 * depthFade})`;
           synapseCtx.lineWidth = 1.9;
         } else if (bothHighlighted) {
           synapseCtx.strokeStyle = state.focusMode
-            ? `rgba(239, 68, 68, ${0.72 * depthFade})`
+            ? `rgba(245, 158, 11, ${0.78 * depthFade})`
             : `rgba(235, 132, 18, ${0.62 * depthFade})`;
           synapseCtx.lineWidth = (a.tier === 'satellite' || b.tier === 'satellite') ? 0.85 : 1.45;
         } else {
@@ -3656,7 +4002,7 @@
         const px = a.screenX + (b.screenX - a.screenX) * pulse.t;
         const py = a.screenY + (b.screenY - a.screenY) * pulse.t;
 
-        synapseCtx.fillStyle = state.focusMode ? '#EF4444' : '#E58010';
+        synapseCtx.fillStyle = state.focusMode ? '#FBBF24' : '#E58010';
         synapseCtx.beginPath();
         synapseCtx.arc(px, py, 2.8, 0, Math.PI * 2);
         synapseCtx.fill();
@@ -3844,6 +4190,31 @@
         let showLabel = false;
         let zoomFadeFactor = 0;
 
+        const FUNCTIONAL_SPHERE_IDS = (window.__BARBI_FUNCTIONAL_SPHERE_IDS || (window.__BARBI_FUNCTIONAL_SPHERE_IDS = new Set([
+          'sys-rea-forge',
+          'sys-study-studio',
+          'sys-power-pmic',
+          'sys-gesture-d3',
+          'sys-omnir-dag',
+          'sys-circuit-crucible',
+          'sys-acoustic-guard',
+          'sys-spec-registry',
+          'sys-gods-eye',
+          'sys-v4-modules',
+          'sys-voice-mode',
+          'zulutronix',
+          'app-google-maps',
+          'app-weather-api',
+          'app-whatsapp',
+          'app-email',
+          'app-github',
+          'stack-timer',
+          'stack-youtube',
+          'stack-chess'
+        ])));
+        const isFunctionalSphereItem = FUNCTIONAL_SPHERE_IDS.has(n.id);
+        const isExplicitSearch = state.searchQuery.trim().length > 0;
+
         if (state.retrievedNodeId && n.id === state.retrievedNodeId) {
           showLabel = true;
           zoomFadeFactor = 1.0;
@@ -3851,44 +4222,26 @@
           showLabel = n.activeInFilter;
           zoomFadeFactor = 1.0;
         } else if (n.tier === 'core') {
-          // CRITICAL RULE: Central Golden Core stays nameless on the sphere UNLESS clicked or exposing categories/commands!
+          // Central Golden Core stays nameless on the sphere UNLESS clicked or exposing categories/commands
           showLabel = (isSelected && state.coreExplicitlyClicked) || state.barbiCommandMode || Boolean(state.activeNexusCategory);
           zoomFadeFactor = 1.0;
         } else if (state.activeNexusCategory && n.activeInFilter && n.tier !== 'satellite') {
           showLabel = true;
           zoomFadeFactor = 1.0;
-        } else if (isHovered || (state.searchQuery.trim().length > 0 && (isSelected || isHighlighted) && onFrontHemisphere)) {
-          // Hovering or searching a node immediately previews its label on the front side
+        } else if (isExplicitSearch && (isSelected || isHighlighted) && onFrontHemisphere) {
+          // Searching any ARCHIVEX memory node still surfaces its label cleanly
           showLabel = true;
           zoomFadeFactor = 1.0;
-        } else if (state.settings.labelDensity === 'hubs') {
-          if ((n.tier === 'hub' || n.tier === 'app' || n.tier === 'stack' || isSelected) && (onFrontHemisphere || isHighlighted || isSelected)) {
-            showLabel = true;
-            zoomFadeFactor = 0.88;
-          }
-        } else if (state.settings.labelDensity === 'all') {
-          if (onFrontHemisphere || isHighlighted || isSelected) {
-            showLabel = true;
-            zoomFadeFactor = 0.88;
-          }
-        } else if (n.tier === 'hub' || n.tier === 'app' || n.tier === 'stack') {
-          // Spread across Outer & Second Layer: visible on front hemisphere with dim orange-amber depth
-          if (onFrontHemisphere || isHighlighted || isSelected) {
+        } else if (isFunctionalSphereItem) {
+          // Decluttered main interface: ONLY genuinely functional, clickable tools & modules float on the 3D sphere
+          if (onFrontHemisphere || isHighlighted || isSelected || isHovered) {
             showLabel = true;
             zoomFadeFactor = isSelected || isHovered ? 1.0 : 0.82;
           }
-        } else if (n.tier === 'memory') {
-          // Second / Mid Layer memory names: visible on front hemisphere and brighten as you zoom in
-          if (onFrontHemisphere || isHighlighted || isSelected) {
-            showLabel = true;
-            zoomFadeFactor = isSelected || isHovered ? 1.0 : Math.min(0.88, 0.48 + Math.max(0, zLevel - 0.85) * 0.35);
-          }
         } else {
-          // Satellite nodes appear only when zoomed in close (> 1.48) on the front hemisphere
-          if (zLevel > 1.48 && n.screenZ < 0) {
-            showLabel = true;
-            zoomFadeFactor = Math.min(1.0, (zLevel - 1.48) / 0.25);
-          }
+          // Passive memory / conceptual hub / non-interactive stack nodes remain hidden from the main sphere
+          showLabel = false;
+          zoomFadeFactor = 0;
         }
 
         if (!showLabel || zoomFadeFactor <= 0.02) {
@@ -3897,36 +4250,55 @@
           return;
         }
 
-        const baseDepthOpacity = (isSelected || isHovered || n.tier === 'app')
-          ? Math.max(0.65, Math.min(1, (260 - n.screenZ) / 380))
-          : Math.max(0.25, Math.min(0.95, (220 - n.screenZ) / 380));
-        const depthOpacity = baseDepthOpacity * zoomFadeFactor;
+        const isRetrievedTarget = Boolean(state.retrievedNodeId && n.id === state.retrievedNodeId);
+        const hasActiveSearch = state.searchQuery.trim().length > 0;
+        const isSearchMatch = isRetrievedTarget || (hasActiveSearch && isHighlighted);
+        const isActiveGlow = isSelected || isHovered || isSearchMatch;
+
+        const baseDepthOpacity = isActiveGlow
+          ? 1.0
+          : (hasActiveSearch
+              ? 0.18
+              : Math.max(0.28, Math.min(0.60, (215 - n.screenZ) / 410)));
+        const depthOpacity = isActiveGlow ? 1.0 : (baseDepthOpacity * zoomFadeFactor);
 
         const isFrontCmdLabel = (n.tier === 'command') && (state.camera.frontCommandNodeId === n.id);
         const scaleCss = isFrontCmdLabel
           ? 1.38
-          : Math.max(0.78, Math.min(1.12, n.screenScale * 0.92));
-        const isRetrievedTarget = Boolean(state.retrievedNodeId && n.id === state.retrievedNodeId);
+          : Math.max(0.78, Math.min(1.08, n.screenScale * 0.90));
         const retrievePulse = isRetrievedTarget ? (0.5 + 0.5 * Math.sin(animTime * 6.8)) : 0;
         const effectiveScaleCss = isRetrievedTarget
           ? (1.32 + 0.10 * retrievePulse)
-          : scaleCss;
+          : (isHovered || isSelected ? Math.max(scaleCss * 1.12, 1.06) : scaleCss);
+
+        labelEl.classList.toggle('node-is-hovered', isHovered);
+        labelEl.classList.toggle('node-is-selected', isSelected);
+        labelEl.classList.toggle('node-is-retrieved', isSearchMatch);
+
+        const glowFilter = (isFrontCmdLabel || isSearchMatch)
+          ? `drop-shadow(0 0 ${Math.round(16 + 12 * retrievePulse)}px rgba(255, 168, 24, 0.96)) drop-shadow(0 0 8px rgba(217, 104, 8, 0.82))`
+          : ((isHovered || isSelected)
+              ? 'drop-shadow(0 0 14px rgba(251, 191, 36, 0.90)) drop-shadow(0 0 6px rgba(245, 158, 11, 0.72))'
+              : '');
+
         if (n.tier === 'command') {
           labelEl.style.transformOrigin = '16px 50%';
           labelEl.style.transform = `translate3d(${n.screenX.toFixed(1)}px, ${n.screenY.toFixed(1)}px, 0) translate(-16px, -50%) scale(${effectiveScaleCss.toFixed(3)})`;
-          labelEl.style.filter = (isFrontCmdLabel || isRetrievedTarget)
-            ? `drop-shadow(0 0 ${Math.round(18 + 10 * retrievePulse)}px rgba(255, 168, 24, 0.95)) drop-shadow(0 0 8px rgba(217, 104, 8, 0.8))`
-            : '';
+          labelEl.style.filter = glowFilter;
+        } else if (n.tier === 'subsystem' || n.tier === 'app' || n.tier === 'stack' || n.tier === 'hub') {
+          labelEl.style.transformOrigin = '14px 50%';
+          labelEl.style.transform = `translate3d(${n.screenX.toFixed(1)}px, ${n.screenY.toFixed(1)}px, 0) translate(-14px, -50%) scale(${effectiveScaleCss.toFixed(3)})`;
+          labelEl.style.filter = glowFilter;
         } else {
           labelEl.style.transform = `translate3d(${n.screenX.toFixed(1)}px, ${n.screenY.toFixed(1)}px, 0) translate(-50%, -50%) scale(${effectiveScaleCss.toFixed(3)})`;
-          labelEl.style.filter = isRetrievedTarget
-            ? `drop-shadow(0 0 ${Math.round(16 + 12 * retrievePulse)}px rgba(255, 168, 24, 0.95)) drop-shadow(0 0 6px rgba(217, 104, 8, 0.78))`
-            : '';
+          labelEl.style.filter = glowFilter;
         }
-        const cmdDimmedByRetrieve = (n.tier === 'command') && Boolean(state.camera.frontCommandNodeId) && !isFrontCmdLabel && Boolean(state.searchQuery.trim());
-        labelEl.style.opacity = isFrontCmdLabel ? '1' : (cmdDimmedByRetrieve ? '0.42' : String(depthOpacity));
-        labelEl.style.pointerEvents = (isFrontCmdLabel || depthOpacity > 0.35) ? 'auto' : 'none';
-        labelEl.style.zIndex = String(isFrontCmdLabel ? 860 : Math.round(500 - n.screenZ));
+        const cmdDimmedByRetrieve = (n.tier === 'command') && Boolean(state.camera.frontCommandNodeId) && !isFrontCmdLabel && hasActiveSearch;
+        labelEl.style.opacity = (isFrontCmdLabel || isActiveGlow) ? '1' : (cmdDimmedByRetrieve ? '0.42' : String(depthOpacity));
+        labelEl.style.pointerEvents = (isFrontCmdLabel || isActiveGlow || depthOpacity > 0.20) ? 'auto' : 'none';
+        labelEl.style.zIndex = String(
+          isSearchMatch ? 920 : (isHovered || isSelected ? 890 : (isFrontCmdLabel ? 860 : Math.round(500 - n.screenZ)))
+        );
 
         const dotEl = n._cachedDotEl !== undefined ? n._cachedDotEl : (n._cachedDotEl = labelEl.querySelector('.node-label-dot'));
         if (n.tier === 'core') {
@@ -3937,11 +4309,11 @@
           }
         } else if (state.focusMode) {
           labelEl.style.borderColor = (isSelected || isHovered || isHighlighted)
-            ? 'rgba(239, 68, 68, 0.9)'
-            : 'rgba(239, 68, 68, 0.45)';
+            ? 'rgba(251, 191, 36, 0.92)'
+            : 'rgba(245, 158, 11, 0.48)';
           if (dotEl) {
-            dotEl.style.backgroundColor = '#EF4444';
-            dotEl.style.boxShadow = '0 0 6px #EF4444';
+            dotEl.style.backgroundColor = '#F59E0B';
+            dotEl.style.boxShadow = '0 0 6px #F59E0B';
           }
         } else {
           labelEl.style.borderColor = (isSelected || isHovered || isHighlighted)
@@ -7422,7 +7794,7 @@
           const x = (i / (hTemps.length - 1)) * 220 + 10;
           return `<text x="${x.toFixed(1)}" y="60" text-anchor="middle" fill="rgba(226,232,240,0.8)" font-size="8" font-family="JetBrains Mono">${Math.round(val)}°</text>`;
         }).join('');
-        statsEl.innerHTML = `<svg viewBox="0 0 240 64" class="w-full h-full overflow-visible">${gridLines}<polyline fill="none" stroke="${state.focusMode ? '#EF4444' : '#FFFFFF'}" stroke-width="1.6" points="${pts.join(' ')}"/><g>${labels}</g></svg>`;
+        statsEl.innerHTML = `<svg viewBox="0 0 240 64" class="w-full h-full overflow-visible">${gridLines}<polyline fill="none" stroke="${state.focusMode ? '#F59E0B' : '#E58010'}" stroke-width="1.6" points="${pts.join(' ')}"/><g>${labels}</g></svg>`;
       }
 
       // Render 6-day forecast row & glowing bottom wave curve
@@ -7467,9 +7839,9 @@
             <svg viewBox="0 0 580 38" class="w-full h-full overflow-visible">
               <defs>
                 <linearGradient id="barbiWeatherWaveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="${state.focusMode ? '#EF4444' : '#FFFFFF'}" stop-opacity="0.75"/>
+                  <stop offset="0%" stop-color="${state.focusMode ? '#F59E0B' : '#E58010'}" stop-opacity="0.75"/>
                   <stop offset="55%" stop-color="#FBBF24" stop-opacity="0.95"/>
-                  <stop offset="100%" stop-color="${state.focusMode ? '#FCA5A5' : '#94A3B8'}" stop-opacity="0.8"/>
+                  <stop offset="100%" stop-color="${state.focusMode ? '#FDE68A' : '#94A3B8'}" stop-opacity="0.8"/>
                 </linearGradient>
               </defs>
               <path d="${dPath}" fill="none" stroke="url(#barbiWeatherWaveGrad)" stroke-width="2.2" stroke-linecap="round"/>
@@ -7712,7 +8084,7 @@
       const cy = h * 0.5;
       const R = Math.min(w, h) * 0.42 * earthGlobeState.zoom;
 
-      const accent = state.focusMode ? '239, 68, 68' : '56, 189, 248';
+      const accent = state.focusMode ? '245, 158, 11' : '56, 189, 248';
       const cosLat = Math.cos(earthGlobeState.rotLat);
       const sinLat = Math.sin(earthGlobeState.rotLat);
 
@@ -7978,7 +8350,7 @@
     mainCanvas.addEventListener('wheel', (e) => {
       e.preventDefault();
       const zoomFactor = e.deltaY > 0 ? 0.92 : 1.08;
-      state.camera.targetZoom = Math.max(0.50, Math.min(8.50, state.camera.targetZoom * zoomFactor)); updateDepthTierButtonsFromZoom(state.camera.targetZoom);
+      state.camera.targetZoom = Math.max(0.50, Math.min(24.0, state.camera.targetZoom * zoomFactor)); updateDepthTierButtonsFromZoom(state.camera.targetZoom);
     }, { passive: false });
 
     // Two-finger touch pinch-to-zoom support
@@ -7998,7 +8370,7 @@
         const dist = Math.hypot(dx, dy);
         if (lastPinchDist > 10) {
           const ratio = dist / lastPinchDist;
-          state.camera.targetZoom = Math.max(0.50, Math.min(8.50, state.camera.targetZoom * ratio)); updateDepthTierButtonsFromZoom(state.camera.targetZoom);
+          state.camera.targetZoom = Math.max(0.50, Math.min(24.0, state.camera.targetZoom * ratio)); updateDepthTierButtonsFromZoom(state.camera.targetZoom);
         }
         lastPinchDist = dist;
       }
@@ -8554,33 +8926,56 @@
       if (topControlsCollapsed) {
         content.classList.add('hidden');
         bar.classList.remove('px-4', 'py-2');
-        bar.classList.add('p-1.5');
+        bar.classList.add('controls-collapsed');
         if (hudSvg) hudSvg.classList.add('hidden');
         arrow.style.transform = 'rotate(180deg)';
       } else {
         content.classList.remove('hidden');
-        bar.classList.remove('p-1.5');
+        bar.classList.remove('controls-collapsed', 'p-1.5');
         bar.classList.add('px-4', 'py-2');
         if (hudSvg) hudSvg.classList.remove('hidden');
         arrow.style.transform = 'rotate(0deg)';
       }
     }
 
+    let barbiBrandCollapsed = false;
+    function toggleBarbiBrandCollapse(forceState) {
+      barbiBrandCollapsed = typeof forceState === 'boolean' ? forceState : !barbiBrandCollapsed;
+      const hud = document.getElementById('barbi-brand-hud');
+      const dotBtn = document.getElementById('btn-brand-collapse-dot');
+      if (hud) {
+        hud.classList.toggle('brand-collapsed', barbiBrandCollapsed);
+        hud.title = barbiBrandCollapsed
+          ? 'B.A.R.B.I Collapsed — Click the dot to expand'
+          : 'Toggle B.A.R.B.I Cognitive Navigation Drawer';
+      }
+      if (dotBtn) {
+        dotBtn.setAttribute('aria-expanded', String(!barbiBrandCollapsed));
+        dotBtn.title = barbiBrandCollapsed ? 'Expand B.A.R.B.I Panel' : 'Collapse B.A.R.B.I Panel';
+      }
+    }
+    window.toggleBarbiBrandCollapse = toggleBarbiBrandCollapse;
+
     function toggleFocusMode() {
       state.focusMode = !state.focusMode;
       document.body.classList.toggle('focus-mode-active', state.focusMode);
 
       const badge = document.getElementById('focus-mode-state');
-      badge.textContent = state.focusMode ? 'ON (RED)' : 'OFF';
-      badge.className = state.focusMode ? 'font-mono-tech text-red-400 font-bold' : 'font-mono-tech text-slate-400';
+      if (badge) {
+        badge.textContent = state.focusMode ? 'ZEN' : 'OFF';
+        badge.className = state.focusMode ? 'font-mono-tech text-amber-300 font-bold' : 'font-mono-tech text-slate-400';
+      }
+
+      const powerBtn = document.getElementById('btn-brand-focus-power');
+      if (powerBtn) {
+        powerBtn.setAttribute('aria-pressed', String(state.focusMode));
+      }
 
       const brandDot = document.getElementById('brand-pulse-dot');
-      const statusDot = document.getElementById('status-dot');
-      const statusPing = document.getElementById('status-ping');
       const clockDot = document.getElementById('clock-pulse-dot');
-      const accentHex = state.focusMode ? '#EF4444' : '#FFFFFF';
+      const accentHex = state.focusMode ? '#F59E0B' : '#D96B08';
 
-      [brandDot, statusDot, statusPing, clockDot].forEach(el => {
+      [brandDot, clockDot].forEach(el => {
         if (el) {
           el.style.backgroundColor = accentHex;
           el.style.boxShadow = `0 0 8px ${accentHex}`;
@@ -8594,8 +8989,8 @@
 
       showToast(
         state.focusMode
-          ? 'Focus Mode ACTIVE: Tactical Red engaged (Central Core remains Golden)'
-          : 'Focus Mode OFF: Crisp White cognitive palette restored',
+          ? 'Deep Zen Focus Mode ON: Tranquil drift, peripheral HUD dimmed, core & active tools isolated'
+          : 'Deep Zen Focus Mode OFF: Full panoramic sphere & HUD restored',
         'accent'
       );
     }
@@ -8910,7 +9305,7 @@
           <!-- Open Top & Right Architectural Rails -->
           <path d="M 122 18 L 430 18 M 550 18 L 952 18 L 986 64 L 986 240 M 986 370 L 986 550 L 950 598 L 820 598" fill="none" stroke="currentColor" stroke-width="2.6" opacity="0.92"/>
           <!-- Left Chamfered Octagonal End-Cap Node (Bottom-Center Design) -->
-          <polygon points="18,46 58,14 114,14 138,52 138,145 M 138,470 L 138,558 L 114,598 L 58,598 L 18,558 L 18,180" fill="none" stroke="currentColor" stroke-width="2.8" opacity="0.94"/>
+          <path d="M 18 46 L 58 14 L 114 14 L 138 52 L 138 145 M 138 470 L 138 558 L 114 598 L 58 598 L 18 558 L 18 180" fill="none" stroke="currentColor" stroke-width="2.8" opacity="0.94"/>
           <polygon points="30,52 60,24 106,24 124,54 124,110 30,110" fill="currentColor" fill-opacity="0.16"/>
           <!-- 3 Bottom-Left Diagonal Slashes -->
           ${leftSlashes}
@@ -9232,16 +9627,41 @@
       if (pReadout) pReadout.textContent = `${deviceBatteryState.powerW.toFixed(2)} W`;
       if (ovText) ovText.textContent = chg ? `⚡ CHARGING (${pct}%) • ${deviceBatteryState.voltageV.toFixed(2)}V / +${deviceBatteryState.currentA.toFixed(2)}A` : `ON BATTERY (${pct}%) • ${deviceBatteryState.voltageV.toFixed(2)}V / ${deviceBatteryState.currentA.toFixed(2)}A`;
 
+      const minsToFull = pct >= 100 ? 0 : Math.max(4, Math.round((100 - pct) * 1.4));
+      const minsToLow = pct <= 15 ? 0 : Math.max(5, Math.round((pct - 15) * 3.2));
+      const minsToEmpty = Math.max(6, Math.round(pct * 3.2));
+      const fmtHm = (m) => `${Math.floor(m / 60)}h ${m % 60}m`;
+
+      const batEtaSub = document.getElementById('battery-eta-sub');
+      if (batEtaSub) {
+        batEtaSub.textContent = chg
+          ? (pct >= 100 ? 'FULL 100%' : `${fmtHm(minsToFull)} TO FULL`)
+          : (pct <= 15 ? 'LOW BATTERY' : `${fmtHm(minsToLow)} TO LOW`);
+      }
+
       if (etaReadout) {
+        etaReadout.textContent = chg
+          ? (pct >= 100 ? 'FULL 100%' : `${fmtHm(minsToFull)} to Full`)
+          : `${fmtHm(minsToLow)} to Low`;
+      }
+
+      const hLabel = document.getElementById('pmic-horizon-label');
+      const hPrimary = document.getElementById('pmic-horizon-primary');
+      const hSecondary = document.getElementById('pmic-horizon-secondary');
+      const hDot = document.getElementById('pmic-horizon-dot');
+      if (hLabel && hPrimary && hSecondary) {
         if (chg) {
-          if (pct >= 100) etaReadout.textContent = 'FULL 100%';
-          else {
-            const minsToFull = Math.max(4, Math.round((100 - pct) * 1.4));
-            etaReadout.textContent = `${Math.floor(minsToFull / 60)}h ${minsToFull % 60}m to Full`;
-          }
+          hLabel.textContent = 'TIME LEFT TO FULL CHARGE (100%):';
+          hPrimary.textContent = pct >= 100 ? 'CHARGED 100%' : fmtHm(minsToFull);
+          hPrimary.className = 'text-xs font-bold text-emerald-300';
+          hSecondary.textContent = pct >= 100 ? 'Float / Trickle Mode' : `Remaining Δ: +${100 - pct}% SOC`;
+          if (hDot) hDot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
         } else {
-          const minsRem = Math.max(12, Math.round(pct * 3.2));
-          etaReadout.textContent = `${Math.floor(minsRem / 60)}h ${minsRem % 60}m Rem`;
+          hLabel.textContent = 'TIME LEFT TO LOW BATTERY (15%):';
+          hPrimary.textContent = pct <= 15 ? 'CRITICAL LOW' : fmtHm(minsToLow);
+          hPrimary.className = pct <= 20 ? 'text-xs font-bold text-red-400 animate-pulse' : 'text-xs font-bold text-amber-300';
+          hSecondary.textContent = `Total Empty: ${fmtHm(minsToEmpty)}`;
+          if (hDot) hDot.className = pct <= 20 ? 'w-2 h-2 rounded-full bg-red-400 animate-ping' : 'w-2 h-2 rounded-full bg-amber-400 animate-pulse';
         }
       }
 
@@ -9297,43 +9717,60 @@
       ramGb: navigator.deviceMemory || 16,
       loadPct: 16,
       tempC: 46.8,
-      lastFrameTs: performance.now()
+      lastFrameTs: performance.now(),
+      lastActivity: 'CORE NOMINAL • AWAITING INPUT',
+      activityLog: []
     };
 
     function updateCpuThermalTelemetry() {
       const now = performance.now();
-      const dt = Math.max(8, now - cpuTelemetryState.lastFrameTs);
       cpuTelemetryState.lastFrameTs = now;
-
-      // Estimate real browser compute utilization from frame budget & active animations/modals
       const activeModals = document.querySelectorAll('section.hud-popup-surface:not(.hidden), aside.hud-popup-surface:not(.hidden)').length;
       const baseLoad = 12 + activeModals * 7 + (state.barbiCommandMode ? 9 : 0) + (state.focusMode ? 6 : 0);
       const jitter = Math.sin(now * 0.0023) * 3.5 + Math.cos(now * 0.0051) * 2.1;
       cpuTelemetryState.loadPct = Math.max(6, Math.min(96, Math.round(baseLoad + jitter)));
 
-      // First-principles thermal RC model: T_die = T_ambient(26°C) + R_th * P_dyn
-      const targetTemp = 39.5 + cpuTelemetryState.loadPct * 0.38;
-      cpuTelemetryState.tempC += (targetTemp - cpuTelemetryState.tempC) * 0.25;
+      const badgeEl = document.getElementById('cpu-load-badge');
+      const actEl = document.getElementById('system-activity-readout');
+      const dotEl = document.getElementById('system-state-dot');
 
-      const tempEl = document.getElementById('cpu-temp-readout');
-      const loadEl = document.getElementById('cpu-load-badge');
-      const coresEl = document.getElementById('cpu-cores-readout');
-      const svgEl = document.getElementById('cpu-scifi-svg');
-
-      if (tempEl) tempEl.textContent = `${cpuTelemetryState.tempC.toFixed(1)}°C`;
-      if (loadEl) loadEl.textContent = `${cpuTelemetryState.loadPct}%`;
-      if (coresEl) coresEl.textContent = `${cpuTelemetryState.cores} CORES • ${cpuTelemetryState.tempC > 65 ? 'WARM' : 'NOMINAL'}`;
-      if (svgEl) {
-        svgEl.style.color = cpuTelemetryState.tempC > 68 ? '#F87171' : (state.focusMode ? '#EF4444' : '#38BDF8');
+      let modeLabel = 'STANDBY';
+      let dotColor = '#F59E0B';
+      if (window.__barbiAiThinking) {
+        modeLabel = 'REASONING';
+        dotColor = '#FDE047';
+      } else if (state.voiceMode) {
+        modeLabel = 'VOICE LINK';
+        dotColor = '#38BDF8';
+      } else if (state.searchQuery && state.searchQuery.trim().length > 0) {
+        modeLabel = 'RETRIEVING';
+        dotColor = '#FBBF24';
+      } else if (state.barbiCommandMode) {
+        modeLabel = 'COMMAND';
+        dotColor = '#FB923C';
+      } else if (state.focusMode) {
+        modeLabel = 'ZEN FOCUS';
+        dotColor = '#F59E0B';
+      } else if (state.chatExpanded) {
+        modeLabel = 'DIALOGUE';
+        dotColor = '#34D399';
       }
+
+      if (badgeEl) badgeEl.textContent = modeLabel;
+      if (actEl) actEl.textContent = cpuTelemetryState.lastActivity;
+      if (dotEl) dotEl.style.backgroundColor = dotColor;
     }
 
     function pulseCpuTelemetryDiagnostic() {
       updateCpuThermalTelemetry();
-      showToast(
-        `CPU Telemetry: ${cpuTelemetryState.cores} Logical Cores • ${cpuTelemetryState.loadPct}% Load • Est. Die Temp ${cpuTelemetryState.tempC.toFixed(1)}°C`,
-        'accent'
-      );
+      const latest = cpuTelemetryState.activityLog.slice(-3).join(' • ') || cpuTelemetryState.lastActivity;
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = 'glass-panel px-3.5 py-1.5 rounded-full text-xs border border-amber-500/60 text-amber-100 shadow-xl transition-opacity duration-300';
+      toast.textContent = `Recent B.A.R.B.I. Activity: ${latest}`;
+      container.appendChild(toast);
+      setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3200);
     }
 
     function toggleHudModalFullscreen(modalId) {
@@ -9494,8 +9931,8 @@
       if (heatmapEl) {
         heatmapEl.innerHTML = state.weeklyHistory.map((d) => {
           const activeColor = state.focusMode
-            ? `rgba(239, 68, 68, ${Math.max(0.2, d.pct / 100)})`
-            : `rgba(255, 255, 255, ${Math.max(0.2, d.pct / 100)})`;
+            ? `rgba(245, 158, 11, ${Math.max(0.24, d.pct / 100)})`
+            : `rgba(217, 107, 8, ${Math.max(0.22, d.pct / 100)})`;
           return `
             <div class="flex flex-col items-center gap-0.5" title="${d.day}: ${d.pct}% complete">
               <div class="w-4 h-4 rounded-md border border-white/20 flex items-center justify-center text-[8px] font-mono-tech font-bold"
@@ -11646,7 +12083,8 @@
         }
         rotateSphereTowardNode(a);
         saveArchivexToPersistentStorage();
-        document.getElementById('hud-agent-ticker').textContent = `${ag.name}: Linked ${a.label} ↔ ${b.label}`;
+        const tickerEl = document.getElementById('hud-agent-ticker');
+        if (tickerEl) tickerEl.textContent = `${ag.name}: Linked ${a.label} ↔ ${b.label}`;
         showToast(`${ag.name} linked & persisted ${a.label} ↔ ${b.label}`, 'accent');
       }
     }
@@ -11688,18 +12126,26 @@
     // N. TOAST NOTIFICATION HELPER
     // =========================================================================
     function showToast(message, variant = 'info') {
-      const container = document.getElementById('toast-container');
-      const toast = document.createElement('div');
-      const borderClass = variant === 'accent'
-        ? (state.focusMode ? 'border-red-400/70 text-red-200' : 'border-white/60 text-white')
-        : 'border-white/20 text-slate-200';
-      toast.className = `glass-panel px-3.5 py-1.5 rounded-full text-xs border ${borderClass} shadow-xl transition-opacity duration-300`;
-      toast.textContent = message;
-      container.appendChild(toast);
-      setTimeout(() => {
-        toast.style.opacity = '0';
-        setTimeout(() => toast.remove(), 300);
-      }, 2600);
+      const clean = String(message || '').trim();
+      if (!clean) return;
+      cpuTelemetryState.lastActivity = clean;
+      cpuTelemetryState.activityLog.push(clean);
+      if (cpuTelemetryState.activityLog.length > 12) cpuTelemetryState.activityLog.shift();
+      const actEl = document.getElementById('system-activity-readout');
+      if (actEl) {
+        actEl.textContent = clean;
+        actEl.classList.add('text-amber-300');
+        setTimeout(() => actEl.classList.remove('text-amber-300'), 1400);
+      }
+      if (variant === 'error') {
+        const container = document.getElementById('toast-container');
+        if (!container) return;
+        const toast = document.createElement('div');
+        toast.className = 'glass-panel px-3.5 py-1.5 rounded-full text-xs border border-red-500/60 text-red-200 shadow-xl transition-opacity duration-300';
+        toast.textContent = clean;
+        container.appendChild(toast);
+        setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2800);
+      }
     }
 
 
@@ -13869,7 +14315,7 @@
       box.prepend(row);
     }
 
-    function openGestureControlModal() {
+    function openLegacyGestureControlModal() {
       closeAllCenterAppModals('gesture-control-modal');
       const modal = document.getElementById('gesture-control-modal');
       if (!modal) return;
@@ -13887,6 +14333,69 @@
       initGestureSkeletonCanvasInteraction();
       renderGestureSkeletonFrame();
     }
+
+    function openGestureControlModal() {
+      window.dispatchEvent(new CustomEvent('barbi:toggle-gesture-nav'));
+    }
+
+    window.__barbiSphereNav = {
+      orbit(dRotY, dRotX) {
+        if (!Number.isFinite(dRotY) || !Number.isFinite(dRotX)) return;
+        state.camera.targetRotY += dRotY;
+        state.camera.targetRotX = Math.max(-1.28, Math.min(1.28, state.camera.targetRotX + dRotX));
+      },
+      zoomBy(deltaZoom) {
+        if (!Number.isFinite(deltaZoom)) return state.camera.targetZoom;
+        state.camera.targetZoom = Math.max(0.48, Math.min(5.5, Number((state.camera.targetZoom + deltaZoom).toFixed(3))));
+        return state.camera.targetZoom;
+      },
+      resetView() {
+        resetSphereView();
+      },
+      hoverAt(normX, normY, isPinched, label) {
+        spatialGestureState.reticleVisible = true;
+        updateSpatialReticleAndHover(normX, normY);
+        const reticleCore = document.getElementById('spatial-reticle-core');
+        if (reticleCore) {
+          reticleCore.className = isPinched
+            ? 'w-4 h-4 rounded-full bg-amber-400 shadow-[0_0_16px_#f59e0b]'
+            : 'w-2.5 h-2.5 rounded-full bg-emerald-300 shadow-[0_0_10px_#34d399]';
+        }
+        const retLbl = document.getElementById('spatial-reticle-label');
+        if (retLbl && label) retLbl.textContent = String(label).toUpperCase();
+        return spatialGestureState.hoveredNodeId || null;
+      },
+      selectHovered() {
+        const targetId = state.hoveredNodeId || spatialGestureState.hoveredNodeId;
+        if (!targetId) return null;
+        selectNode(targetId, false);
+        const node = state.nodes.find((n) => n.id === targetId);
+        return node ? node.label : targetId;
+      },
+      cycleRing(dir) {
+        const node = rotateRetrieveCommandRing(dir < 0 ? -1 : 1);
+        return node ? node.label : null;
+      },
+      hideReticle() {
+        const reticle = document.getElementById('spatial-gesture-reticle');
+        if (reticle) reticle.classList.add('hidden');
+      },
+      setHudStatus(label) {
+        const hudState = document.getElementById('gesture-hud-state');
+        if (hudState) hudState.textContent = String(label || 'READY');
+      },
+      getCameraState() {
+        return {
+          rotX: state.camera.rotX,
+          rotY: state.camera.rotY,
+          zoom: state.camera.zoom,
+          hoveredNodeId: spatialGestureState.hoveredNodeId || state.hoveredNodeId || null,
+        };
+      },
+      openCalibrationModal() {
+        openLegacyGestureControlModal();
+      },
+    };
 
     function renderWebcamGestureRepositoriesList() {
       const box = document.getElementById('gesture-webcam-repos-list');
@@ -14363,8 +14872,13 @@
             : 'px-2.5 py-1 rounded-lg bg-white/10 border border-white/20 text-slate-200 text-[10px] font-mono-tech';
         }
       });
-      if (tabId === 'rea' && typeof window.refreshHostedSystemsList === 'function') {
-        window.refreshHostedSystemsList();
+      if (tabId === 'rea') {
+        if (typeof window.syncReaGithubRepoFromUI === 'function' && !window.__reaRepoProfile) {
+          window.syncReaGithubRepoFromUI(true);
+        }
+        if (typeof window.refreshHostedSystemsList === 'function') {
+          window.refreshHostedSystemsList(false);
+        }
       }
       if (tabId === 'studio' && typeof window.renderExplainerSceneFrame === 'function') {
         window.renderExplainerSceneFrame(0, 1);
@@ -14754,7 +15268,7 @@ def malicious_skill():
       }
     }, 200);
 
-    // --- 3-Layer Cavernous Depth Zoom Controller (1·OUTER, 2·MID, 3·CORE) ---
+    // --- 4-Layer Cavernous Depth Zoom Controller (1·OUTER, 2·MID, 3·CORE, 4·INNER CORE) ---
     function setSphereDepthTier(tierNum) {
       state.camera.autoRotate = true;
       if (tierNum === 1) {
@@ -14766,13 +15280,16 @@ def malicious_skill():
       } else if (tierNum === 3) {
         state.camera.targetZoom = 5.85;
         showToast('Depth Layer 3: Deep Inner Geodesic Icosahedron Core', 'accent');
+      } else if (tierNum === 4) {
+        state.camera.targetZoom = 19.0;
+        showToast('Depth Layer 4: Inside the Inner Core Geodesic Lattice', 'accent');
       }
       updateDepthTierButtonsFromZoom(state.camera.targetZoom);
     }
 
     function updateDepthTierButtonsFromZoom(zVal) {
-      const activeTier = zVal < 1.45 ? 1 : (zVal < 3.60 ? 2 : 3);
-      [1, 2, 3].forEach(t => {
+      const activeTier = zVal < 1.45 ? 1 : (zVal < 3.60 ? 2 : (zVal < 11.50 ? 3 : 4));
+      [1, 2, 3, 4].forEach(t => {
         const b = document.getElementById(`btn-depth-${t}`);
         if (!b) return;
         b.className = t === activeTier
@@ -14800,7 +15317,7 @@ def malicious_skill():
       const scene = new THREE.Scene();
       scene.fog = new THREE.FogExp2(0x020100, 0.048);
 
-      const camera = new THREE.PerspectiveCamera(fovDeg, width / height, 0.02, 350);
+      const camera = new THREE.PerspectiveCamera(fovDeg, width / height, 0.004, 350);
       camera.position.set(0, 0, (660 / state.camera.zoom) * SCALE_TO_THREE);
 
       let renderer;
@@ -14835,7 +15352,7 @@ def malicious_skill():
         composer.addPass(new THREE.RenderPass(scene, camera));
         bloomPass = new THREE.UnrealBloomPass(
           new THREE.Vector2(Math.floor(width / 2), Math.floor(height / 2)),
-          0.74, // Controlled bloom so parallel ring lines stay distinct when zooming in
+          0.74,
           0.46,
           0.32
         );
@@ -14866,7 +15383,7 @@ def malicious_skill():
               vec4 cr = texture2D(tDiffuse, vUv + dir * offset);
               vec4 cg = texture2D(tDiffuse, vUv);
               vec4 cb = texture2D(tDiffuse, vUv - dir * offset * 0.5);
-              vec3 col = vec3(cr.r * 1.02, cg.g * 0.86, cb.b * 0.34);
+              vec3 col = vec3(cr.r * 1.02, cg.g * 0.94, cb.b * 0.88);
               gl_FragColor = vec4(col, 1.0);
             }
           `
@@ -14875,30 +15392,40 @@ def malicious_skill():
         composer.addPass(chromaticPass);
       }
 
-      // Calibrated Dimmish Burnt-Orange / Warm Amber Palette
-      const C_BRIGHT = 0xe67300; // Warm Amber-Orange
-      const C_MID    = 0xc45100; // Dimmish Burnt Orange
-      const C_DIM    = 0x7a2e00; // Dark Burnt Sienna
-      const C_FAINT  = 0x331200; // Deep Roasted Umber
-      const C_HOT    = 0xff9d1a; // Luminous Golden-Amber Core Wireframe
+      // Calibrated B.A.R.B.I 3.1 Burnt-Orange / Warm Amber Default Palette
+      const C_BRIGHT = 0xe67300;
+      const C_MID    = 0xc45100;
+      const C_DIM    = 0x7a2e00;
+      const C_FAINT  = 0x331200;
+      const C_HOT    = 0xff9d1a;
 
-      // Master Unified Sphere Group (1:1 rotation-locked with B.A.R.B.I. project3D)
+      // Permanent Golden Core Lock constants (never overridden by color themes or Focus Mode)
+      const GOLD_CORE_HEX = 0xd96800;
+      const GOLD_HOT_HEX  = 0xff9d1a;
+
+      // Track themeable line materials by semantic role so Color Themes re-grade non-core shells live
+      const themedMaterials = { bright: [], mid: [], dim: [], faint: [], hot: [] };
+
       const orbGroup = new THREE.Group();
       orbGroup.rotation.order = 'XYZ';
       scene.add(orbGroup);
 
-      // Constrictable Sphere Body Group (constricts to 0.45x when B.A.R.B.I. Command/Category Mode is active!)
       const constrictGroup = new THREE.Group();
       orbGroup.add(constrictGroup);
 
-      function lineMat(color, opacity = 1) {
-        return new THREE.LineBasicMaterial({
+      function lineMat(color, opacity = 1, role = null) {
+        const mat = new THREE.LineBasicMaterial({
           color,
           transparent: true,
           opacity,
           blending: THREE.AdditiveBlending,
           depthWrite: false
         });
+        mat.userData = { baseOpacity: opacity };
+        if (role && themedMaterials[role]) {
+          themedMaterials[role].push(mat);
+        }
+        return mat;
       }
 
       function latRing(radius, lat, segs = 144) {
@@ -14925,18 +15452,19 @@ def malicious_skill():
         return new THREE.BufferGeometry().setFromPoints(pts);
       }
 
-      // Helper: Builds a Gyroscopic Band as a Stack of 28 Closely-Spaced Fine Parallel Lines
-      // (Looks like a glowing band from afar; resolves into individual razor-thin lines when zooming in!)
-      function createMultiLineRingStack(radius, lineCount = 28, angularSpread = 0.20, peakOpacity = 0.52) {
+      function createMultiLineRingStack(radius, lineCount = 28, angularSpread = 0.20, peakOpacity = 0.52, lockGold = false) {
         const stackGroup = new THREE.Group();
         for (let j = 0; j < lineCount; j++) {
-          const t = (j / (lineCount - 1)) * 2 - 1; // -1 .. +1
+          const t = (j / (lineCount - 1)) * 2 - 1;
           const latOffset = (t * angularSpread) * 0.5;
           const radialJitter = (j % 3 - 1) * 0.004;
           const gauss = Math.exp(-t * t * 3.1);
           const op = peakOpacity * gauss;
-          const col = Math.abs(t) < 0.22 ? C_HOT : (Math.abs(t) < 0.55 ? C_BRIGHT : C_MID);
-          stackGroup.add(new THREE.Line(latRing(radius + radialJitter, latOffset, 180), lineMat(col, op)));
+          const isHot = Math.abs(t) < 0.22;
+          const isBright = Math.abs(t) < 0.55;
+          const col = isHot ? C_HOT : (isBright ? C_BRIGHT : C_MID);
+          const role = lockGold ? null : (isHot ? 'hot' : (isBright ? 'bright' : 'mid'));
+          stackGroup.add(new THREE.Line(latRing(radius + radialJitter, latOffset, 180), lineMat(col, op, role)));
         }
         return stackGroup;
       }
@@ -14949,21 +15477,21 @@ def malicious_skill():
       for (let i = -16; i <= 16; i++) {
         const lat = (i / 16) * (Math.PI / 2) * 0.96;
         const opacity = i % 4 === 0 ? 0.28 : 0.07;
-        const color = i % 4 === 0 ? C_MID : C_FAINT;
-        outerShell.add(new THREE.Line(latRing(R1, lat), lineMat(color, opacity)));
+        const isMajor = i % 4 === 0;
+        outerShell.add(new THREE.Line(latRing(R1, lat), lineMat(isMajor ? C_MID : C_FAINT, opacity, isMajor ? 'mid' : 'faint')));
       }
       for (let i = 0; i < 24; i++) {
         const lon = (i / 24) * Math.PI * 2;
         const isMajor = i % 6 === 0;
-        outerShell.add(new THREE.Line(meridian(R1, lon), lineMat(isMajor ? C_MID : C_FAINT, isMajor ? 0.34 : 0.06)));
+        outerShell.add(new THREE.Line(meridian(R1, lon), lineMat(isMajor ? C_MID : C_FAINT, isMajor ? 0.34 : 0.06, isMajor ? 'mid' : 'faint')));
       }
       constrictGroup.add(outerShell);
 
-      // 3 Tilted Multi-Line Gyroscopic Ring Stacks on the Outer Layer (NO thick solid tubes!)
+      // 3 Tilted Multi-Line Gyroscopic Ring Stacks on the Outer Layer
       const gyroStacksGroup = new THREE.Group();
-      const gyroStack1 = createMultiLineRingStack(R1 + 0.02, 28, 0.22, 0.48);
-      const gyroStack2 = createMultiLineRingStack(R1 + 0.05, 28, 0.20, 0.44);
-      const gyroStack3 = createMultiLineRingStack(R1 - 0.02, 24, 0.18, 0.38);
+      const gyroStack1 = createMultiLineRingStack(R1 + 0.02, 28, 0.22, 0.48, false);
+      const gyroStack2 = createMultiLineRingStack(R1 + 0.05, 28, 0.20, 0.44, false);
+      const gyroStack3 = createMultiLineRingStack(R1 - 0.02, 24, 0.18, 0.38, false);
       gyroStack1.rotation.set(0.42, 0.35, 0.18);
       gyroStack2.rotation.set(1.18, -0.48, -0.24);
       gyroStack3.rotation.set(-0.55, 0.72, 0.62);
@@ -14974,7 +15502,7 @@ def malicious_skill():
       const panelGroup = new THREE.Group();
       function createSpherePanel(latCenter, lonCenter, latSpan, lonSpan, radius, divisions = 4) {
         const group = new THREE.Group();
-        const mat = lineMat(C_DIM, 0.20);
+        const mat = lineMat(C_DIM, 0.20, 'dim');
         for (let i = 0; i <= divisions; i++) {
           const lat = latCenter - latSpan / 2 + (i / divisions) * latSpan;
           const pts = [];
@@ -15017,19 +15545,18 @@ def malicious_skill():
       const midLayerGroup = new THREE.Group();
       const R2 = 1.25;
 
-      // Mid-Layer Multi-Line Filament Stack + Latitude Cage
-      const midGyroStack1 = createMultiLineRingStack(R2, 22, 0.24, 0.42);
-      const midGyroStack2 = createMultiLineRingStack(R2 * 0.96, 18, 0.20, 0.36);
+      const midGyroStack1 = createMultiLineRingStack(R2, 22, 0.24, 0.42, false);
+      const midGyroStack2 = createMultiLineRingStack(R2 * 0.96, 18, 0.20, 0.36, false);
       midGyroStack1.rotation.set(0.68, -0.32, 0.45);
       midGyroStack2.rotation.set(-0.74, 0.52, -0.38);
       midLayerGroup.add(midGyroStack1, midGyroStack2);
 
       for (let i = -8; i <= 8; i++) {
         const lat = (i / 8) * (Math.PI / 2) * 0.92;
-        midLayerGroup.add(new THREE.Line(latRing(R2, lat, 120), lineMat(i % 2 === 0 ? C_DIM : C_FAINT, i % 2 === 0 ? 0.22 : 0.07)));
+        const isMajor = i % 2 === 0;
+        midLayerGroup.add(new THREE.Line(latRing(R2, lat, 120), lineMat(isMajor ? C_DIM : C_FAINT, isMajor ? 0.22 : 0.07, isMajor ? 'dim' : 'faint')));
       }
 
-      // 8 Helical Spirals wrapping the Second Layer down toward the Core
       const R_HELIX = 0.95;
       for (let s = 0; s < 8; s++) {
         const pts = [];
@@ -15045,121 +15572,247 @@ def malicious_skill():
             R_HELIX * Math.cos(lat) * Math.sin(lon)
           ));
         }
-        midLayerGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lineMat(C_MID, 0.24 + Math.random() * 0.14)));
+        midLayerGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), lineMat(C_MID, 0.24 + Math.random() * 0.14, 'mid')));
       }
       constrictGroup.add(midLayerGroup);
 
       // =======================================================================
-      // LAYER 3: DEEP INNER GEODESIC CORE (R_CORE = 0.24 Three.js === 31 B.A.R.B.I. units)
-      // (11x smaller than Outer Shell so zooming in travels through deep 3D space!)
+      // LAYER 3 & 4: PERMANENT GOLDEN GEODESIC CORE & INNER CORE LATTICE (R_CORE = 0.24)
       // =======================================================================
       const coreGroup = new THREE.Group();
       const R_CORE = 0.24;
 
-      // Outer Core Multi-Line Halo Stack
-      const coreHaloStack = createMultiLineRingStack(R_CORE * 1.45, 16, 0.26, 0.45);
+      // Outer Core Multi-Line Halo Stack (permanently golden)
+      const coreHaloStack = createMultiLineRingStack(R_CORE * 1.45, 16, 0.26, 0.45, true);
       coreHaloStack.rotation.set(0.52, 0.78, -0.34);
       coreGroup.add(coreHaloStack);
 
+      // Dynamic Outer Core Mesh: individual edges that connect & disconnect organically (permanently golden)
       const icoGeo = new THREE.IcosahedronGeometry(R_CORE, 2);
-      const icoEdges = new THREE.WireframeGeometry(icoGeo);
-      const icoWireMat = lineMat(C_HOT, 0.86);
-      const icoWire = new THREE.LineSegments(icoEdges, icoWireMat);
+      const icoEdgesRaw = new THREE.WireframeGeometry(icoGeo);
+      const icoSrcPos = icoEdgesRaw.attributes.position.array;
+      const icoEdgeCount = Math.floor(icoSrcPos.length / 6);
+      const icoUniqueNodes = [];
+      for (let i = 0; i < icoSrcPos.length; i += 3) {
+        const vx = icoSrcPos[i], vy = icoSrcPos[i + 1], vz = icoSrcPos[i + 2];
+        if (!icoUniqueNodes.some((p) => Math.abs(p.x - vx) < 1e-3 && Math.abs(p.y - vy) < 1e-3 && Math.abs(p.z - vz) < 1e-3)) {
+          icoUniqueNodes.push(new THREE.Vector3(vx, vy, vz));
+        }
+      }
+      const icoEdgeMeta = [];
+      for (let e = 0; e < icoEdgeCount; e++) {
+        icoEdgeMeta.push({
+          ax: icoSrcPos[e * 6], ay: icoSrcPos[e * 6 + 1], az: icoSrcPos[e * 6 + 2],
+          bx: icoSrcPos[e * 6 + 3], by: icoSrcPos[e * 6 + 4], bz: icoSrcPos[e * 6 + 5],
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.7 + Math.random() * 1.4
+        });
+      }
+      const icoDynPositions = new Float32Array(icoEdgeCount * 6);
+      const icoDynGeo = new THREE.BufferGeometry();
+      icoDynGeo.setAttribute('position', new THREE.BufferAttribute(icoDynPositions, 3));
+      const icoWireMat = lineMat(GOLD_HOT_HEX, 0.78, null);
+      const icoWire = new THREE.LineSegments(icoDynGeo, icoWireMat);
       coreGroup.add(icoWire);
 
-      const innerIcoGeo = new THREE.IcosahedronGeometry(R_CORE * 0.58, 1);
-      const innerIcoWire = new THREE.LineSegments(new THREE.WireframeGeometry(innerIcoGeo), lineMat(C_BRIGHT, 0.65));
-      coreGroup.add(innerIcoWire);
-
+      // Central core sphere permanently locked to Golden (#D96800)
       const coreSphereMat = new THREE.MeshBasicMaterial({
-        color: 0xd96800,
+        color: GOLD_CORE_HEX,
         transparent: true,
-        opacity: 0.08,
+        opacity: 0.06,
         blending: THREE.AdditiveBlending
       });
       const coreSphere = new THREE.Mesh(new THREE.SphereGeometry(R_CORE * 0.52, 24, 24), coreSphereMat);
       coreGroup.add(coreSphere);
 
-      // =======================================================================
-      // LIVE ARTIFICIAL NEURONS INSIDE ONLY THE INNER-INNER CORE SPHERE (r <= 0.48 * R_CORE)
-      // =======================================================================
-      const innerCoreNeuronsGroup = new THREE.Group();
-      const NEURON_R_LIMIT = R_CORE * 0.46; // Strictly confined inside coreSphere!
-      const NEURON_SOMA_COUNT = 34;
-      const somaPositions = [];
-      const somaFlat = new Float32Array(NEURON_SOMA_COUNT * 3);
-      for (let i = 0; i < NEURON_SOMA_COUNT; i++) {
+      // Popping Equations, Code, Matrices, Graphs & Tech Icons inside Inner Core
+      const innerCoreGlyphsGroup = new THREE.Group();
+      const CORE_GLYPH_R_LIMIT = R_CORE * 0.64;
+      let lastGlyphT = 0;
+      const CORE_GLYPH_ITEMS = [
+        { kind: 'text', label: '∫ f(x) dx' },
+        { kind: 'text', label: '∮ B·dl = μ₀I' },
+        { kind: 'text', label: '∇×E = -∂B/∂t' },
+        { kind: 'text', label: '∂L/∂θ = 0' },
+        { kind: 'text', label: '∫₀^∞ e^{-st}f(t)dt' },
+        { kind: 'text', label: 'det(A - λI) = 0' },
+        { kind: 'text', label: 'v⃗ = [x, y, z]ᵀ' },
+        { kind: 'text', label: '[a₁₁ a₁₂; a₂₁ a₂₂]' },
+        { kind: 'text', label: 'J(θ) = ∂y/∂x' },
+        { kind: 'text', label: 'dx/dt = Ax + Bu' },
+        { kind: 'text', label: 'H(X) = -Σ p log p' },
+        { kind: 'text', label: 'τ = r × F' },
+        { kind: 'text', label: 'SO(3) ⊂ ℝ^{3×3}' },
+        { kind: 'text', label: '∑ wᵢxᵢ + b' },
+        { kind: 'text', label: 'matmul(Q, Kᵀ)/√d' },
+        { kind: 'text', label: 'softmax(zᵢ)' },
+        { kind: 'text', label: 'async fn infer()' },
+        { kind: 'text', label: 'YOLO.detect(frame)' },
+        { kind: 'text', label: 'SLAM.update(pose)' },
+        { kind: 'text', label: 'PID(Kp, Ki, Kd)' },
+        { kind: 'text', label: 'ROS2::spin(node)' },
+        { kind: 'text', label: 'CAN_TX(0x1F4)' },
+        { kind: 'text', label: 'PWM.duty(72%)' },
+        { kind: 'text', label: 'ReLU(Wx + b)' },
+        { kind: 'llm', label: 'LLM' },
+        { kind: 'cv', label: 'CV·BBOX' },
+        { kind: 'robotics', label: 'KINEMATICS' },
+        { kind: 'mechatronics', label: 'ACTUATOR' },
+        { kind: 'graph', label: 'LOSS' },
+        { kind: 'matrix', label: 'TENSOR' },
+        { kind: 'vector', label: 'EIGEN' }
+      ];
+
+      function makeCoreGlyphTexture(item) {
+        const c = document.createElement('canvas');
+        c.width = 256;
+        c.height = 68;
+        const ctx = c.getContext('2d');
+        ctx.clearRect(0, 0, c.width, c.height);
+        ctx.strokeStyle = '#FFD27D';
+        ctx.fillStyle = '#FFE29A';
+        ctx.shadowColor = 'rgba(245, 158, 11, 0.85)';
+        ctx.shadowBlur = 8;
+        ctx.lineWidth = 2.0;
+
+        if (item.kind === 'text') {
+          ctx.font = '600 20px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(item.label, 128, 34);
+        } else {
+          if (item.kind === 'llm') {
+            const pts = [[50, 20], [50, 48], [80, 16], [80, 34], [80, 52]];
+            ctx.beginPath();
+            for (let a = 0; a < 2; a++) for (let b = 2; b < 5; b++) {
+              ctx.moveTo(pts[a][0], pts[a][1]);
+              ctx.lineTo(pts[b][0], pts[b][1]);
+            }
+            ctx.stroke();
+            pts.forEach(([x, y]) => { ctx.beginPath(); ctx.arc(x, y, 3.2, 0, Math.PI * 2); ctx.fill(); });
+          } else if (item.kind === 'cv') {
+            ctx.strokeRect(46, 16, 36, 36);
+            ctx.beginPath();
+            ctx.arc(64, 34, 8, 0, Math.PI * 2);
+            ctx.moveTo(40, 34); ctx.lineTo(48, 34);
+            ctx.moveTo(80, 34); ctx.lineTo(88, 34);
+            ctx.stroke();
+          } else if (item.kind === 'robotics') {
+            ctx.beginPath();
+            ctx.moveTo(44, 52); ctx.lineTo(60, 24); ctx.lineTo(82, 32);
+            ctx.stroke();
+            [[44, 52], [60, 24], [82, 32]].forEach(([x, y]) => {
+              ctx.beginPath(); ctx.arc(x, y, 3.5, 0, Math.PI * 2); ctx.fill();
+            });
+          } else if (item.kind === 'mechatronics') {
+            ctx.beginPath();
+            ctx.arc(64, 34, 11, 0, Math.PI * 2);
+            ctx.arc(64, 34, 4, 0, Math.PI * 2);
+            ctx.moveTo(64, 17); ctx.lineTo(64, 23);
+            ctx.moveTo(64, 45); ctx.lineTo(64, 51);
+            ctx.moveTo(47, 34); ctx.lineTo(53, 34);
+            ctx.moveTo(75, 34); ctx.lineTo(81, 34);
+            ctx.stroke();
+          } else if (item.kind === 'graph') {
+            ctx.beginPath();
+            ctx.moveTo(44, 50); ctx.lineTo(44, 16);
+            ctx.moveTo(44, 50); ctx.lineTo(86, 50);
+            ctx.moveTo(46, 22); ctx.quadraticCurveTo(56, 46, 68, 30); ctx.quadraticCurveTo(76, 20, 84, 44);
+            ctx.stroke();
+          } else if (item.kind === 'matrix') {
+            ctx.beginPath();
+            ctx.moveTo(52, 16); ctx.lineTo(46, 16); ctx.lineTo(46, 52); ctx.lineTo(52, 52);
+            ctx.moveTo(76, 16); ctx.lineTo(82, 16); ctx.lineTo(82, 52); ctx.lineTo(76, 52);
+            ctx.stroke();
+            for (let r = 0; r < 3; r++) for (let col = 0; col < 3; col++) {
+              ctx.fillRect(53 + col * 8, 22 + r * 10, 3, 3);
+            }
+          } else {
+            ctx.beginPath();
+            ctx.moveTo(46, 48); ctx.lineTo(82, 20);
+            ctx.moveTo(72, 20); ctx.lineTo(82, 20); ctx.lineTo(79, 30);
+            ctx.stroke();
+          }
+          ctx.font = '700 17px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace';
+          ctx.textAlign = 'left';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(item.label, 96, 34);
+        }
+        const tex = new THREE.CanvasTexture(c);
+        tex.needsUpdate = true;
+        return tex;
+      }
+
+      const glyphTextures = CORE_GLYPH_ITEMS.map(makeCoreGlyphTexture);
+      const CORE_GLYPH_COUNT = 26;
+      const coreGlyphEntries = [];
+
+      function randomInnerCorePos() {
         const u = Math.random();
         const v = Math.random();
-        const thetaN = u * Math.PI * 2;
-        const phiN = Math.acos(2 * v - 1);
-        const radN = NEURON_R_LIMIT * (0.28 + 0.68 * Math.cbrt(Math.random()));
-        const nx = radN * Math.sin(phiN) * Math.cos(thetaN);
-        const ny = radN * Math.sin(phiN) * Math.sin(thetaN);
-        const nz = radN * Math.cos(phiN);
-        somaPositions.push(new THREE.Vector3(nx, ny, nz));
-        somaFlat[i * 3] = nx;
-        somaFlat[i * 3 + 1] = ny;
-        somaFlat[i * 3 + 2] = nz;
+        const thetaG = u * Math.PI * 2;
+        const phiG = Math.acos(2 * v - 1);
+        const radG = CORE_GLYPH_R_LIMIT * (0.16 + 0.82 * Math.cbrt(Math.random()));
+        return new THREE.Vector3(
+          radG * Math.sin(phiG) * Math.cos(thetaG),
+          radG * Math.sin(phiG) * Math.sin(thetaG),
+          radG * Math.cos(phiG)
+        );
       }
-      const somaGeo = new THREE.BufferGeometry();
-      somaGeo.setAttribute('position', new THREE.BufferAttribute(somaFlat, 3));
-      const somaMat = new THREE.PointsMaterial({
-        size: 0.017,
-        color: 0xffb84d,
-        transparent: true,
-        opacity: 0.92,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false
-      });
-      const somaPoints = new THREE.Points(somaGeo, somaMat);
-      innerCoreNeuronsGroup.add(somaPoints);
 
-      // Intra-core axon / dendrite synaptic connections inside inner-inner core
-      const axonEdges = [];
-      const axonFlatPts = [];
-      for (let i = 0; i < NEURON_SOMA_COUNT; i++) {
-        for (let j = i + 1; j < NEURON_SOMA_COUNT; j++) {
-          const dist = somaPositions[i].distanceTo(somaPositions[j]);
-          if (dist < NEURON_R_LIMIT * 0.95 && axonEdges.length < 56) {
-            axonEdges.push([somaPositions[i], somaPositions[j], Math.random() * Math.PI * 2, 0.55 + Math.random() * 0.9]);
-            axonFlatPts.push(
-              somaPositions[i].x, somaPositions[i].y, somaPositions[i].z,
-              somaPositions[j].x, somaPositions[j].y, somaPositions[j].z
-            );
-          }
+      function nearestOuterNodeIndex(pos) {
+        let bestIdx = 0;
+        let bestDist = Infinity;
+        for (let k = 0; k < icoUniqueNodes.length; k++) {
+          const d = pos.distanceToSquared(icoUniqueNodes[k]);
+          if (d < bestDist) { bestDist = d; bestIdx = k; }
         }
+        return bestIdx;
       }
-      const axonGeo = new THREE.BufferGeometry();
-      axonGeo.setAttribute('position', new THREE.Float32BufferAttribute(axonFlatPts, 3));
-      const axonMat = new THREE.LineBasicMaterial({
-        color: 0xff8c1a,
-        transparent: true,
-        opacity: 0.42,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false
-      });
-      innerCoreNeuronsGroup.add(new THREE.LineSegments(axonGeo, axonMat));
 
-      // Travelling synaptic action-potential spikes along internal dendrites/axons
-      const SPIKE_COUNT = Math.max(16, Math.min(36, axonEdges.length));
-      const spikeFlat = new Float32Array(SPIKE_COUNT * 3);
-      const spikeGeo = new THREE.BufferGeometry();
-      spikeGeo.setAttribute('position', new THREE.BufferAttribute(spikeFlat, 3));
-      const spikeMat = new THREE.PointsMaterial({
-        size: 0.022,
-        color: 0xffe099,
+      for (let i = 0; i < CORE_GLYPH_COUNT; i++) {
+        const texIdx = i % glyphTextures.length;
+        const mat = new THREE.SpriteMaterial({
+          map: glyphTextures[texIdx],
+          transparent: true,
+          opacity: 0,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        });
+        const sprite = new THREE.Sprite(mat);
+        const pos = randomInnerCorePos();
+        sprite.position.copy(pos);
+        const baseScale = 0.095 + Math.random() * 0.045;
+        sprite.scale.set(baseScale * 2.6, baseScale * 0.68, 1);
+        innerCoreGlyphsGroup.add(sprite);
+        coreGlyphEntries.push({
+          sprite,
+          mat,
+          baseScale,
+          nodeIdx: nearestOuterNodeIndex(pos),
+          cycle: Math.random(),
+          speed: 0.20 + Math.random() * 0.26,
+          driftY: (Math.random() - 0.5) * 0.03
+        });
+      }
+      coreGroup.add(innerCoreGlyphsGroup);
+
+      // Dynamic Node-to-Fragment Tether Lines (permanently golden)
+      const tetherPositions = new Float32Array(CORE_GLYPH_COUNT * 6);
+      const tetherGeo = new THREE.BufferGeometry();
+      tetherGeo.setAttribute('position', new THREE.BufferAttribute(tetherPositions, 3));
+      const tetherMat = new THREE.LineBasicMaterial({
+        color: 0xffa630,
         transparent: true,
-        opacity: 0.98,
+        opacity: 0.36,
         blending: THREE.AdditiveBlending,
         depthWrite: false
       });
-      const spikePoints = new THREE.Points(spikeGeo, spikeMat);
-      innerCoreNeuronsGroup.add(spikePoints);
-      coreGroup.add(innerCoreNeuronsGroup);
+      const coreTetherLines = new THREE.LineSegments(tetherGeo, tetherMat);
+      coreGroup.add(coreTetherLines);
 
       const glowSphereMat = new THREE.MeshBasicMaterial({
-        color: C_MID,
+        color: GOLD_CORE_HEX,
         transparent: true,
         opacity: 0.035,
         blending: THREE.AdditiveBlending
@@ -15169,39 +15822,85 @@ def malicious_skill():
       constrictGroup.add(coreGroup);
 
       // =======================================================================
-      // 120+ DIMMISH BURNT-ORANGE FLOATING NAMES & CODE TOKENS ACROSS ALL 3 LAYERS
-      // (Replaces the old white floating balls/spheres!)
+      // INTERACTIVE FLOATING NAMES & CODE TOKENS ACROSS ALL DEPTH LAYERS
       // =======================================================================
       const codeSpritesGroup = new THREE.Group();
       const FLOATING_NAMES_AND_TOKENS = [
-        'sys.init()', 'malloc()', 'kernel.d', '01101001', 'DMA xfer', 'use std',
-        '200 OK', 'IRQ 0x7', 'mutex.lk', 'TLS 1.3', 'HTTP/2', 'ptr ref',
-        'impl Orb', 'exec()', 'async fn', '0x7FFF04', 'vtable*', 'fork()',
-        'mmap()', 'gid=1000', 'ring_buf', 'I2S_CLK', 'PID_1kHz', 'WAL_SYNC',
-        'ESP-NOW Mesh', 'Kalman Filter', 'PWM Dead-Time', 'IGBT Driver',
-        'SolidWorks FEA', 'Reynolds Re', 'Runge-Kutta 4', 'Laplace s-Pole',
-        'Nyquist Margin', 'Altium 4-Layer', 'SSD1306 OLED', 'MAX98357A I2S',
-        'INMP441 MEMS', 'YOLOv8 FP16', 'Qdrant HNSW', 'RAID-0 NVMe',
-        'KubeEdge Sync', 'Buck-Boost MPPT', 'LiFePO4 BMS', 'Wheatstone Br',
-        'Phase Lock PLL', 'Gibbs dG < 0', 'Partition Z', 'Euler-Lagrange',
-        'Hamiltonian H', 'Box 4-4-4-4', 'Parametric EQ', 'ECSA Outcome 1',
-        'STM32H7 HAL', 'ESP32-S3 SIMD', 'CAN_2.0B Bus', 'FreeRTOS Task',
-        'Hailo-8 26TOPS', 'Orin Nano 8GB', 'Mohr Circle', 'Von Mises Stress',
-        'Fourier q=-k∇T', 'Nusselt Nu', 'Prandtl Pr', 'Grashof Gr',
-        'Rankine Cycle', 'Carnot η_max', 'Bernoulli ΔP', 'Navier-Stokes',
-        'Jacobian J(q)', 'Denavit-Hartenberg', 'PID Kp Ki Kd', 'State x_dot=Ax+Bu',
-        'Lyapunov V(x)>0', 'Zero-Order Hold', 'Bode Gain dB', 'Root Locus',
-        'Modbus RTU', 'OPC-UA Node', 'Siemens S7-1200', 'Ladder Logic',
-        'Gerber RS-274X', 'Impedance 50Ω', 'Differential Pair', 'Via Stitching',
-        'Schottky Clamp', 'MOSFET Rds(on)', 'Snubber RC', 'Flyback Diode',
-        'H-Bridge PWM', 'Encoder Quadrature', 'BLDC Commutation', 'FOC Clark-Park',
-        'SVPWM Sector', 'Watchdog Timer', 'SPI DMA Channel', 'UART RingBuf',
-        'I2C Pull-Up 4.7k', 'ADC 12-Bit SAR', 'DAC Sigma-Delta', 'PLL Multiplier',
-        'NVIC Priority', 'Mutex Semaphore', 'EventGroup Bits', 'Queue SendISR',
-        'TensorRT Engine', 'ONNX Runtime', 'Cosine Sim', 'BM25 Retriever',
-        'IndexedDB WAL', 'SHA-256 Digest', 'HMAC Auth', 'WebRTC Stream',
-        'MediaPipe 21pt', 'Pinch Hysteresis', 'EMA α=0.80', '8-Band Formant',
-        'Spectral Sub', 'OpenRouter Pool', 'Kahn TopoSort', 'AST Crucible'
+        { label: 'B.A.R.B.I 3.1', action: () => typeof openEvoBackendModal === 'function' && openEvoBackendModal() },
+        { label: 'ZULUTRONIX', action: () => typeof selectNode === 'function' && selectNode('zulutronix', true) },
+        { label: 'SHAP ZX1', action: () => typeof selectNode === 'function' && selectNode('shap-zx1', true) },
+        { label: 'PolyGhost Chrono', action: () => typeof openSmartTimerModal === 'function' && openSmartTimerModal() },
+        { label: 'Smart Timer', action: () => typeof openSmartTimerModal === 'function' && openSmartTimerModal() },
+        { label: 'Tactical Chess', action: () => typeof openChessModal === 'function' && openChessModal() },
+        { label: 'Power & PMIC', action: () => typeof openPowerTelemetryModal === 'function' && openPowerTelemetryModal() },
+        { label: 'Weather Telemetry', action: () => typeof openWeatherApiModal === 'function' && openWeatherApiModal() },
+        { label: 'Gesture D3', action: () => typeof openGestureControlModal === 'function' && openGestureControlModal() },
+        { label: 'Sphere Config', action: () => window.dispatchEvent(new CustomEvent('barbi:toggle-sphere-config')) },
+        { label: 'YouTube Media', action: () => typeof openYouTubeModal === 'function' && openYouTubeModal() },
+        { label: 'Live GTA Radar', action: () => typeof openGtaMapModal === 'function' && openGtaMapModal() },
+        { label: 'Survival Protocol', nodeId: 'barbi-survival' },
+        { label: 'Eternum Protocol', nodeId: 'barbi-eternum' },
+        { label: 'Evolvere Engine', nodeId: 'barbi-evolvere' },
+        { label: 'Dream Core / OneirOS', nodeId: 'barbi-dream-core' },
+        { label: 'Virtual Consciousness', nodeId: 'barbi-vcl' },
+        { label: 'ARCHIVEX Memory', nodeId: 'barbi-archivex' },
+        { label: 'Hardware Abstraction', nodeId: 'barbi-hal' },
+        { label: 'Persona Mode Engine', nodeId: 'barbi-persona' },
+        { label: 'ZX Nexus Core', nodeId: 'zulutronix' },
+        { label: 'Spec 004 WAL', action: () => typeof window.__toggleSymbioticDrawer === 'function' && window.__toggleSymbioticDrawer() },
+        { label: 'D2 Rev 5 RBAC', action: () => typeof window.__toggleSymbioticDrawer === 'function' && window.__toggleSymbioticDrawer() },
+        { label: 'Kahn DAG Router', action: () => typeof openEvoBackendModal === 'function' && openEvoBackendModal() },
+        { label: 'OpenRouter Pool', action: () => typeof openEvoBackendModal === 'function' && openEvoBackendModal() },
+        { label: 'Gemini 4 Argon', query: 'Summarize B.A.R.B.I. Gemini 4 Argon orchestration status' },
+        { label: 'Jetson Orin Nano', query: 'Inspect 4x Jetson Orin Nano cluster specs for B.A.R.B.I.' },
+        { label: 'Raspberry Pi 5', query: 'Review Raspberry Pi 5 + Hailo-8 NPU central hub layout' },
+        { label: 'Hailo-8 26TOPS', query: 'Analyze Hailo-8 NPU local edge inference throughput' },
+        { label: 'ESP32-S3 DevKitC', query: 'Inspect ESP32-S3 DevKitC-1 N16R8 I/O architecture' },
+        { label: 'ESP32-C3 Node', query: 'Review SHAP ZX1 ESP32-C3 expansion module nodes' },
+        { label: 'Dual CAN Bus', query: 'Examine SHAP ZX1 dual CAN bus telemetry framing' },
+        { label: 'ESP-NOW Mesh', query: 'Review ESP-NOW mesh coordination for B.A.R.B.I. drones' },
+        { label: 'FreeRTOS Task', query: 'Inspect FreeRTOS task scheduling across ESP32-S3 nodes' },
+        { label: 'QUICKFREEZER', query: 'Open QUICKFREEZER countertop vapor-compression blueprints' },
+        { label: 'Anti-Hijack Tech', query: 'Inspect AHT dual-band FHSS & MOSFET cut-off logic' },
+        { label: '4WD EV Prototype', query: 'Review TUT Manufacturing II 4WD EV prototype specs' },
+        { label: 'TUT BEngTech', nodeId: 'owner-treasure-zulu' },
+        { label: 'UJ BEngTechHons', query: 'Review 2027 UJ BEngTech Honours Mechanical Engineering plan' },
+        { label: 'NMU MEng', query: 'Outline NMU Master of Engineering in Mechatronics roadmap' },
+        { label: 'ECSA Candidate', query: 'Check ECSA Candidate Engineering Technologist outcomes' },
+        { label: 'Fireblade Aviation', query: 'Review Fireblade Aviation Aircraft Engineer In Training work' },
+        { label: 'Golden Key', nodeId: 'owner-treasure-zulu' },
+        { label: 'COMET Diagnostic', query: 'Review COMET Processual Competence diagnostic recognition' },
+        { label: 'Altium Designer', query: 'Open Altium Designer 4-layer PCB schematic workflow' },
+        { label: 'SOLIDWORKS FEA', query: 'Review SOLIDWORKS CAD & FEA stress simulation pipeline' },
+        { label: 'ANSYS Fluent', query: 'Inspect ANSYS Fluent CFD thermal & aerodynamic checks' },
+        { label: 'MATLAB Simulink', query: 'Open MATLAB Simulink control loop & power models' },
+        { label: 'KiCad PCB', query: 'Review KiCad modular PCB breakout routing' },
+        { label: 'PlatformIO', query: 'Inspect PlatformIO firmware build for ESP32-S3' },
+        { label: 'Arduino Mega 2560', query: 'Review dual Arduino Mega 2560 motor control firmware' },
+        { label: 'STM32H7 HAL', query: 'Inspect STM32H7 high-speed real-time control loop' },
+        { label: 'STM32G4', query: 'Review STM32G4 mixed-signal PWM & ADC configuration' },
+        { label: 'INMP441 MEMS', query: 'Inspect INMP441 I2S digital microphone wake-word pipeline' },
+        { label: 'MAX98357A I2S', query: 'Review MAX98357A I2S class-D amplifier audio output' },
+        { label: 'SSD1306 OLED', query: 'Inspect 128x32 I2C OLED status telemetry display' },
+        { label: 'Piper TTS', query: 'Test local Piper TTS offline voice synthesis' },
+        { label: 'ElevenLabs Voice', query: 'Inspect ElevenLabs voice synthesis routing' },
+        { label: 'Telegram Bot', query: 'Review B.A.R.B.I. Telegram bot API bridge' },
+        { label: 'AETHER-STEM', query: 'Open AETHER-STEM Tiny STEM LLM interface context' },
+        { label: 'Solar Drone Deck', query: 'Review 3-drone solar wireless charging surveillance network' },
+        { label: '6-DOF Chess Arm', query: 'Inspect 6-DOF chess-playing robotic arm kinematics' },
+        { label: '3D Metrology VX', query: 'Review Go!SCAN 50 & MetraSCAN 3D metrology practical' },
+        { label: 'Creality CP-01', query: 'Inspect Creality CP-01 3-in-1 fabrication tolerances' },
+        { label: 'K2025/699918/07', nodeId: 'zulutronix' },
+        { label: 'Inner Core Lattice', action: () => typeof setSphereDepthTier === 'function' && setSphereDepthTier(4) },
+        { label: 'Core Mesh Shell', action: () => typeof setSphereDepthTier === 'function' && setSphereDepthTier(3) },
+        { label: 'Mid Hub Layer', action: () => typeof setSphereDepthTier === 'function' && setSphereDepthTier(2) },
+        { label: 'Outer Meridian', action: () => typeof setSphereDepthTier === 'function' && setSphereDepthTier(1) },
+        { label: 'Time Travel', action: () => typeof toggleTimelineBar === 'function' && toggleTimelineBar() },
+        { label: 'Nexus Categories', action: () => typeof toggleNexusCategoryMode === 'function' && toggleNexusCategoryMode() },
+        { label: 'Focus Mode', action: () => typeof toggleFocusMode === 'function' && toggleFocusMode() },
+        { label: 'Orbital Settings', action: () => typeof openSettingsModal === 'function' && openSettingsModal() },
+        { label: 'WAL Sync', action: () => typeof window.__toggleSymbioticDrawer === 'function' && window.__toggleSymbioticDrawer() },
+        { label: 'RBAC Authority', action: () => typeof window.__toggleSymbioticDrawer === 'function' && window.__toggleSymbioticDrawer() }
       ];
 
       function makeDimOrangeNameSprite(textStr, scaleFactor = 1.0, opacityVal = 0.44) {
@@ -15210,29 +15909,28 @@ def malicious_skill():
         c.height = 56;
         const ctx = c.getContext('2d');
         ctx.font = '600 20px "JetBrains Mono", monospace';
-        ctx.fillStyle = 'rgba(218, 102, 8, 0.88)';
-        ctx.shadowColor = 'rgba(180, 68, 0, 0.65)';
-        ctx.shadowBlur = 6;
+        ctx.fillStyle = 'rgba(255, 224, 185, 0.92)';
+        ctx.shadowColor = 'rgba(255, 168, 76, 0.55)';
+        ctx.shadowBlur = 5;
         ctx.fillText(textStr, 8, 36);
         const tex = new THREE.CanvasTexture(c);
         const mat = new THREE.SpriteMaterial({
           map: tex,
+          color: C_BRIGHT,
           transparent: true,
           opacity: opacityVal,
           blending: THREE.AdditiveBlending,
           depthWrite: false
         });
+        mat.userData = { baseOpacity: opacityVal };
         const sp = new THREE.Sprite(mat);
         sp.scale.set(0.68 * scaleFactor, 0.136 * scaleFactor, 1);
         return sp;
       }
 
       const floatingSpriteEntries = [];
-      FLOATING_NAMES_AND_TOKENS.forEach((tok, idx) => {
-        // Distribute across all 3 depth layers:
-        // - 35% in Outer Layer (R = 1.85..2.85)
-        // - 45% in Second / Mid Layer (R = 0.82..1.75)
-        // - 20% deep near Inner Core (R = 0.34..0.78)
+      FLOATING_NAMES_AND_TOKENS.forEach((item, idx) => {
+        const tok = typeof item === 'string' ? item : item.label;
         let radius, scaleFactor, opVal;
         if (idx % 5 === 0) {
           radius = 0.34 + (idx % 7) * 0.065;
@@ -15260,8 +15958,11 @@ def malicious_skill():
           radius * Math.cos(phi) * Math.sin(theta)
         );
         codeSpritesGroup.add(sp);
+        sp.userData = { item, label: tok };
         floatingSpriteEntries.push({
           sprite: sp,
+          item,
+          label: tok,
           radius,
           theta,
           phi,
@@ -15270,7 +15971,49 @@ def malicious_skill():
       });
       constrictGroup.add(codeSpritesGroup);
 
-      // 3,200 Fine Dim Burnt-Orange Dust Specks (NO white balls!)
+      // Interactive Raycaster so EVERY floating word is clickable & functional
+      const spriteRaycaster = new THREE.Raycaster();
+      const spritePointer = new THREE.Vector2();
+      const interactiveCanvas = document.getElementById('sphere-canvas');
+      let spriteDownPos = null;
+      if (interactiveCanvas) {
+        interactiveCanvas.addEventListener('pointerdown', (ev) => {
+          spriteDownPos = { x: ev.clientX, y: ev.clientY };
+        });
+        interactiveCanvas.addEventListener('pointermove', (ev) => {
+          const rect = interactiveCanvas.getBoundingClientRect();
+          spritePointer.x = ((ev.clientX - rect.left) / rect.width) * 2 - 1;
+          spritePointer.y = -((ev.clientY - rect.top) / rect.height) * 2 + 1;
+          spriteRaycaster.setFromCamera(spritePointer, camera);
+          const visibleSprites = codeSpritesGroup.children.filter((c) => c.visible);
+          const hits = spriteRaycaster.intersectObjects(visibleSprites, false);
+          interactiveCanvas.style.cursor = hits.length > 0 ? 'pointer' : 'grab';
+        });
+        interactiveCanvas.addEventListener('click', (ev) => {
+          if (spriteDownPos && Math.hypot(ev.clientX - spriteDownPos.x, ev.clientY - spriteDownPos.y) > 6) return;
+          const rect = interactiveCanvas.getBoundingClientRect();
+          spritePointer.x = ((ev.clientX - rect.left) / rect.width) * 2 - 1;
+          spritePointer.y = -((ev.clientY - rect.top) / rect.height) * 2 + 1;
+          spriteRaycaster.setFromCamera(spritePointer, camera);
+          const visibleSprites = codeSpritesGroup.children.filter((c) => c.visible);
+          const hits = spriteRaycaster.intersectObjects(visibleSprites, false);
+          if (!hits.length) return;
+          const meta = hits[0].object.userData && hits[0].object.userData.item;
+          if (!meta) return;
+          if (typeof meta.action === 'function') {
+            meta.action();
+            showToast(`Activated: ${meta.label}`, 'accent');
+          } else if (meta.nodeId && typeof selectNode === 'function') {
+            selectNode(meta.nodeId, true);
+            showToast(`Focused Node: ${meta.label}`, 'accent');
+          } else if (meta.query) {
+            window.dispatchEvent(new CustomEvent('barbi:toggle-chat-panel', { detail: { open: true, prompt: meta.query } }));
+            showToast(`Loaded B.A.R.B.I. Prompt: ${meta.label}`, 'accent');
+          }
+        });
+      }
+
+      // 3,200 Fine Themeable Dust Specks
       const dustCount = 3200;
       const dustPos = new Float32Array(dustCount * 3);
       for (let i = 0; i < dustCount; i++) {
@@ -15288,15 +16031,16 @@ def malicious_skill():
       dotC.width = dotC.height = 64;
       const dCtx = dotC.getContext('2d');
       const g = dCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
-      g.addColorStop(0, 'rgba(224, 108, 8, 0.95)');
-      g.addColorStop(0.3, 'rgba(184, 72, 0, 0.45)');
-      g.addColorStop(0.65, 'rgba(110, 38, 0, 0.16)');
-      g.addColorStop(1, 'rgba(20, 6, 0, 0)');
+      g.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+      g.addColorStop(0.3, 'rgba(235, 215, 200, 0.48)');
+      g.addColorStop(0.65, 'rgba(180, 145, 120, 0.16)');
+      g.addColorStop(1, 'rgba(0, 0, 0, 0)');
       dCtx.fillStyle = g;
       dCtx.fillRect(0, 0, 64, 64);
 
+      const starTex = new THREE.CanvasTexture(dotC);
       const dustMat = new THREE.PointsMaterial({
-        map: new THREE.CanvasTexture(dotC),
+        map: starTex,
         size: 0.044,
         transparent: true,
         opacity: 0.46,
@@ -15308,17 +16052,219 @@ def malicious_skill():
       const dustPoints = new THREE.Points(dustGeo, dustMat);
       constrictGroup.add(dustPoints);
 
+      // Concentric Slowly-Rotating Twinkling Background Stars (per-vertex golden-angle twinkle)
+      const starPinCanvas = document.createElement('canvas');
+      starPinCanvas.width = starPinCanvas.height = 64;
+      const spCtx = starPinCanvas.getContext('2d');
+      const spGrad = spCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      spGrad.addColorStop(0, 'rgba(255, 255, 255, 0.95)');
+      spGrad.addColorStop(0.18, 'rgba(255, 232, 205, 0.65)');
+      spGrad.addColorStop(0.45, 'rgba(215, 175, 140, 0.22)');
+      spGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      spCtx.fillStyle = spGrad;
+      spCtx.fillRect(0, 0, 64, 64);
+      const starPinTex = new THREE.CanvasTexture(starPinCanvas);
+      starPinTex.colorSpace = THREE.SRGBColorSpace;
+
+      const concentricStarsGroup = new THREE.Group();
+      scene.add(concentricStarsGroup);
+      const concentricShellConfigs = [
+        { count: 140, radius: 2.95, radialJitter: 0.14, zOffset: -0.35, zJitter: 0.22, tiltX: 0.04, tiltY: -0.03, size: 0.095, opacity: 0.32, color: 0xd96b08, speedZ: -0.022 },
+        { count: 170, radius: 3.55, radialJitter: 0.18, zOffset: -0.65, zJitter: 0.26, tiltX: -0.05, tiltY: 0.04, size: 0.105, opacity: 0.29, color: 0xc2540a, speedZ: -0.017 },
+        { count: 200, radius: 4.25, radialJitter: 0.22, zOffset: -1.00, zJitter: 0.30, tiltX: 0.06, tiltY: 0.03, size: 0.115, opacity: 0.26, color: 0xe06d10, speedZ: -0.013 },
+        { count: 220, radius: 5.05, radialJitter: 0.26, zOffset: -1.35, zJitter: 0.34, tiltX: -0.04, tiltY: -0.05, size: 0.125, opacity: 0.23, color: 0xb84a06, speedZ: -0.010 },
+        { count: 240, radius: 5.95, radialJitter: 0.30, zOffset: -1.75, zJitter: 0.38, tiltX: 0.03, tiltY: 0.05, size: 0.135, opacity: 0.20, color: 0xd4610c, speedZ: -0.0078 },
+        { count: 260, radius: 7.00, radialJitter: 0.36, zOffset: -2.20, zJitter: 0.42, tiltX: -0.03, tiltY: 0.02, size: 0.145, opacity: 0.17, color: 0xa33f05, speedZ: -0.0060 }
+      ];
+      const concentricStarShells = concentricShellConfigs.map((cfg, sIdx) => {
+        const pos = new Float32Array(cfg.count * 3);
+        const col = new Float32Array(cfg.count * 3);
+        const flickerPhases = new Float32Array(cfg.count);
+        const flickerSpeeds = new Float32Array(cfg.count);
+        const baseColor = new THREE.Color(cfg.color);
+        for (let i = 0; i < cfg.count; i++) {
+          const baseAngle = (i / cfg.count) * Math.PI * 2;
+          const angleNoise = Math.sin(i * 12.9898 + sIdx * 78.233) * (Math.PI / cfg.count) * 0.72;
+          const theta = baseAngle + angleNoise + sIdx * 0.37;
+          const radNoise = Math.sin(i * 45.164 + sIdx * 19.41) * cfg.radialJitter;
+          const rad = cfg.radius + radNoise;
+          const zWave = Math.cos(i * 23.71 + sIdx * 9.13) * cfg.zJitter;
+          pos[i * 3] = rad * Math.cos(theta);
+          pos[i * 3 + 1] = rad * Math.sin(theta);
+          pos[i * 3 + 2] = cfg.zOffset + zWave;
+          col[i * 3] = baseColor.r;
+          col[i * 3 + 1] = baseColor.g;
+          col[i * 3 + 2] = baseColor.b;
+          flickerPhases[i] = (i * 1.618 + sIdx * 2.399) % (Math.PI * 2);
+          flickerSpeeds[i] = 1.15 + ((i * 7 + sIdx * 3) % 11) * 0.16;
+        }
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+        const mat = new THREE.PointsMaterial({
+          map: starPinTex,
+          size: cfg.size,
+          transparent: true,
+          opacity: cfg.opacity,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false,
+          sizeAttenuation: true,
+          fog: false,
+          vertexColors: true
+        });
+        const pts = new THREE.Points(geo, mat);
+        pts.rotation.set(cfg.tiltX, cfg.tiltY, 0);
+        concentricStarsGroup.add(pts);
+        return {
+          mesh: pts,
+          geo,
+          mat,
+          baseColor,
+          defaultHex: cfg.color,
+          flickerPhases,
+          flickerSpeeds,
+          count: cfg.count,
+          baseOpacity: cfg.opacity,
+          speedZ: cfg.speedZ
+        };
+      });
+
+      // Live Sphere Configuration State (controlled by SphereConfigPanel via window.applyBarbiSphereConfig)
+      const liveSphereCfg = {
+        rotationSpeed: 1.0,
+        bloomScale: 1.0,
+        opacityBoost: 1.0,
+        innerGlyphRatio: 1.0,
+        starShellCount: 6,
+        themePalette: null,
+        lastFocusMode: Boolean(state.focusMode)
+      };
+
+      const FOCUS_DEFAULT_THREE = {
+        bright: C_BRIGHT,
+        mid: C_MID,
+        dim: C_DIM,
+        faint: C_FAINT,
+        hot: C_HOT,
+        dust: C_MID,
+        starColors: [0xd96b08, 0xc2540a, 0xe06d10, 0xb84a06, 0xd4610c, 0xa33f05]
+      };
+
+      function applyThreePalette(threeColors, opacityBoost) {
+        const roles = ['bright', 'mid', 'dim', 'faint', 'hot'];
+        for (let r = 0; r < roles.length; r++) {
+          const role = roles[r];
+          const hex = threeColors[role];
+          const mats = themedMaterials[role];
+          for (let i = 0; i < mats.length; i++) {
+            mats[i].color.setHex(hex);
+            mats[i].opacity = Math.min(1, (mats[i].userData.baseOpacity || 0.3) * opacityBoost);
+          }
+        }
+        dustMat.color.setHex(threeColors.dust);
+        for (let i = 0; i < floatingSpriteEntries.length; i++) {
+          const sp = floatingSpriteEntries[i].sprite;
+          sp.material.color.setHex(threeColors.bright);
+        }
+        for (let s = 0; s < concentricStarShells.length; s++) {
+          const starHex = (threeColors.starColors && threeColors.starColors[s]) || concentricStarShells[s].defaultHex;
+          concentricStarShells[s].baseColor.setHex(starHex);
+        }
+        // Central 3D sphere core remains permanently golden (#D96800 / #FF9D1A)
+        coreSphereMat.color.setHex(GOLD_CORE_HEX);
+        icoWireMat.color.setHex(GOLD_HOT_HEX);
+        glowSphereMat.color.setHex(GOLD_CORE_HEX);
+        tetherMat.color.setHex(0xffa630);
+      }
+
+      function applySubsetVisibility(groupChildren, ratio) {
+        const total = groupChildren.length;
+        const keep = Math.max(0, Math.min(total, Math.round(total * ratio)));
+        for (let i = 0; i < total; i++) {
+          groupChildren[i].visible = i < keep;
+        }
+      }
+
+      function applyBarbiSphereConfig(payload) {
+        if (!payload || !payload.config) return;
+        const cfg = payload.config;
+        const prof = payload.complexityProfile || {};
+        const pal = payload.themePalette || null;
+
+        liveSphereCfg.rotationSpeed = typeof cfg.rotationSpeed === 'number' ? cfg.rotationSpeed : 1.0;
+        liveSphereCfg.bloomScale = typeof prof.bloomScale === 'number' ? prof.bloomScale : 1.0;
+        liveSphereCfg.opacityBoost = typeof prof.opacityBoost === 'number' ? prof.opacityBoost : 1.0;
+        liveSphereCfg.innerGlyphRatio = typeof prof.innerGlyphRatio === 'number' ? prof.innerGlyphRatio : 1.0;
+        liveSphereCfg.starShellCount = typeof prof.starShellCount === 'number' ? prof.starShellCount : 6;
+        liveSphereCfg.themePalette = pal;
+
+        // Visual Complexity Layer Controls
+        outerShell.visible = prof.outerShellVisible !== false;
+        midLayerGroup.visible = prof.midLayerVisible !== false;
+
+        const panelRatio = typeof prof.panelRatio === 'number' ? prof.panelRatio : 1.0;
+        applySubsetVisibility(panelGroup.children, panelRatio);
+
+        const gyroRatio = typeof prof.gyroLineRatio === 'number' ? prof.gyroLineRatio : 1.0;
+        [gyroStack1, gyroStack2, gyroStack3, midGyroStack1, midGyroStack2].forEach((stack) => {
+          applySubsetVisibility(stack.children, gyroRatio);
+        });
+
+        const tokenRatio = typeof prof.floatingTokenRatio === 'number' ? prof.floatingTokenRatio : 1.0;
+        applySubsetVisibility(codeSpritesGroup.children, tokenRatio);
+
+        const dustRatio = typeof prof.dustRatio === 'number' ? prof.dustRatio : 1.0;
+        dustGeo.setDrawRange(0, Math.max(0, Math.round(dustCount * dustRatio)));
+
+        for (let s = 0; s < concentricStarShells.length; s++) {
+          concentricStarShells[s].mesh.visible = s < liveSphereCfg.starShellCount;
+        }
+
+        const activeGlyphCount = Math.max(4, Math.round(coreGlyphEntries.length * liveSphereCfg.innerGlyphRatio));
+        for (let i = 0; i < coreGlyphEntries.length; i++) {
+          coreGlyphEntries[i].sprite.visible = i < activeGlyphCount;
+        }
+
+        // Color Theme Grading (Focus Mode always preserves warm amber-gold grading; core always golden)
+        const targetThree = state.focusMode
+          ? FOCUS_DEFAULT_THREE
+          : (pal && pal.three ? pal.three : FOCUS_DEFAULT_THREE);
+        applyThreePalette(targetThree, liveSphereCfg.opacityBoost);
+      }
+
+      window.applyBarbiSphereConfig = applyBarbiSphereConfig;
+      if (window.__barbiSphereConfig) {
+        applyBarbiSphereConfig(window.__barbiSphereConfig);
+      }
+
       let currentConstrict = 1.0;
       const clock = new THREE.Clock();
-
+      let animAccum = 0;
+      let lastFrameT = 0;
       let extraGyroSpinAccum = 0;
 
       function renderUnifiedBarbiSphereFrame() {
         const t = clock.getElapsedTime();
+        const dt = Math.min(0.05, Math.max(0.001, t - lastFrameT));
+        lastFrameT = t;
+
+        // Re-apply theme palette cleanly when Focus Mode toggles
+        if (Boolean(state.focusMode) !== liveSphereCfg.lastFocusMode) {
+          liveSphereCfg.lastFocusMode = Boolean(state.focusMode);
+          const targetThree = state.focusMode
+            ? FOCUS_DEFAULT_THREE
+            : (liveSphereCfg.themePalette && liveSphereCfg.themePalette.three ? liveSphereCfg.themePalette.three : FOCUS_DEFAULT_THREE);
+          applyThreePalette(targetThree, liveSphereCfg.opacityBoost);
+        }
+
         const summonActive = Boolean(state.chatSummonAnim && state.chatSummonAnim.active);
         const summonScale = summonActive ? (state.chatSummonAnim.scaleMult || 1.0) : 1.0;
         const summonSpin = summonActive ? (state.chatSummonAnim.spinBoost || 0.0) : 0.0;
         extraGyroSpinAccum += summonSpin * 1.45;
+
+        const speedMult = liveSphereCfg.rotationSpeed;
+        const convRate = (state.chatExpanded ? 0.65 : (state.focusMode ? 0.50 : 1.0)) * speedMult;
+        animAccum += dt * convRate;
 
         // 1:1 Mathematical Lock between Three.js Camera/OrbGroup and B.A.R.B.I. project3D!
         camera.position.set(0, 0, (660 / Math.max(0.35, state.camera.zoom)) * SCALE_TO_THREE);
@@ -15326,31 +16272,71 @@ def malicious_skill():
         orbGroup.rotation.y = state.camera.rotY;
         orbGroup.rotation.z = 0;
 
-        // B.A.R.B.I. Mode Constriction + Chat Summon Shrink-Then-Expand Pulse!
+        // Slowly rotate & twinkle concentric background star shells around (0,0,0)
+        const starOpacityScale = (state.focusMode ? 0.45 : 1.0) * liveSphereCfg.opacityBoost;
+        for (let s = 0; s < concentricStarShells.length; s++) {
+          const shell = concentricStarShells[s];
+          if (!shell.mesh.visible) continue;
+          shell.mesh.rotation.z = animAccum * shell.speedZ;
+          shell.mat.opacity = Math.min(1, shell.baseOpacity * starOpacityScale);
+          const cAttr = shell.geo.attributes.color;
+          const arr = cAttr.array;
+          for (let i = 0; i < shell.count; i++) {
+            const tw = 0.80 + 0.20 * Math.sin(t * shell.flickerSpeeds[i] + shell.flickerPhases[i]);
+            arr[i * 3] = shell.baseColor.r * tw;
+            arr[i * 3 + 1] = shell.baseColor.g * tw;
+            arr[i * 3 + 2] = shell.baseColor.b * tw;
+          }
+          cAttr.needsUpdate = true;
+        }
+        dustMat.opacity = Math.min(0.85, (state.focusMode ? 0.24 : 0.46) * liveSphereCfg.opacityBoost);
+
+        // B.A.R.B.I. Mode Constriction + Chat Summon Shrink-Then-Expand Pulse
         const baseConstrict = (state.barbiCommandMode || state.activeNexusCategory) ? 0.46 : 1.0;
         const targetConstrict = baseConstrict * summonScale;
         const constrictLerp = summonActive ? 0.28 : 0.08;
         currentConstrict += (targetConstrict - currentConstrict) * constrictLerp;
         constrictGroup.scale.setScalar(currentConstrict);
 
-        // Subtle internal gyroscopic & geodesic motion (accelerates during chat summon spin, slows during conversation)
-        const convRate = state.chatExpanded ? 0.65 : 1.0;
-        icoWire.rotation.x = t * 0.24 * convRate + extraGyroSpinAccum * 0.9;
-        icoWire.rotation.y = -t * 0.32 * convRate - extraGyroSpinAccum * 1.2;
-        innerIcoWire.rotation.x = -t * 0.38 * convRate - extraGyroSpinAccum;
-        innerIcoWire.rotation.z = t * 0.29 * convRate + extraGyroSpinAccum * 0.8;
-        coreHaloStack.rotation.z = t * 0.22 * convRate + extraGyroSpinAccum * 0.7;
+        // Internal gyroscopic & geodesic motion driven smoothly by animAccum (freezes cleanly at 0x)
+        icoWire.rotation.x = animAccum * 0.24 + extraGyroSpinAccum * 0.9;
+        icoWire.rotation.y = -animAccum * 0.32 - extraGyroSpinAccum * 1.2;
+        if (innerCoreGlyphsGroup) {
+          innerCoreGlyphsGroup.rotation.copy(icoWire.rotation);
+          coreTetherLines.rotation.copy(icoWire.rotation);
+        }
 
-        gyroStack1.rotation.z = t * 0.08 * convRate + extraGyroSpinAccum * 0.55;
-        gyroStack2.rotation.z = -t * 0.07 * convRate - extraGyroSpinAccum * 0.48;
-        gyroStack3.rotation.y = t * 0.09 * convRate + extraGyroSpinAccum * 0.62;
-        midGyroStack1.rotation.z = -t * 0.12 * convRate - extraGyroSpinAccum * 0.75;
-        midGyroStack2.rotation.x = t * 0.10 * convRate + extraGyroSpinAccum * 0.65;
+        // Connect & disconnect outer geodesic core edges organically
+        const icoPosAttr = icoDynGeo.attributes.position;
+        for (let e = 0; e < icoEdgeCount; e++) {
+          const em = icoEdgeMeta[e];
+          const pulse = 0.5 + 0.5 * Math.sin(t * em.speed + em.phase);
+          if (pulse < 0.22) {
+            for (let z = 0; z < 6; z++) icoPosAttr.array[e * 6 + z] = 0;
+          } else {
+            const frac = Math.min(1.0, (pulse - 0.22) / 0.35);
+            icoPosAttr.array[e * 6] = em.ax;
+            icoPosAttr.array[e * 6 + 1] = em.ay;
+            icoPosAttr.array[e * 6 + 2] = em.az;
+            icoPosAttr.array[e * 6 + 3] = em.ax + (em.bx - em.ax) * frac;
+            icoPosAttr.array[e * 6 + 4] = em.ay + (em.by - em.ay) * frac;
+            icoPosAttr.array[e * 6 + 5] = em.az + (em.bz - em.az) * frac;
+          }
+        }
+        icoPosAttr.needsUpdate = true;
 
-        // Drift the 120+ dimmish orange-amber floating names gently along their orbital shells
+        coreHaloStack.rotation.z = animAccum * 0.22 + extraGyroSpinAccum * 0.7;
+        gyroStack1.rotation.z = animAccum * 0.08 + extraGyroSpinAccum * 0.55;
+        gyroStack2.rotation.z = -animAccum * 0.07 - extraGyroSpinAccum * 0.48;
+        gyroStack3.rotation.y = animAccum * 0.09 + extraGyroSpinAccum * 0.62;
+        midGyroStack1.rotation.z = -animAccum * 0.12 - extraGyroSpinAccum * 0.75;
+        midGyroStack2.rotation.x = animAccum * 0.10 + extraGyroSpinAccum * 0.65;
+
+        // Drift interactive floating names gently along their orbital shells
         for (let i = 0; i < floatingSpriteEntries.length; i++) {
           const entry = floatingSpriteEntries[i];
-          const curTheta = entry.theta + t * entry.speed * convRate + extraGyroSpinAccum * (i % 2 === 0 ? 0.35 : -0.35);
+          if (!entry.sprite.visible) continue;
+          const curTheta = entry.theta + animAccum * entry.speed + extraGyroSpinAccum * (i % 2 === 0 ? 0.35 : -0.35);
           entry.sprite.position.x = entry.radius * Math.cos(entry.phi) * Math.cos(curTheta);
           entry.sprite.position.z = entry.radius * Math.cos(entry.phi) * Math.sin(curTheta);
         }
@@ -15363,28 +16349,54 @@ def malicious_skill():
         coreSphereMat.opacity = Math.min(0.36, (0.05 + pulseWave * 0.04) * (coreGlowFactor / 0.10) * 0.32);
         glowSphereMat.opacity = Math.min(0.18, 0.025 * (coreGlowFactor / 0.10) * 0.40);
 
-        // Animate living artificial neurons & action-potential spikes strictly inside inner-inner core
-        if (innerCoreNeuronsGroup && axonEdges.length > 0) {
-          const thinkingMult = window.__barbiAiThinking ? 2.4 : (state.voiceMode ? 1.8 : 1.0);
-          innerCoreNeuronsGroup.rotation.y = t * 0.48 * convRate + extraGyroSpinAccum;
-          innerCoreNeuronsGroup.rotation.x = -t * 0.32 * convRate;
-          somaMat.opacity = 0.72 + 0.25 * Math.sin(t * 3.4 * thinkingMult);
-          axonMat.opacity = 0.28 + 0.28 * Math.sin(t * 2.6 * thinkingMult);
-          const spAttr = spikeGeo.attributes.position;
-          for (let k = 0; k < SPIKE_COUNT; k++) {
-            const edge = axonEdges[k % axonEdges.length];
-            const prog = (t * edge[3] * thinkingMult + edge[2]) % 1;
-            const a = edge[0];
-            const b = edge[1];
-            spAttr.array[k * 3] = a.x + (b.x - a.x) * prog;
-            spAttr.array[k * 3 + 1] = a.y + (b.y - a.y) * prog;
-            spAttr.array[k * 3 + 2] = a.z + (b.z - a.z) * prog;
+        // Animate popping equations, code, icons & node-to-fragment tethers inside the golden core
+        if (innerCoreGlyphsGroup && coreGlyphEntries.length > 0) {
+          const dtGlyph = Math.min(0.05, Math.max(0.001, t - lastGlyphT));
+          lastGlyphT = t;
+          const thinkingMult = window.__barbiAiThinking ? 2.2 : (state.voiceMode ? 1.6 : 1.0);
+          const glowScale = Math.max(0.55, Math.min(1.25, (state.settings.coreGlow || 0.10) / 0.10));
+          const tAttr = tetherGeo.attributes.position;
+          for (let i = 0; i < coreGlyphEntries.length; i++) {
+            const gEntry = coreGlyphEntries[i];
+            if (!gEntry.sprite.visible) {
+              for (let z = 0; z < 6; z++) tAttr.array[i * 6 + z] = 0;
+              continue;
+            }
+            const prevCycle = gEntry.cycle;
+            gEntry.cycle = (gEntry.cycle + dtGlyph * gEntry.speed * thinkingMult) % 1.0;
+            if (gEntry.cycle < prevCycle) {
+              const np = randomInnerCorePos();
+              gEntry.sprite.position.copy(np);
+              gEntry.nodeIdx = nearestOuterNodeIndex(np);
+              gEntry.mat.map = glyphTextures[Math.floor(Math.random() * glyphTextures.length)];
+              gEntry.mat.needsUpdate = true;
+            }
+            const env = gEntry.cycle < 0.22
+              ? (gEntry.cycle / 0.22)
+              : (gEntry.cycle > 0.72 ? Math.max(0, (1.0 - gEntry.cycle) / 0.28) : 1.0);
+            const eased = env * env * (3 - 2 * env);
+            gEntry.mat.opacity = Math.min(0.86, eased * 0.72 * glowScale);
+            const s = gEntry.baseScale * (0.78 + 0.28 * eased);
+            gEntry.sprite.scale.set(s * 2.6, s * 0.68, 1);
+            gEntry.sprite.position.y += gEntry.driftY * dtGlyph;
+
+            const anchor = icoUniqueNodes[gEntry.nodeIdx];
+            if (anchor && eased > 0.12) {
+              tAttr.array[i * 6] = anchor.x;
+              tAttr.array[i * 6 + 1] = anchor.y;
+              tAttr.array[i * 6 + 2] = anchor.z;
+              tAttr.array[i * 6 + 3] = anchor.x + (gEntry.sprite.position.x - anchor.x) * eased;
+              tAttr.array[i * 6 + 4] = anchor.y + (gEntry.sprite.position.y - anchor.y) * eased;
+              tAttr.array[i * 6 + 5] = anchor.z + (gEntry.sprite.position.z - anchor.z) * eased;
+            } else {
+              for (let z = 0; z < 6; z++) tAttr.array[i * 6 + z] = 0;
+            }
           }
-          spAttr.needsUpdate = true;
+          tAttr.needsUpdate = true;
         }
 
         if (bloomPass) {
-          bloomPass.strength = 0.72 + Math.min(0.48, coreGlowFactor * 0.28 + voiceBoost * 0.35);
+          bloomPass.strength = (0.72 + Math.min(0.48, coreGlowFactor * 0.28 + voiceBoost * 0.35)) * liveSphereCfg.bloomScale;
         }
         if (chromaticPass) {
           chromaticPass.uniforms.uTime.value = t;
@@ -15399,6 +16411,7 @@ def malicious_skill():
 
       window.renderUnifiedBarbiSphereFrame = renderUnifiedBarbiSphereFrame;
       renderUnifiedBarbiSphereFrame();
+      window.dispatchEvent(new CustomEvent('barbi:sphere-runtime-ready'));
 
       window.addEventListener('resize', () => {
         const nw = Math.max(1, window.innerWidth);
@@ -15459,49 +16472,60 @@ def malicious_skill():
       setChatStreamVisible(!state.streamVisible);
     };
 
+    window.__setBarbiChatOpenState = function(isOpen) {
+      const next = Boolean(isOpen);
+      state.chatExpanded = next;
+      const launcherBtn = document.getElementById('btn-chat-launcher');
+      if (launcherBtn) {
+        if (next) {
+          launcherBtn.classList.add('border-amber-500/80', 'scale-105');
+        } else {
+          launcherBtn.classList.remove('border-white/60', 'border-amber-500/80', 'scale-105');
+        }
+      }
+      const drawer = document.getElementById('chat-collapsible-drawer');
+      if (drawer) {
+        drawer.classList.add('hidden');
+        drawer.classList.remove('flex');
+      }
+    };
+
     toggleChatComposerCollapse = function(forceState) {
-      const nextExpanded = typeof forceState === 'boolean' ? forceState : !state.chatExpanded;
-      const wasExpanded = state.chatExpanded;
+      const currentlyOpen = Boolean(window.__barbiChatPanelOpen ?? state.chatExpanded);
+      const nextExpanded = typeof forceState === 'boolean' ? forceState : !currentlyOpen;
+      const wasExpanded = currentlyOpen;
       state.chatExpanded = nextExpanded;
       const drawer = document.getElementById('chat-collapsible-drawer');
       const launcherBtn = document.getElementById('btn-chat-launcher');
 
+      if (drawer) {
+        drawer.classList.add('hidden');
+        drawer.classList.remove('flex');
+      }
+
       if (state.chatExpanded) {
-        // Hide the conversation stream when calling forth the chat panel so the 3D sphere stays clear
         setChatStreamVisible(false);
         const strip = document.getElementById('pipeline-strip');
         if (strip) {
           strip.classList.add('hidden');
           strip.classList.remove('flex');
         }
-        if (drawer) {
-          drawer.classList.remove('hidden');
-          drawer.classList.add('flex');
-        }
         if (launcherBtn) launcherBtn.classList.add('border-amber-500/80', 'scale-105');
         if (!wasExpanded) {
           triggerChatSummonSphereAnimation();
         }
-        setTimeout(() => {
-          const inp = document.getElementById('chat-input');
-          if (inp) inp.focus();
-        }, 60);
       } else {
-        if (drawer) {
-          drawer.classList.add('hidden');
-          drawer.classList.remove('flex');
-        }
         if (launcherBtn) launcherBtn.classList.remove('border-white/60', 'border-amber-500/80', 'scale-105');
         closeComposerPopover();
         if (state.composerToolsOpen) toggleComposerToolsTray();
-        const inp = document.getElementById('chat-input');
-        if (inp) inp.blur();
       }
+
+      window.dispatchEvent(new CustomEvent('barbi:toggle-chat-panel', { detail: { open: nextExpanded } }));
     };
 
     const _origIsAnyOverlayModalOrDrawerOpen = isAnyOverlayModalOrDrawerOpen;
     isAnyOverlayModalOrDrawerOpen = function() {
-      if (state.chatExpanded || state.sidebarOpen) return true;
+      if (state.chatExpanded || window.__barbiChatPanelOpen || state.sidebarOpen) return true;
       const chatDrawer = document.getElementById('chat-collapsible-drawer');
       if (chatDrawer && !chatDrawer.classList.contains('hidden')) return true;
       return _origIsAnyOverlayModalOrDrawerOpen();
@@ -16006,13 +17030,20 @@ def malicious_skill():
     // Poll host telemetry periodically for CPU / RAM HUD
     setInterval(async () => {
       if (!window.BarbiBridge) return;
-      const tel = await window.BarbiBridge.fetchTelemetry();
-      if (!tel) return;
-      const loadEl = document.getElementById('cpu-load-badge');
-      const coresEl = document.getElementById('cpu-cores-readout');
-      if (loadEl) loadEl.textContent = tel.cpuLoadPct + '%';
-      if (coresEl) coresEl.textContent = `${tel.cpuCount} CORES • ${tel.memoryUsedPct}% RAM`;
-    }, 8000);
+      if (document.visibilityState !== 'visible' || navigator.onLine === false) return;
+      try {
+        const tel = await window.BarbiBridge.fetchTelemetry();
+        if (!tel) return;
+        if (typeof tel.cpuLoadPct === 'number' && typeof cpuTelemetryState !== 'undefined') {
+          cpuTelemetryState.loadPct = tel.cpuLoadPct;
+        }
+        const coresEl = document.getElementById('cpu-cores-readout');
+        if (coresEl) coresEl.textContent = `${tel.cpuCount} CORES • ${tel.memoryUsedPct}% RAM`;
+        if (typeof updateCpuThermalTelemetry === 'function') updateCpuThermalTelemetry();
+      } catch {
+        // Ignore transient host polling interruptions
+      }
+    }, 10000);
 
     // =========================================================================
     // P. QUOTA GUARD POPUP + WINDOWS LOCAL PERSISTENCE + R.E.A + STUDY STUDIO
@@ -16130,15 +17161,76 @@ def malicious_skill():
       }
     };
 
-    // R.E.A. Platform Study, Custom Agent Forge & System Builder + Hosting
+    // R.E.A. Agent Forge — GitHub Repo Bridge (morluto/rea), Multi-Platform System Builder & File Explorer
     window.__latestForgedBundle = null;
+    window.__reaRepoProfile = null;
+
+    function getSelectedReaPlatforms() {
+      const boxes = Array.from(document.querySelectorAll('.rea-platform-cb'));
+      const selected = boxes.filter(cb => cb.checked).map(cb => cb.value);
+      if (!selected.includes('web')) selected.unshift('web');
+      return selected.length ? selected : ['web', 'windows', 'macos', 'ios', 'android'];
+    }
+
+    function getReaGithubRepoInput() {
+      const el = document.getElementById('rea-github-repo-url');
+      return (el && el.value.trim()) || 'https://github.com/morluto/rea';
+    }
+
+    function escapeReaHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    window.syncReaGithubRepoFromUI = async function(silent = false) {
+      const repoUrl = getReaGithubRepoInput();
+      const statusEl = document.getElementById('rea-repo-status');
+      const badgeEl = document.getElementById('rea-repo-source-badge');
+      if (statusEl) statusEl.textContent = `Syncing GitHub repository ${repoUrl}...`;
+      if (!window.BarbiBridge || typeof window.BarbiBridge.reaSyncGithubRepo !== 'function') return;
+
+      const data = await window.BarbiBridge.reaSyncGithubRepo(repoUrl);
+      if (!data || !data.reaRepo) {
+        if (statusEl) {
+          statusEl.innerHTML = `<span class="text-rose-300">Unable to sync "${escapeReaHtml(repoUrl)}". Use https://github.com/&lt;owner&gt;/&lt;repo&gt; or owner/repo.</span>`;
+        }
+        return;
+      }
+
+      const r = data.reaRepo;
+      window.__reaRepoProfile = r;
+      if (badgeEl) {
+        badgeEl.textContent = r.source === 'github-live' ? `LIVE • ${r.fullName}` : `SYNCED • ${r.fullName}`;
+      }
+      if (statusEl) {
+        const starsTxt = typeof r.stars === 'number' ? `★ ${r.stars.toLocaleString()} • ` : '';
+        const filesTxt = Array.isArray(r.topLevelFiles) && r.topLevelFiles.length
+          ? r.topLevelFiles.slice(0, 6).join(', ')
+          : 'README.md, package.json';
+        statusEl.innerHTML = `
+          <div class="flex items-center justify-between gap-2 text-amber-200 font-semibold">
+            <a href="${escapeReaHtml(r.htmlUrl)}" target="_blank" rel="noopener noreferrer" class="hover:underline">${escapeReaHtml(r.fullName)}</a>
+            <span class="text-[9px] text-emerald-300">${starsTxt}${escapeReaHtml(r.language || 'TypeScript')} (${escapeReaHtml(r.defaultBranch || 'main')})</span>
+          </div>
+          <div class="text-slate-300 mt-0.5">${escapeReaHtml(r.description || '')}</div>
+          <div class="text-[9px] text-amber-200/80 mt-1">MCP CLI: <code>${escapeReaHtml(r.cliCommand || 'npx rea-agents@latest setup')}</code> · Tree: ${escapeReaHtml(filesTxt)}</div>
+        `;
+      }
+      if (!silent) {
+        showToast(`REA GitHub repo synced: ${r.fullName}`, 'accent');
+      }
+    };
+
     window.runReaPlatformStudy = async function(allowAuto = false) {
       const targetEl = document.getElementById('rea-study-target');
       const notesEl = document.getElementById('rea-study-notes');
       const outEl = document.getElementById('rea-study-output');
       const target = targetEl ? targetEl.value.trim() : '';
       if (!target) { showToast('Enter a URL or platform name to study', 'info'); return; }
-      if (outEl) outEl.textContent = `Studying ${target} DOM topology & architecture...`;
+      if (outEl) outEl.textContent = `Studying ${target} DOM topology & cross-platform architecture...`;
       if (!window.BarbiBridge) return;
       try {
         const res = await window.BarbiBridge.reaStudyUrl({ target, notes: notesEl ? notesEl.value.trim() : '', allowAutoFailover: allowAuto });
@@ -16162,7 +17254,7 @@ def malicious_skill():
             source: 'REA_PLATFORM_STUDY'
           });
         }
-        showToast(`R.E.A. study complete & indexed to ARCHIVEX`, 'accent');
+        showToast('R.E.A. study complete & indexed to ARCHIVEX', 'accent');
       } catch (err) {
         if (outEl) outEl.textContent = `Error: ${err.message || err}`;
       }
@@ -16173,72 +17265,182 @@ def malicious_skill():
       const outEl = document.getElementById('rea-agent-output');
       const prompt = inp ? inp.value.trim() : '';
       if (!prompt || !window.BarbiBridge) { showToast('Describe the agent you want to forge', 'info'); return; }
-      if (outEl) outEl.textContent = 'Synthesizing autonomous agent blueprint...';
-      const res = await window.BarbiBridge.reaBuildAgent({ prompt, allowAutoFailover: allowAuto });
-      if (res.switchRecommendation && res.switchRecommendation.recommendedProvider) {
-        showAiQuotaWarningPopup({
-          ...res.switchRecommendation,
-          onSwitch: async () => {
-            await window.BarbiBridge.switchProvider(res.switchRecommendation.recommendedProvider.id);
-            window.forgeCustomAgentFromRea(true);
+      if (outEl) outEl.textContent = 'Synthesizing REA MCP autonomous agent blueprint...';
+      try {
+        const res = await window.BarbiBridge.reaBuildAgent({
+          prompt,
+          reaRepoUrl: getReaGithubRepoInput(),
+          platforms: getSelectedReaPlatforms(),
+          allowAutoFailover: allowAuto
+        });
+        if (res.switchRecommendation && res.switchRecommendation.recommendedProvider) {
+          showAiQuotaWarningPopup({
+            ...res.switchRecommendation,
+            onSwitch: async () => {
+              await window.BarbiBridge.switchProvider(res.switchRecommendation.recommendedProvider.id);
+              window.forgeCustomAgentFromRea(true);
+            }
+          });
+          return;
+        }
+        if (res.agent) {
+          const ag = res.agent;
+          state.activeAgents[ag.id] = {
+            name: ag.name,
+            role: ag.role,
+            active: true,
+            steps: ag.steps,
+            systemPrompt: ag.systemPrompt,
+            reaRepo: ag.reaRepo,
+            platforms: ag.platforms
+          };
+          const badge = document.getElementById('active-agent-count');
+          if (badge) badge.textContent = Object.keys(state.activeAgents).length;
+          const platStr = Array.isArray(ag.platforms) ? ag.platforms.join('/').toUpperCase() : 'MULTI-OS';
+          if (outEl) {
+            outEl.innerHTML = `<span class="text-emerald-300 font-bold">✓ Forged &amp; Registered: ${escapeReaHtml(ag.name)}</span> (${escapeReaHtml(platStr)} · ${escapeReaHtml(ag.reaRepo?.fullName || 'morluto/rea')})`;
           }
-        });
-        return;
-      }
-      if (res.agent) {
-        const ag = res.agent;
-        state.activeAgents[ag.id] = { name: ag.name, role: ag.role, active: true, steps: ag.steps, systemPrompt: ag.systemPrompt };
-        const badge = document.getElementById('active-agent-count');
-        if (badge) badge.textContent = Object.keys(state.activeAgents).length;
-        if (outEl) outEl.innerHTML = `<span class="text-emerald-300 font-bold">✓ Forged &amp; Registered: ${ag.name}</span> — Open Navigation → Agents to inspect or run.`;
-        window.BarbiBridge.saveMemory({
-          label: `Agent Blueprint: ${ag.name}`,
-          content: `${ag.role} | Workflow: ${(ag.steps || []).join(' -> ')}`,
-          category: 'PROJECT',
-          domain: 'ai',
-          source: 'REA_AGENT_FORGE'
-        });
-        persistLocalBarbiBackup();
-        showToast(`Agent [${ag.name}] added to Autonomous Agents`, 'accent');
+          window.BarbiBridge.saveMemory({
+            label: `Agent Blueprint: ${ag.name}`,
+            content: `${ag.role} | Targets: ${platStr} | Workflow: ${(ag.steps || []).join(' -> ')}`,
+            category: 'PROJECT',
+            domain: 'ai',
+            source: 'REA_AGENT_FORGE'
+          });
+          persistLocalBarbiBackup();
+          showToast(`Agent [${ag.name}] added to Autonomous Agents`, 'accent');
+        }
+      } catch (err) {
+        if (outEl) outEl.innerHTML = `<span class="text-rose-300">Forge error: ${escapeReaHtml(err.message || err)}</span>`;
       }
     };
+
+    window.inspectForgedFile = function(filePath) {
+      const b = window.__latestForgedBundle;
+      const previewEl = document.getElementById('rea-file-preview');
+      const activeNameEl = document.getElementById('rea-file-active-name');
+      if (!b || !b.files || !previewEl) return;
+      const content = b.files[filePath] || '';
+      if (activeNameEl) activeNameEl.textContent = filePath;
+      previewEl.textContent = content.length > 4200 ? content.slice(0, 4200) + '\n\n... (truncated in preview — download .zip for full file)' : content;
+      document.querySelectorAll('.rea-file-tab-btn').forEach(btn => {
+        const isActive = btn.getAttribute('data-file') === filePath;
+        btn.className = isActive
+          ? 'rea-file-tab-btn px-2 py-0.5 rounded bg-amber-500/30 border border-amber-400/70 text-amber-100 text-[9px] font-mono-tech cursor-pointer'
+          : 'rea-file-tab-btn px-2 py-0.5 rounded bg-white/5 hover:bg-white/15 border border-white/15 text-slate-300 text-[9px] font-mono-tech cursor-pointer';
+      });
+    };
+
+    function renderForgedMultiPlatformBundle(bundle) {
+      const resEl = document.getElementById('rea-forged-result');
+      const zipBtn = document.getElementById('btn-download-forged-zip');
+      if (!resEl || !bundle || !bundle.hostedApp || !bundle.files) return;
+
+      window.__latestForgedBundle = bundle;
+      if (zipBtn) zipBtn.classList.remove('hidden');
+
+      const h = bundle.hostedApp;
+      const fileKeys = Object.keys(bundle.files);
+      const deliverables = Array.isArray(h.platformDeliverables) ? h.platformDeliverables : [];
+      const defaultPreviewFile = fileKeys.includes('.github/workflows/rea-multiplatform-release.yml')
+        ? '.github/workflows/rea-multiplatform-release.yml'
+        : fileKeys[0];
+
+      const deliverableCards = deliverables.map(d => `
+        <div class="p-1.5 rounded bg-black/55 border border-amber-500/25">
+          <div class="flex items-center justify-between gap-1">
+            <span class="text-amber-200 font-bold text-[9.5px]">${escapeReaHtml(d.label)}</span>
+            <span class="text-[8.5px] px-1 bg-emerald-500/20 text-emerald-300 border border-emerald-400/35">READY</span>
+          </div>
+          <div class="text-[8.5px] text-slate-300 mt-0.5">${escapeReaHtml(d.artifactFormat)}</div>
+          <div class="text-[8.5px] text-cyan-300/90 mt-0.5 truncate" title="${escapeReaHtml(d.buildCommand)}">$ ${escapeReaHtml(d.buildCommand)}</div>
+        </div>
+      `).join('');
+
+      const fileButtons = fileKeys.map(fk => `
+        <button type="button" data-file="${escapeReaHtml(fk)}" onclick="inspectForgedFile('${escapeReaHtml(fk).replace(/'/g, "\\'")}')"
+                class="rea-file-tab-btn px-2 py-0.5 rounded bg-white/5 hover:bg-white/15 border border-white/15 text-slate-300 text-[9px] font-mono-tech cursor-pointer">
+          ${escapeReaHtml(fk)}
+        </button>
+      `).join('');
+
+      resEl.innerHTML = `
+        <div class="p-2 rounded-lg bg-emerald-500/15 border border-emerald-400/40 space-y-1.5">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="text-emerald-200 font-bold">✓ Forged &amp; Hosted: ${escapeReaHtml(h.appTitle)}</div>
+            <a href="${escapeReaHtml(h.hostedUrl)}" target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline font-semibold">↗ Open Live Web App</a>
+          </div>
+          <div class="flex flex-wrap gap-x-3 gap-y-0.5 text-[9px] text-slate-300">
+            <span>Bundle ID: <code class="text-amber-200">${escapeReaHtml(h.bundleId || '')}</code></span>
+            <span>REA Repo: <code class="text-amber-200">${escapeReaHtml(h.reaRepo?.fullName || 'morluto/rea')}</code></span>
+            <span>Files: <strong class="text-emerald-300">${fileKeys.length}</strong></span>
+          </div>
+          ${deliverableCards ? `<div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1">${deliverableCards}</div>` : ''}
+        </div>
+        <div class="space-y-1.5 pt-1">
+          <div class="flex items-center justify-between">
+            <span class="text-[9px] uppercase tracking-wider text-amber-300 font-semibold">Generated End-to-End Source &amp; Build Matrix</span>
+            <span id="rea-file-active-name" class="text-[9px] text-cyan-300">${escapeReaHtml(defaultPreviewFile || '')}</span>
+          </div>
+          <div class="flex flex-wrap gap-1">${fileButtons}</div>
+          <pre id="rea-file-preview" class="max-h-40 overflow-auto p-2 rounded-lg bg-black/80 border border-white/10 text-[9px] text-amber-100/90 whitespace-pre-wrap leading-relaxed"></pre>
+        </div>
+      `;
+      if (defaultPreviewFile) {
+        window.inspectForgedFile(defaultPreviewFile);
+      }
+    }
 
     window.forgeAndHostSystem = async function(allowAuto = false) {
       const nameEl = document.getElementById('rea-system-name');
       const promptEl = document.getElementById('rea-system-prompt');
       const resEl = document.getElementById('rea-forged-result');
-      const zipBtn = document.getElementById('btn-download-forged-zip');
       const systemName = (nameEl && nameEl.value.trim()) || 'ZULUTRONIX Forge App';
-      const prompt = (promptEl && promptEl.value.trim()) || 'Interactive engineering telemetry dashboard';
+      const prompt = (promptEl && promptEl.value.trim()) || 'Interactive end-to-end engineering telemetry system across desktop, mobile, and web';
+      const platforms = getSelectedReaPlatforms();
+      const reaRepoUrl = getReaGithubRepoInput();
       if (!window.BarbiBridge) return;
-      if (resEl) resEl.innerHTML = '<div class="text-amber-300">Building Web + Windows Tauri bundle &amp; provisioning live Express hosting...</div>';
 
-      const res = await window.BarbiBridge.reaBuildSystem({ systemName, prompt, allowAutoFailover: allowAuto });
-      if (res.switchRecommendation && res.switchRecommendation.recommendedProvider) {
-        showAiQuotaWarningPopup({
-          ...res.switchRecommendation,
-          onSwitch: async () => {
-            await window.BarbiBridge.switchProvider(res.switchRecommendation.recommendedProvider.id);
-            window.forgeAndHostSystem(true);
-          }
-        });
-        return;
+      if (resEl) {
+        resEl.innerHTML = `<div class="text-amber-300">Building end-to-end system for <strong>${escapeReaHtml(platforms.join(', ').toUpperCase())}</strong> via REA repo (<code>${escapeReaHtml(reaRepoUrl)}</code>)...</div>`;
       }
-      if (res.hostedApp && res.files) {
-        window.__latestForgedBundle = res;
-        if (zipBtn) zipBtn.classList.remove('hidden');
-        const h = res.hostedApp;
-        if (resEl) {
-          resEl.innerHTML = `
-            <div class="p-2 rounded-lg bg-emerald-500/15 border border-emerald-400/40 space-y-1">
-              <div class="text-emerald-200 font-bold">✓ Hosted Live: ${h.appTitle}</div>
-              <div>URL: <a href="${h.hostedUrl}" target="_blank" rel="noopener noreferrer" class="text-cyan-300 underline">${h.hostedUrl}</a></div>
-              <div class="text-slate-300">Included deliverables: index.html, styles.css, app.js, server.js, package.json, src-tauri/tauri.conf.json, build-windows-installer.ps1, launch-windows-app.bat</div>
-            </div>
-          `;
+
+      try {
+        const res = await window.BarbiBridge.reaBuildSystem({
+          systemName,
+          prompt,
+          platforms,
+          reaRepoUrl,
+          allowAutoFailover: allowAuto
+        });
+        if (res.switchRecommendation && res.switchRecommendation.recommendedProvider) {
+          showAiQuotaWarningPopup({
+            ...res.switchRecommendation,
+            onSwitch: async () => {
+              await window.BarbiBridge.switchProvider(res.switchRecommendation.recommendedProvider.id);
+              window.forgeAndHostSystem(true);
+            }
+          });
+          return;
         }
-        window.refreshHostedSystemsList();
-        showToast(`Built & hosted ${h.appTitle} at ${h.hostedUrl}`, 'accent');
+        if (res.hostedApp && res.files) {
+          if (res.reaRepo) window.__reaRepoProfile = res.reaRepo;
+          renderForgedMultiPlatformBundle(res);
+          showToast(`Built ${res.hostedApp.appTitle} (${res.hostedApp.platforms.length} platforms · ${res.hostedApp.fileCount} files)`, 'accent');
+        }
+      } catch (err) {
+        if (resEl) {
+          resEl.innerHTML = `<div class="text-rose-300">System Forge failed: ${escapeReaHtml(err.message || err)}</div>`;
+        }
+      }
+    };
+
+    window.openHostedSystemBundle = async function(slug) {
+      if (!window.BarbiBridge || typeof window.BarbiBridge.reaGetHostedBundle !== 'function') return;
+      const bundle = await window.BarbiBridge.reaGetHostedBundle(slug);
+      if (bundle && bundle.hostedApp && bundle.files) {
+        renderForgedMultiPlatformBundle(bundle);
+        showToast(`Loaded ${bundle.hostedApp.appTitle} multi-platform bundle`, 'info');
       }
     };
 
@@ -16246,20 +17448,32 @@ def malicious_skill():
       const b = window.__latestForgedBundle;
       if (!b || !b.files || !window.BarbiBridge) return;
       await window.BarbiBridge.downloadBundleZip(b.hostedApp.slug, b.files);
-      showToast(`Downloaded ${b.hostedApp.slug}-windows-web-system.zip`, 'accent');
+      showToast(`Downloaded ${b.hostedApp.slug}-multiplatform-system.zip`, 'accent');
     };
 
-    window.refreshHostedSystemsList = async function() {
+    window.refreshHostedSystemsList = async function(forceShowList = false) {
       const resEl = document.getElementById('rea-forged-result');
       if (!resEl || !window.BarbiBridge) return;
       const list = await window.BarbiBridge.reaListHosted();
-      if (list && Array.isArray(list.hostedApps) && list.hostedApps.length > 0 && !window.__latestForgedBundle) {
-        resEl.innerHTML = list.hostedApps.map(app => `
-          <div class="flex items-center justify-between p-1.5 rounded bg-white/5 border border-white/10">
-            <span class="text-white truncate">${app.appTitle}</span>
-            <a href="${app.hostedUrl}" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:underline shrink-0">↗ Open Hosted Site</a>
-          </div>
-        `).join('');
+      if (list && Array.isArray(list.hostedApps) && list.hostedApps.length > 0 && (forceShowList || !window.__latestForgedBundle)) {
+        resEl.innerHTML = `
+          <div class="text-[9.5px] text-amber-300 uppercase font-semibold mb-1">Hosted Multi-Platform Systems (${list.hostedApps.length})</div>
+          ${list.hostedApps.map(app => {
+            const pBadges = (app.platforms || ['web', 'windows']).map(p => `<span class="px-1 bg-amber-500/15 border border-amber-400/35 text-[8.5px] text-amber-200 uppercase">${escapeReaHtml(p)}</span>`).join('');
+            return `
+              <div class="flex flex-wrap items-center justify-between gap-2 p-2 rounded bg-white/5 border border-white/10">
+                <div class="min-w-0">
+                  <div class="text-white font-semibold truncate">${escapeReaHtml(app.appTitle)}</div>
+                  <div class="flex flex-wrap gap-1 mt-0.5">${pBadges}</div>
+                </div>
+                <div class="flex items-center gap-2 shrink-0">
+                  <button type="button" onclick="openHostedSystemBundle('${escapeReaHtml(app.slug)}')" class="px-2 py-0.5 rounded bg-amber-500/20 hover:bg-amber-500/35 border border-amber-400/45 text-amber-200 text-[9px] cursor-pointer">Inspect Files</button>
+                  <a href="${escapeReaHtml(app.hostedUrl)}" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:underline text-[9.5px]">↗ Open Live</a>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        `;
       }
     };
 
@@ -16556,10 +17770,93 @@ def malicious_skill():
       showToast(`Saved Study Pack [${pack.title}] to ARCHIVEX & Windows backup`, 'accent');
     };
 
+    // --- Symbiotic Hardening Audit & Patch Testbench Handlers ---
+    window.__toggleSymbioticDrawer = function(forceOpen) {
+      const drawer = document.getElementById('symbiotic-drawer');
+      if (!drawer) return;
+      const isHidden = drawer.style.display === 'none' || !drawer.style.display;
+      const shouldOpen = typeof forceOpen === 'boolean' ? forceOpen : isHidden;
+      drawer.style.display = shouldOpen ? 'block' : 'none';
+      if (shouldOpen) {
+        if (typeof injectAllHudWindowFrames === 'function') injectAllHudWindowFrames();
+        if (typeof window.__renderHealthSim === 'function') window.__renderHealthSim();
+      }
+    };
+
+    window.__switchAuditTab = function(tabName) {
+      document.querySelectorAll('.audit-tab-panel').forEach((panel) => {
+        panel.style.display = panel.id === `audit-tab-${tabName}` ? 'block' : 'none';
+      });
+      document.querySelectorAll('.audit-tab-btn').forEach((btn) => {
+        const active = btn.getAttribute('data-tab') === tabName;
+        btn.style.borderColor = active ? 'rgba(245,158,11,0.45)' : 'rgba(255,255,255,0.14)';
+        btn.style.background = active ? 'rgba(245,158,11,0.18)' : 'transparent';
+        btn.style.color = active ? '#fde68a' : '#d6d3d1';
+      });
+      if (tabName === 'health' && typeof window.__renderHealthSim === 'function') {
+        window.__renderHealthSim();
+      }
+    };
+
+    window.__runAuthSim = function() {
+      const hasToken = Boolean(document.getElementById('sim-auth-token')?.checked);
+      const endpoint = document.getElementById('sim-endpoint-select')?.value || 'POST /api/ai/chat';
+      const out = document.getElementById('sim-auth-result');
+      if (!out) return;
+      if (!hasToken) {
+        out.style.color = '#fca5a5';
+        out.textContent = JSON.stringify({
+          endpoint,
+          status: 401,
+          error: 'UNAUTHORIZED',
+          guard: 'requireAuth',
+          reason: 'Missing Firebase Bearer ID token'
+        }, null, 2);
+      } else {
+        out.style.color = '#a7f3d0';
+        out.textContent = JSON.stringify({
+          endpoint,
+          status: 200,
+          guard: 'requireAuth',
+          principal: 'owner-treasure-zulu',
+          permissions: ['memory.read', 'application.open']
+        }, null, 2);
+      }
+    };
+
+    window.__runCorsSim = function() {
+      const origin = String(document.getElementById('sim-cors-origin')?.value || '').trim();
+      const out = document.getElementById('sim-cors-result');
+      if (!out) return;
+      const allowed = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(origin) || origin === 'tauri://localhost';
+      out.style.color = allowed ? '#a7f3d0' : '#fca5a5';
+      out.textContent = JSON.stringify({
+        origin: origin || '(empty)',
+        decision: allowed ? 'ALLOW' : 'DENY',
+        policy: 'explicit ALLOWED_ORIGINS + localhost + tauri://localhost'
+      }, null, 2);
+    };
+
+    window.__renderHealthSim = function() {
+      const hasKey = Boolean(document.getElementById('sim-gemini-key')?.checked);
+      const out = document.getElementById('sim-health-result');
+      if (!out) return;
+      out.textContent = JSON.stringify({
+        status: 'ok',
+        embeddingMode: hasKey ? 'gemini-text-embedding-004' : 'degraded-hash-fallback',
+        authBoundary: 'requireAuth (strict)',
+        rbacOwnerBootstrap: ['memory.read', 'application.open']
+      }, null, 2);
+    };
+
     window.__initBarbiRuntime = () => { if (window.__barbiRuntimeBooted) return; window.__barbiRuntimeBooted = true;
       buildCognitiveGraph();
       restoreLocalBarbiBackup();
       initLabelDOMElements();
+      injectAllHudWindowFrames();
+      enableDraggableHudPanels();
+      refreshDeviceBatteryTelemetry(false);
+      updateCpuThermalTelemetry();
       renderChatMessages();
       renderHabitSystem();
       updateGtaHudLabels();

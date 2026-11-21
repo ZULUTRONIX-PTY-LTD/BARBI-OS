@@ -2,6 +2,56 @@
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var own = Object.getOwnPropertyDescriptor(window, 'fetch');
+          if (!own || own.configurable) {
+            var cur = window;
+            var found = null;
+            while (cur && !found) {
+              found = Object.getOwnPropertyDescriptor(cur, 'fetch');
+              cur = Object.getPrototypeOf(cur);
+            }
+            if (found && ((found.get && !found.set) || (!found.get && !found.set && 'value' in found && found.writable === false))) {
+              var origGet = found.get;
+              var origVal = found.value;
+              var overrideFetch = null;
+              Object.defineProperty(window, 'fetch', {
+                configurable: true,
+                enumerable: found.enumerable !== false,
+                get: function () {
+                  return overrideFetch || (origGet ? origGet.call(this) : origVal);
+                },
+                set: function (fn) {
+                  if (typeof fn === 'function') overrideFetch = fn;
+                },
+              });
+            }
+          }
+        } catch (_) {}
+
+        try {
+          var extRe = /(?:chrome-extension|moz-extension|safari-extension|safari-web-extension|ms-browser-extension):\/\//i;
+          var msgRe = /cannot set property fetch|setting getter-only property ["']?fetch["']?|only a getter/i;
+          var guardExtFetchErr = function (ev) {
+            var errObj = (ev && (ev.error || ev.reason)) || null;
+            var msg = String((ev && ev.message) || (errObj && errObj.message) || '');
+            if (!msgRe.test(msg)) return;
+            var src = String((ev && ev.filename) || '') + ' ' + String((errObj && errObj.stack) || '');
+            if (extRe.test(src)) {
+              ev.preventDefault();
+              if (typeof ev.stopImmediatePropagation === 'function') {
+                ev.stopImmediatePropagation();
+              }
+            }
+          };
+          window.addEventListener('error', guardExtFetchErr, true);
+          window.addEventListener('unhandledrejection', guardExtFetchErr, true);
+          window.__barbiExtensionFetchGuardInstalled__ = true;
+        } catch (_) {}
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="theme-color" content="#020100" />
     <meta name="apple-mobile-web-app-capable" content="yes" />

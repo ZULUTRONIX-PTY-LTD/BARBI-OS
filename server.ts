@@ -4,10 +4,12 @@ import express from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import fs from 'node:fs';
+import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createServer as createViteServer } from 'vite';
 import { apiRouter } from './src/server/routes/api.ts';
+import { attachLiveVoiceWebSocket } from './src/server/ai/liveVoiceBridge.ts';
 import { getHostedSystemsRootDir } from './src/server/rea/reaService.ts';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -102,7 +104,10 @@ async function bootstrapServer() {
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
+  const httpServer = http.createServer(app);
+  attachLiveVoiceWebSocket(httpServer);
+
+  httpServer.listen(PORT, '0.0.0.0', () => {
     console.log(`B.A.R.B.I 2.0 PIOS server listening on http://0.0.0.0:${PORT}`);
   });
 }

@@ -43,9 +43,11 @@ export interface BarbiBridgeApi {
   sendTelegram: (text: string, chatId?: string) => Promise<boolean>;
   fetchConversationMessages: (key: string) => Promise<Array<Record<string, unknown>> | null>;
   reaStudyUrl: (payload: { target: string; notes?: string; allowAutoFailover?: boolean }) => Promise<Record<string, unknown>>;
-  reaBuildAgent: (payload: { prompt: string; allowAutoFailover?: boolean }) => Promise<Record<string, unknown>>;
-  reaBuildSystem: (payload: { systemName: string; prompt: string; allowAutoFailover?: boolean }) => Promise<Record<string, unknown>>;
+  reaSyncGithubRepo: (repo?: string) => Promise<{ reaRepo: Record<string, unknown> } | null>;
+  reaBuildAgent: (payload: { prompt: string; reaRepoUrl?: string; platforms?: string[]; allowAutoFailover?: boolean }) => Promise<Record<string, unknown>>;
+  reaBuildSystem: (payload: { systemName: string; prompt: string; platforms?: string[]; reaRepoUrl?: string; allowAutoFailover?: boolean }) => Promise<Record<string, unknown>>;
   reaListHosted: () => Promise<Awaited<ReturnType<typeof barbiApi.reaListHosted>> | null>;
+  reaGetHostedBundle: (slug: string) => Promise<Awaited<ReturnType<typeof barbiApi.reaGetHostedBundle>> | null>;
   studioGenerateStudyPack: (payload: { topicTitle: string; materialText: string; allowAutoFailover?: boolean }) => Promise<Record<string, unknown>>;
   downloadBundleZip: (slug: string, files: Record<string, string>) => Promise<void>;
   openExternalSafely: (url: string) => void;
@@ -286,6 +288,14 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
       return barbiApi.reaStudyUrl(payload);
     },
 
+    async reaSyncGithubRepo(repo) {
+      try {
+        return await barbiApi.reaSyncGithubRepo(repo);
+      } catch {
+        return null;
+      }
+    },
+
     async reaBuildAgent(payload) {
       return barbiApi.reaBuildAgent(payload);
     },
@@ -297,6 +307,14 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
     async reaListHosted() {
       try {
         return await barbiApi.reaListHosted();
+      } catch {
+        return null;
+      }
+    },
+
+    async reaGetHostedBundle(slug) {
+      try {
+        return await barbiApi.reaGetHostedBundle(slug);
       } catch {
         return null;
       }
@@ -315,7 +333,7 @@ export function installBarbiBridge(onSyncEvent?: (detail: { user: unknown; works
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${slug}-windows-web-system.zip`;
+      a.download = `${slug}-multiplatform-system.zip`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
